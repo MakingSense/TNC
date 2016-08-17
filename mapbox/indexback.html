@@ -1,0 +1,291 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+    <script type="text/javascript">
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .map {
+        position: relative;
+
+        display: block;
+
+        width: 1000px;
+        height: 600px;
+        margin: auto;
+        margin-top: 100px;
+      }
+      .form {
+        display: block;
+
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+
+        text-align: center;
+      }
+      .form .search {
+        font-size: 18px;
+
+        display: block;
+
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding: 15px 20px;
+
+        border: 2px solid #ccc;
+      }
+      .menu-ui {
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+
+        width: 120px;
+
+        border: 1px solid rgba(0,0,0,.4);
+        border-radius: 3px;
+        background: #fff;
+      }
+      .menu-ui a {
+        font-size: 13px;
+
+        display: block;
+
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+
+        text-align: center;
+        text-decoration: none;
+
+        color: #404040;
+        border-bottom: 1px solid rgba(0,0,0,.25);
+      }
+      .menu-ui a:first-child {
+        border-radius: 3px 3px 0 0;
+      }
+      .menu-ui a:last-child {
+        border: none;
+        border-radius: 0 0 3px 3px;
+      }
+      .menu-ui a:hover {
+        color: #404040;
+        background: #f8f8f8;
+      }
+      .menu-ui a.active,
+      .menu-ui a.active:hover {
+        color: #fff;
+        background: #3887be;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='map-one' class='map'>
+      <nav class='menu-ui'>
+        <a href='#' data-filter='1'>Buenos Aires</a>
+        <a href='#' data-filter='3'>La Pampa</a>
+        <a href='#' data-filter='2'>Calafate</a>
+      </nav>
+    </div>
+    <form action="" class="form">
+      <input id="search" class="search" type="search" oninput='geocodeThis()' placeholder="Search City">
+      <button onclick="testing()">Test</button>
+    </form>
+    <script>
+      L.mapbox.accessToken = 'pk.eyJ1IjoibmF6YXJlbm9vdmllZG8iLCJhIjoiY2lybTkzejdqMDA1YnQybmsyeHdjYW53dyJ9.Guagy4wd-4VvC14bcYBu9A';
+
+      var geojson = [
+      {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irng9sz00",
+            "title": "MDP 1",
+            "description": "Mar del Plata 1°",
+            "marker-size": "large",
+            "marker-color": "#fa946e",
+            "marker-symbol": "marker",
+            "Tipo": 1
+        },
+        "geometry": {
+            "coordinates": [-57.556257, -38.00044],
+            "type": "Point"
+        },
+        "id": "19948fcb7def8a791a59f2ec9b8680f9"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irnggyor2",
+            "title": "Chapadmalal",
+            "description": "Chapadmalal",
+            "marker-size": "large",
+            "marker-color": "#f1f075",
+            "marker-symbol": "marker",
+            "Tipo": 1
+        },
+        "geometry": {
+            "coordinates": [-57.680282, -38.195089],
+            "type": "Point"
+        },
+        "id": "31d6e4acbb75c80b8ab357d680c546b2"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irngk4fe4",
+            "title": "Miramar 2",
+            "description": "Miramar 2",
+            "marker-size": "large",
+            "marker-color": "#9c89cc",
+            "marker-symbol": "marker",
+            "Tipo": 1
+        },
+        "geometry": {
+            "coordinates": [-57.845871, -38.265747],
+            "type": "Point"
+        },
+        "id": "40e0c7044e11f25435ecc7b1c0b471ec"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irngoxbf6",
+            "title": "Santa Rosa",
+            "description": "Santa Rosa",
+            "marker-size": "large",
+            "marker-color": "#9c89cc",
+            "marker-symbol": "marker",
+            "Tipo": 3
+        },
+        "geometry": {
+            "coordinates": [-64.281005, -36.615527],
+            "type": "Point"
+        },
+        "id": "42a875c57fe1af523f1c74bfd95a9aaa"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irngc6sp1",
+            "title": "MDP 2",
+            "description": "MDP 2",
+            "marker-size": "large",
+            "marker-color": "#f86767",
+            "marker-symbol": "marker",
+            "Tipo": 1
+        },
+        "geometry": {
+            "coordinates": [-57.54836, -37.990683],
+            "type": "Point"
+        },
+        "id": "5fe4ae909bc12e5b047cf6ccd1598cbc"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irngpk857",
+            "title": "El Calafate",
+            "description": "El Calafate",
+            "marker-size": "large",
+            "marker-color": "#7ec9b1",
+            "marker-symbol": "marker",
+            "Tipo": 2
+        },
+        "geometry": {
+            "coordinates": [-72.279052, -50.34546],
+            "type": "Point"
+        },
+        "id": "b2aff203718fb2455e84e0ef6e9b675a"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irngjaci3",
+            "title": "Miramar",
+            "description": "Miramar",
+            "marker-size": "large",
+            "marker-color": "#9c89cc",
+            "marker-symbol": "marker",
+            "Tipo": 1
+        },
+        "geometry": {
+            "coordinates": [-57.839648, -38.270363],
+            "type": "Point"
+        },
+        "id": "e6be1f78537182f9d89135b2230b65ce"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "id": "marker-irngkr5y5",
+            "title": "Batan",
+            "description": "Batan",
+            "marker-size": "large",
+            "marker-color": "#9c89cc",
+            "marker-symbol": "marker",
+            "Tipo": 1
+        },
+        "geometry": {
+            "coordinates": [-57.701021, -38.006603],
+            "type": "Point"
+        },
+        "id": "f19dad98018b6b74d779953bf0cc329f"
+    }];
+
+      var geocoder = L.mapbox.geocoder('mapbox.places');
+
+      var map = L.mapbox.map('map-one', 'mapbox.streets').setView([-38.746, -64.204], 6);
+
+      var markers = L.mapbox.featureLayer()
+          .setGeoJSON(geojson)
+          .addTo(map);
+
+      function showMap(err, data) {
+          if (data.lbounds) {
+              map.fitBounds(data.lbounds);
+          } else if (data.latlng) {
+              map.setView([data.latlng[0], data.latlng[1]], 13);
+          }
+      }
+
+      function geocodeThis() {
+          var text = document.getElementById('search').value;
+          if (text.length >= 5) {
+              geocoder.query(text, showMap);
+          }
+      }
+
+      $('.menu-ui a').on('click', function() {
+          // For each filter link, get the 'data-filter' attribute value.
+          var filter = $(this).data('filter');
+          $(this).addClass('active').siblings().removeClass('active');
+          markers.setFilter(function(f) {
+            return (f.properties["Tipo"] === filter);
+          });
+          return false;
+      });
+
+      function testing() {
+          var markersItem = [];
+          map.eachLayer(function(marker) { markersItem.push(marker); });
+          cycle(markersItem);
+      };
+
+      function cycle(markersItem) {
+          var i = 0;
+          function run() {
+              if (++i > markersItem.length - 1) i = 0;
+              var marker = markersItem[i];
+              console.log(marker.getPopup());
+          }
+          run();
+      }
+
+
+
+      // $.each(markers, function(index, val) {
+      //   console.log(val.getLatLng());
+      // });
+    </script>
+  </body>
+</html>

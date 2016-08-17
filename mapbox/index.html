@@ -1,0 +1,246 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+    <script type="text/javascript">
+    </script>
+    <style>
+      body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Slab';
+}
+.map__container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #ccc;
+}
+.map {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  height: 50vh;
+  margin: 0 auto;
+}
+.form {
+  display: block;
+
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  text-align: center;
+
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -95%);
+}
+.form .search {
+  font-size: 18px;
+
+  display: block;
+
+  width: 400px;
+  margin: 0 auto;
+  padding: 15px 20px;
+
+  border: 2px solid #ccc;
+}
+.item__list {
+  margin-top: 50vh;
+  padding-top: 40px;
+}
+.item {
+  background: #D7F0FF;
+  padding: 15px;
+}
+
+.item:nth-child(odd) {
+  background: #E2F0F8;
+}
+
+.item a {
+  width: 100%;
+  display: block;
+  text-decoration: none;
+  color: #444;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="map__container">
+      <div id='map-one' class='map'>
+      </div>
+      <form action="" class="form">
+        <input id="search" class="search" type="search" oninput='geocodeThis()' placeholder="Search City">
+      </form>
+    </div>
+    <div class='item__list'>
+      <div class='heading'>
+        <h1>Our WaterSources</h1>
+      </div>
+      <div id='listings' class='listings'></div>
+    </div>
+    <script>
+        L.mapbox.accessToken = 'pk.eyJ1IjoidG5jLWdsb2JhbHdhdGVyIiwiYSI6ImNpcjVveDV0YTAwOGZnN25uNTltdjdpbzMifQ.2Ff5ioAO5z2s5ltmcBx7cA';
+
+var map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr') // update with your own map id
+.setView([6.119903, 0.125115], 16);
+
+var geocoder = L.mapbox.geocoder('mapbox.places');
+
+var listings = document.getElementById('listings');
+var locations = L.mapbox.featureLayer().addTo(map);
+
+var aux = L.mapbox.featureLayer();
+
+locations.loadURL('data.geojson'); // load in your own GeoJSON file here
+
+function setActive(el) {
+  var siblings = listings.getElementsByTagName('div');
+  for (var i = 0; i < siblings.length; i++) {
+    siblings[i].className = siblings[i].className
+      .replace(/active/, '').replace(/\s\s*$/, '');
+  }
+
+  el.className += ' active';
+}
+
+function geocodeThis() {
+  var text = document.getElementById('search').value;
+  if (text.length >= 5) {
+    geocoder.query(text, showMap);
+  }
+}
+
+function showMap(err, data) {
+  filterLocations(data.results.features[0].text);
+  if (data.lbounds) {
+    map.fitBounds(data.lbounds);
+  } else if (data.latlng) {
+    map.setView([data.latlng[0], data.latlng[1]], 13);
+  }
+}
+
+function filterLocations(cityName){
+  $('.listings .item').remove();
+  filterWaterSourcesbyID(nametoID(cityName));  
+}
+
+function nametoID(cityName){
+  var id;
+  locations.eachLayer(function(locale) {
+    prop = locale.feature.properties;
+    if(prop.type == "city" && prop.city_name == cityName){
+      id = prop.id;
+    }
+  });
+  return id;
+}
+
+$('#btn-water').click(function() {
+  var cityID = parseInt($('#cityID').val());
+  filterWaterSourcesbyID(cityID);
+});
+
+function filterWaterSources(){
+  var waterSources = [];
+  locations.eachLayer(function(locale) {
+    prop = locale.feature.properties;
+    if(prop.type == "water_source"){
+      waterSources.push(locale);
+    }
+  });
+  return waterSources;
+}
+
+function filterWaterSourcesbyID(cityID){  
+  var waterSources = filterWaterSources();
+  var filteredSources = [];
+  $('.listings .item').remove();
+  $.each(waterSources, function(index, val) {
+     prop = val.feature.properties;
+     if(prop.cities.indexOf(cityID) > -1){
+      locationsPrinter(val);
+      filteredSources.push(val);
+    }
+  });
+  return filteredSources;
+}
+
+function locationsPrinter(locale) {
+  var prop = locale.feature.properties;
+  var listing = listings.appendChild(document.createElement('div'));
+  listing.className = 'item';
+
+  var link = listing.appendChild(document.createElement('a'));
+  link.href = '#';
+  link.className = 'title';
+
+  link.innerHTML = prop.name;
+  link.innerHTML += '<small class="quiet">' + prop.type + '</small>';
+
+  var details = listing.appendChild(document.createElement('div'));
+  details.innerHTML = prop.id;
+
+  link.onclick = function() {
+    setActive(listing);
+
+    // When a menu item is clicked, animate the map to center
+    // its associated locale and open its popup.
+    map.setView(locale.getLatLng(), 16);
+    locale.openPopup();
+    return false;
+  };
+}
+
+locations.on('ready', function() {
+  locations.eachLayer(function(locale) {
+
+    // Shorten locale.feature.properties to just `prop` so we're not
+    // writing this long form over and over again.
+    var prop = locale.feature.properties;
+
+    // Each marker on the map.
+    var popup = '<h3>Type:</h3><div>' + prop.type;
+
+    if (prop.crossStreet) {
+      popup += '<br /><small class="quiet">' + prop.name + '</small>';
+    }
+
+    // Marker interaction
+    locale.on('click', function(e) {
+      // 1. center the map on the selected marker.
+      map.panTo(locale.getLatLng());
+
+      // 2. Set active the markers associated listing.
+      //setActive(listing);
+    });
+
+    popup += '</div>';
+    locationsPrinter(locale);
+    locale.bindPopup(popup);
+  });
+});
+
+locations.on('layeradd', function(e) {
+  var marker = e.layer;
+  marker.setIcon(L.icon({
+    iconUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/6362/marker.png', // load your own custom marker image here
+    iconSize: [56, 56],
+    iconAnchor: [28, 28],
+    popupAnchor: [0, -34]
+  }));
+});
+    </script>
+  </body>
+</html>

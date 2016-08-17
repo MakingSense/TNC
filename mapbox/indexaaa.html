@@ -1,0 +1,186 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+    <script type="text/javascript">
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .map {
+        position: relative;
+
+        display: block;
+
+        width: 1000px;
+        height: 600px;
+        margin: auto;
+        margin-top: 100px;
+      }
+      .form {
+        display: block;
+
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+
+        text-align: center;
+      }
+      .form .search {
+        font-size: 18px;
+
+        display: block;
+
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding: 15px 20px;
+
+        border: 2px solid #ccc;
+      }
+      .menu-ui {
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+
+        width: 120px;
+
+        border: 1px solid rgba(0,0,0,.4);
+        border-radius: 3px;
+        background: #fff;
+      }
+      .menu-ui a {
+        font-size: 13px;
+
+        display: block;
+
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+
+        text-align: center;
+        text-decoration: none;
+
+        color: #404040;
+        border-bottom: 1px solid rgba(0,0,0,.25);
+      }
+      .menu-ui a:first-child {
+        border-radius: 3px 3px 0 0;
+      }
+      .menu-ui a:last-child {
+        border: none;
+        border-radius: 0 0 3px 3px;
+      }
+      .menu-ui a:hover {
+        color: #404040;
+        background: #f8f8f8;
+      }
+      .menu-ui a.active,
+      .menu-ui a.active:hover {
+        color: #fff;
+        background: #3887be;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='map-one' class='map'>
+    </div>
+    <div class='sidebar'>
+      <div class='heading'>
+        <h1>Our locations</h1>
+      </div>
+      <div id='listings' class='listings'></div>
+    </div>
+    <form action="" class="form">
+      <input id="search" class="search" type="search" oninput='geocodeThis()' placeholder="Search City">
+    </form>
+    <script>
+        L.mapbox.accessToken = 'pk.eyJ1IjoibmF6YXJlbm9vdmllZG8iLCJhIjoiY2lybTkzejdqMDA1YnQybmsyeHdjYW53dyJ9.Guagy4wd-4VvC14bcYBu9A';
+
+        var map = L.mapbox.map('map-one', 'mapbox.light') // update with your own map id
+            .setView([38.909671288923, -77.034084142948], 16);
+
+        var listings = document.getElementById('listings');
+        var locations = L.mapbox.featureLayer().addTo(map);
+
+        locations.loadURL('https://s3-us-west-2.amazonaws.com/s.cdpn.io/6362/sweetgreen.geojson'); // load in your own GeoJSON file here
+
+        function setActive(el) {
+            var siblings = listings.getElementsByTagName('div');
+            for (var i = 0; i < siblings.length; i++) {
+                siblings[i].className = siblings[i].className
+                    .replace(/active/, '').replace(/\s\s*$/, '');
+            }
+
+            el.className += ' active';
+        }
+
+        locations.on('ready', function() {
+            locations.eachLayer(function(locale) {
+
+                // Shorten locale.feature.properties to just `prop` so we're not
+                // writing this long form over and over again.
+                var prop = locale.feature.properties;
+
+                // Each marker on the map.
+                var popup = '<h3>Sweetgreen</h3><div>' + prop.address;
+
+                var listing = listings.appendChild(document.createElement('div'));
+                listing.className = 'item';
+
+                var link = listing.appendChild(document.createElement('a'));
+                link.href = '#';
+                link.className = 'title';
+
+                link.innerHTML = prop.address;
+                if (prop.crossStreet) {
+                    link.innerHTML += '<br /><small class="quiet">' + prop.crossStreet + '</small>';
+                    popup += '<br /><small class="quiet">' + prop.crossStreet + '</small>';
+                }
+
+                var details = listing.appendChild(document.createElement('div'));
+                details.innerHTML = prop.city;
+                if (prop.phone) {
+                    details.innerHTML += ' &middot; ' + prop.phoneFormatted;
+                }
+
+                link.onclick = function() {
+                    setActive(listing);
+
+                    // When a menu item is clicked, animate the map to center
+                    // its associated locale and open its popup.
+                    map.setView(locale.getLatLng(), 16);
+                    locale.openPopup();
+                    return false;
+                };
+
+                // Marker interaction
+                locale.on('click', function(e) {
+                    // 1. center the map on the selected marker.
+                    map.panTo(locale.getLatLng());
+
+                    // 2. Set active the markers associated listing.
+                    setActive(listing);
+                });
+
+                popup += '</div>';
+                locale.bindPopup(popup);
+            });
+        });
+
+        locations.on('layeradd', function(e) {
+            var marker = e.layer;
+            marker.setIcon(L.icon({
+                iconUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/6362/marker.png', // load your own custom marker image here
+                iconSize: [56, 56],
+                iconAnchor: [28, 28],
+                popupAnchor: [0, -34]
+            }));
+        });
+    </script>
+  </body>
+</html>
