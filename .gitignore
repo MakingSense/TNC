@@ -1,0 +1,16 @@
+.settings
+.svn
+.project
+*.map
+*.scssc
+jeet/
+normalize/
+node_modules/
+bower_components/
+
+assets/doc/
+dev/css/
+dev/img/
+dev/js/vendor/
+dev/fonts/
+dev/*.html
