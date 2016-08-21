@@ -17,12 +17,12 @@
 body,
 html {
   overflow-x: hidden;
-  font: $msuif-font;
-  color: $msuif-font-color;
+  font: $tnc-font;
+  color: $tnc-font-color;
 }
 
 body {
-  background-color: $msuif-background;
+  background-color: $tnc-background;
 }
 
 img {
@@ -67,5 +67,5 @@ button {
 
 a {
 	text-decoration: none;
-  transition: all $msuif-transition-duration $msuif-transition-timing;
+  transition: all $tnc-transition-duration $tnc-transition-timing;
 }

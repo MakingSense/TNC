@@ -9,7 +9,7 @@ $modal-backdrop-background:    rgba(#000, 0.5) !default;
 ///
 $modal-content-background:     #fff !default;
 ///
-$modal-transition-delay:       $msuif-transition-duration !default;
+$modal-transition-delay:       $tnc-transition-duration !default;
 
 
 /// Component Dialog - 
@@ -33,7 +33,7 @@ $modal-transition-delay:       $msuif-transition-duration !default;
     visibility: hidden;
     opacity: 0;
     background-color: $modal-backdrop-background;
-    transition: visibility $msuif-transition-duration 0s, opacity $msuif-transition-duration $msuif-transition-timing;
+    transition: visibility $tnc-transition-duration 0s, opacity $tnc-transition-duration $tnc-transition-timing;
 
     @at-root {
       &__content {
@@ -42,7 +42,7 @@ $modal-transition-delay:       $msuif-transition-duration !default;
         margin-top: -20px;
         opacity: 0;
         background-color: $modal-content-background;
-        transition: opacity $msuif-transition-duration $msuif-transition-timing $modal-transition-delay, margin $msuif-transition-duration $msuif-transition-timing $modal-transition-delay;
+        transition: opacity $tnc-transition-duration $tnc-transition-timing $modal-transition-delay, margin $tnc-transition-duration $tnc-transition-timing $modal-transition-delay;
       }
 
       &__close {

@@ -3,3 +3,31 @@
 /// @group Home
 /// @author MS
 ////
+
+// -------------------------------------
+//   Variables
+// -------------------------------------
+
+
+// -------------------------------------
+//   Code
+// -------------------------------------
+
+.section {
+  background-color: #aaa;
+  &-2 {
+    background-color: #777;
+  }
+  &-3 {
+    background-color: #222;
+    #scroll {
+      position: fixed;
+      top: 0;
+
+      background-color: silver;
+    }
+  }
+  &-4 {
+    background-color: #ccc;
+  }
+}

@@ -65,15 +65,15 @@
   }
 }
 
-/// Gets the media query from the Media Queries List Configured in `$msuif-breakpoints`
-/// @param {String} breakpoint - The breakpoint to search on `$msuif-breakpoints` List
+/// Gets the media query from the Media Queries List Configured in `$tnc-breakpoints`
+/// @param {String} breakpoint - The breakpoint to search on `$tnc-breakpoints` List
 @mixin respond-to($breakpoint) {
-  // Get the query map for $msuif-breakpoints map
-  $queries: map-get($msuif-breakpoints, $breakpoint);
+  // Get the query map for $tnc-breakpoints map
+  $queries: map-get($tnc-breakpoints, $breakpoint);
 
   // If there is no query called $breakpoint in map, throw an error
   @if not $queries {
-    @error "No value could be retrieved from `#{$breakpoint}`. Please make sure it is defined in `$msuif-breakpoints` map.";
+    @error "No value could be retrieved from `#{$breakpoint}`. Please make sure it is defined in `$tnc-breakpoints` map.";
   }
 
   // Include the media mixin with $queries

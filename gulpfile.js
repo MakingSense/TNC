@@ -37,7 +37,9 @@ var config = {
     jeet: 'bower_components/jeet.gs',
     normalize: 'bower_components/normalize-scss',
     sassyCast: 'bower_components/sassy-cast',
-    jquery: 'bower_components/jquery-latest'
+    jquery: 'bower_components/jquery-latest',
+    fullPage: 'bower_components/fullpage.js',
+    mousewheel: 'bower_components/jquery-mousewheel'
   },
 
   // Sassdoc task options
@@ -173,7 +175,7 @@ gulp.task('kraken', function () {
 
 
 // Copy only the needed resources from Bower
-gulp.task('bowercopy', ['bowercopy:jeet', 'bowercopy:normalize', 'bowercopy:sassy-cast', 'bowercopy:jquery']);
+gulp.task('bowercopy', ['bowercopy:jeet', 'bowercopy:normalize', 'bowercopy:sassy-cast', 'bowercopy:jquery', 'bowercopy:fullPage', 'bowercopy:mousewheel']);
 
 gulp.task('bowercopy:jeet', function () {
   return gulp.src([config.folderBower.jeet + '/scss/jeet/*.scss'])
@@ -190,6 +192,14 @@ gulp.task('bowercopy:sassy-cast', function () {
 gulp.task('bowercopy:jquery', function () {
   return gulp.src([config.folderBower.jquery + '/dist/jquery.min.js'])
   .pipe(gulp.dest(config.folderDev.base + '/js/vendor'));
+});
+gulp.task('bowercopy:fullPage', function () {
+  return gulp.src([config.folderBower.fullPage + '/jquery.fullPage.min.js'])
+  .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
+});
+gulp.task('bowercopy:mousewheel', function () {
+  return gulp.src([config.folderBower.mousewheel + '/jquery.mousewheel.min.js'])
+  .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
 });
 
 

@@ -7,49 +7,49 @@
 
 /// Fonts ///
 ///
-$msuif-font-size:                 16px;
+$tnc-font-size:                 16px;
 ///
-$msuif-font-weight:               400;
+$tnc-font-weight:               400;
 ///
-$msuif-font-family:               Arial, "Helvetica Neue", Helvetica, sans-serif;
+$tnc-font-family:               Arial, "Helvetica Neue", Helvetica, sans-serif;
 ///
-$msuif-font:                      $msuif-font-weight toem($msuif-font-size) $msuif-font-family;
+$tnc-font:                      $tnc-font-weight toem($tnc-font-size) $tnc-font-family;
 ///
-$msuif-font-weight-light:         300;
+$tnc-font-weight-light:         300;
 ///
-$msuif-font-weight-regular:       $msuif-font-weight;
+$tnc-font-weight-regular:       $tnc-font-weight;
 ///
-$msuif-font-weight-semibold:      600;
+$tnc-font-weight-semibold:      600;
 ///
-$msuif-font-weight-bold:          700;
+$tnc-font-weight-bold:          700;
 ///
-$msuif-font-color:                #101010;
+$tnc-font-color:                #101010;
 ///
-$msuif-font-color-bright:         #edede6;
+$tnc-font-color-bright:         #edede6;
 ///
-$msuif-font-color-dark:           $msuif-font-color;
+$tnc-font-color-dark:           $tnc-font-color;
 ///
-$msuif-font-color-white:          #fff;
+$tnc-font-color-white:          #fff;
 
 
 
 /// Background ///
 ///
-$msuif-background:                $msuif-font-color-bright;
+$tnc-background:                $tnc-font-color-bright;
 ///
-$msuif-background-bright:         $msuif-background;
+$tnc-background-bright:         $tnc-background;
 
 
 
 /// Wrapper ///
 ///
-$msuif-wrapper-min-width:         torem(1200px);
+$tnc-wrapper-min-width:         torem(1200px);
 
 
 
 /// Breakpoints ///
 ///
-$msuif-breakpoints: (
+$tnc-breakpoints: (
   'desktop-fhd': (max-width: 1920px),
   'desktop': (max-width: 1366px),
   'ipad': (min-width: 1023px, max-width: 1024px),
@@ -62,6 +62,6 @@ $msuif-breakpoints: (
 
 /// Transition/Animation ///
 ///
-$msuif-transition-duration:      0.25s;
+$tnc-transition-duration:      0.25s;
 ///
-$msuif-transition-timing:        ease;
+$tnc-transition-timing:        ease;
