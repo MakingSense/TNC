@@ -16,7 +16,7 @@
 .section {
   background-color: #aaa;
   &-2 {
-    background-color: #777;
+    background: linear-gradient(rgb(158, 215, 243), rgb(228, 228, 228));
   }
   &-3 {
     background-color: #222;

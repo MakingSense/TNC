@@ -18,7 +18,7 @@ $(document).ready(function() {
           //using index
           if(index == 1){
               //$.fn.fullpage.setAllowScrolling(false);
-              return false;
+              //return false;
           }
       }
     });

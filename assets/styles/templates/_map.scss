@@ -1,0 +1,95 @@
+////
+/// Map
+/// @group Map
+/// @author MS
+////
+
+// -------------------------------------
+//   Variables
+// -------------------------------------
+
+
+// -------------------------------------
+//   Code
+// -------------------------------------
+
+.map__container {
+  position: relative;
+
+  width: 80vw;
+  margin: 0 auto;
+  border-bottom: 1px solid #ccc;
+  background: white;
+}
+.map {
+  display: block;
+
+  position: relative;
+
+  width: 100%;
+  height: 45vh;
+  margin: 0 auto;
+}
+.form {
+  display: block;
+
+  position: absolute;
+  top: 52%;
+  left: 50%;
+
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  transform: translate(-50%, -95%);
+  text-align: center;
+}
+.form .search {
+  display: block;
+
+  font-size: 18px;
+
+  width: 400px;
+  margin: 0 auto;
+  padding: 15px 20px;
+
+  border: 2px solid #ccc;
+}
+.item__list {
+  display: block;
+
+  position: relative;
+
+  width: 100%;
+  height: 35vh;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+.item {
+  padding: 12px;
+
+  background: #d7f0ff;
+}
+
+.item:nth-child(odd) {
+  background: #e2f0f8;
+}
+
+.item a {
+  display: block;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  width: 100%;
+  margin-bottom: 8px;
+
+  text-decoration: none;
+
+  color: #444;
+}
+
+// .leaflet-clickable {
+//     stroke: brown;
+//     transition: all .25s linear;
+// }

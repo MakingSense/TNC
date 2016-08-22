@@ -18,6 +18,9 @@
   <meta property="og:site_name" content="" />
   <!-- Stylesheets and polyfills -->
   <link rel="stylesheet" type="text/css" href="./css/styles.css">
+  <!-- Mapbox Styles -->
+  <link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+  <link href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' rel='stylesheet' type='text/css' />
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -46,12 +49,24 @@
   <!-- Content -->
   <main role="main">
     <div id="fullpage">
-        <div class="section">Some section</div>
-        <div class="section section-2">
-          <div id="scroll">scroll:0 </div>   
+      <div class="section">Some section</div>
+      <div class="section section-2">
+        <div class="map__container">
+          <div id='map-one' class='map'>
+          </div>
+          <form action="" class="form">
+            <input id="search-input" class="search" type="search" placeholder="Search City">
+          </form>
+          <div class='item__list'>
+          <div class='heading'>
+            <h1>Our WaterSources</h1>
+          </div>
+          <div id='listings' class='listings'></div>
         </div>
-        <div class="section section-3">Some section</div>
-        <div class="section section-4">Some section</div>
+        </div>        
+      </div>
+      <div class="section section-3">Some section</div>
+      <div class="section section-4">Some section</div>
     </div>
   </main>
   <!-- /End of Content -->
@@ -63,17 +78,25 @@
 
   <!-- Javascript files -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-  <script>
-  window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>');
-  </script>
+  <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>');</script>
 
   <!-- fullPage Plugin -->
   <script type="text/javascript" src="js/plugins/jquery.fullPage.min.js"></script>
 
   <!-- mousewheel Plugin -->
   <script type="text/javascript" src="js/plugins/jquery.mousewheel.min.js"></script>
+  
+  <!-- mapbox Plugin -->
+  <script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
+
 
   <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/script-maps.js"></script>
 </body>
 
 </html>
+
+
+
+    
