@@ -165,12 +165,18 @@ gulp.task('doc:generate', function () {
 gulp.task('kraken', function () {
   gulp.src(config.folderAssets.base + '/images/*.*')
   .pipe(kraken({
-      key: '',
-      secret: '',
+      key: 'b87e244345e0334cdfdcb06151d0736e',
+      secret: '7c5349c43fac3efa4256014de693b2aa7ee96885',
       lossy: true,
       concurrency: 6
   }))
-  .pipe(gulp.dest(config.folderDev.base));
+  .pipe(gulp.dest(config.folderDev.base + '/img/'));
+});
+
+// Kraken image optimization task definition
+gulp.task('copy:images', function () {
+  gulp.src(config.folderAssets.base + '/images/*.*')
+  .pipe(gulp.dest(config.folderDev.base + '/img/'));
 });
 
 
@@ -219,10 +225,11 @@ gulp.task('run', ['build', 'serve'], function (){
   gulp.watch(config.folderAssets.base + '/**/*.scss', ['sass']);
   gulp.watch(config.folderAssets.base + '/icons/*.svg', ['build']);
   gulp.watch(config.folderDev.css + '/*.css', ['autoprefixer']);
+  gulp.watch(config.folderAssets.base + '/images/*.*', ['copy:images']);
   gulp.watch(config.folderAssets.base + '/templates/*.html', ['processHtml']);
   // Uncomment if want to watch for js changes
-  // gulp.watch('app/js/**/*.js', browserSync.reload); 
+  // gulp.watch('app/js/**/*.js', browserSync.reload);
 });
 
 // Define build task
-gulp.task('build', ['sass:build' ,'autoprefixer', 'processHtml']);
+gulp.task('build', ['sass:build' ,'autoprefixer', 'processHtml', 'copy:images']);
