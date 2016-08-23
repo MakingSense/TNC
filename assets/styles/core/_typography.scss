@@ -9,13 +9,62 @@
 ///
 @import "../modules/icons";
 
+//Custom Font
+@font-face {
+  font-family: 'Whitney Condensed';
+  src: url('../fonts/WhitneyCondensed-Light.eot');
+  src: url('../fonts/WhitneyCondensed-Light.woff2') format('woff2'),
+       url('../fonts/WhitneyCondensed-Light.woff') format('woff'),
+       url('../fonts/WhitneyCondensed-Light.ttf') format('truetype'),
+       url('../fonts/WhitneyCondensed-Light.svg#WhitneyCondensed-Light') format('svg'),
+       url('../fonts/WhitneyCondensed-Light.eot?#iefix') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney Condensed';
+  src: url('../fonts/WhitneyCondensed-Semibold.eot');
+  src: url('../fonts/WhitneyCondensed-Semibold.woff2') format('woff2'),
+       url('../fonts/WhitneyCondensed-Semibold.woff') format('woff'),
+       url('../fonts/WhitneyCondensed-Semibold.ttf') format('truetype'),
+       url('../fonts/WhitneyCondensed-Semibold.svg#WhitneyCondensed-Semibold') format('svg'),
+       url('../fonts/WhitneyCondensed-Semibold.eot?#iefix') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney Pro';
+  src: url('../fonts/Whitney-Semibold.eot');
+  src: url('../fonts/Whitney-Semibold.woff2') format('woff2'),
+       url('../fonts/Whitney-Semibold.woff') format('woff'),
+       url('../fonts/Whitney-Semibold.ttf') format('truetype'),
+       url('../fonts/Whitney-Semibold.svg#Whitney-Semibold') format('svg'),
+       url('../fonts/Whitney-Semibold.eot?#iefix') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney Pro';
+  src: url('../fonts/Whitney-Light.eot');
+  src: url('../fonts/Whitney-Light.woff2') format('woff2'),
+       url('../fonts/Whitney-Light.woff') format('woff'),
+       url('../fonts/Whitney-Light.ttf') format('truetype'),
+       url('../fonts/Whitney-Light.svg#Whitney-Light') format('svg'),
+       url('../fonts/Whitney-Light.eot?#iefix') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 
 ///
-$tnc-headers-h1-font-size: 				toem(46px);
+$tnc-headers-h1-font-size: 				toem(32px);
 ///
 $tnc-headers-h2-font-size: 				toem(32px);
 ///
-$tnc-headers-h3-font-size: 				toem(24px);
+$tnc-headers-h3-font-size: 				toem(18px);
 ///
 $tnc-headers-h4-font-size: 				toem(22px);
 ///
@@ -43,7 +92,8 @@ h6 {
 h1 {
   margin: 0;
   font-size: $tnc-headers-h1-font-size;
-  font-weight: $tnc-font-weight-bold;
+  font-weight: $tnc-font-weight-semibold;
+  //letter-spacing: -1px;
   line-height: 1.2;
   text-transform: uppercase;
 }
@@ -56,6 +106,7 @@ h2 {
 
 h3 {
   font-size: $tnc-headers-h3-font-size;
+  font-weight: $tnc-font-weight-light;
 }
 
 h4 {

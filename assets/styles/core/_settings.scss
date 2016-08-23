@@ -7,61 +7,63 @@
 
 /// Fonts ///
 ///
-$tnc-font-size:                 16px;
+$tnc-font-size            : 16px;
 ///
-$tnc-font-weight:               400;
+$tnc-font-weight          : 400;
 ///
-$tnc-font-family:               Arial, "Helvetica Neue", Helvetica, sans-serif;
+$tnc-font-family          : 'Whitney Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 ///
-$tnc-font:                      $tnc-font-weight toem($tnc-font-size) $tnc-font-family;
+$tnc-font                 : $tnc-font-weight toem($tnc-font-size) $tnc-font-family;
 ///
-$tnc-font-weight-light:         300;
+$tnc-font-weight-light    : 300;
 ///
-$tnc-font-weight-regular:       $tnc-font-weight;
+$tnc-font-weight-regular  : $tnc-font-weight;
 ///
-$tnc-font-weight-semibold:      600;
+$tnc-font-weight-semibold : 600;
 ///
-$tnc-font-weight-bold:          700;
+$tnc-font-weight-bold     : 700;
 ///
-$tnc-font-color:                #101010;
+$tnc-font-color           : #00bfff;
 ///
-$tnc-font-color-bright:         #edede6;
+$tnc-font-color-bright    : #edede6;
 ///
-$tnc-font-color-dark:           $tnc-font-color;
+$tnc-font-color-dark      : $tnc-font-color;
 ///
-$tnc-font-color-white:          #fff;
+$tnc-font-color-white     : #fff;
 
 
 
 /// Background ///
 ///
-$tnc-background:                $tnc-font-color-bright;
+$tnc-background           : $tnc-font-color-bright;
+$tnc-background--footer   : #252525;
+$tnc-color--footer        : #666666;
 ///
-$tnc-background-bright:         $tnc-background;
+$tnc-background-bright    : $tnc-background;
 
 
 
 /// Wrapper ///
 ///
-$tnc-wrapper-min-width:         torem(1200px);
+$tnc-wrapper-min-width    : torem(1200px);
 
 
 
 /// Breakpoints ///
 ///
-$tnc-breakpoints: (
-  'desktop-fhd': (max-width: 1920px),
-  'desktop': (max-width: 1366px),
-  'ipad': (min-width: 1023px, max-width: 1024px),
-  'isdesktop': (min-width: 1024px),
-  'ismobile': (max-width: 1024px),
-  'iphone': (max-width: 980px)
+$tnc-breakpoints          : (
+'desktop-fhd'             : (max-width: 1920px),
+'desktop'                 : (max-width: 1366px),
+'ipad'                    : (min-width: 1023px, max-width: 1024px),
+'isdesktop'               : (min-width: 1024px),
+'ismobile'                : (max-width: 1024px),
+'iphone'                  : (max-width: 980px)
 );
 
 
 
 /// Transition/Animation ///
 ///
-$tnc-transition-duration:      0.25s;
+$tnc-transition-duration  : 0.25s;
 ///
-$tnc-transition-timing:        ease;
+$tnc-transition-timing    : ease;

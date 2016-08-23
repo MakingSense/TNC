@@ -20,7 +20,7 @@ $(document).ready(function() {
             //using index
             if (index == 6) {
                 //$.fn.fullpage.setAllowScrolling(false);
-                return false;
+                //return false;
             }
         }
     });
