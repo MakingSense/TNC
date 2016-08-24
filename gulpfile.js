@@ -39,7 +39,10 @@ var config = {
     sassyCast: 'bower_components/sassy-cast',
     jquery: 'bower_components/jquery-latest',
     fullPage: 'bower_components/fullpage.js',
-    mousewheel: 'bower_components/jquery-mousewheel'
+    mousewheel: 'bower_components/jquery-mousewheel',
+    waypoints: 'bower_components/waypoints',
+    raphael: 'bower_components/raphael',
+    gsap: 'bower_components/gsap'
   },
 
   // Sassdoc task options
@@ -181,7 +184,7 @@ gulp.task('copy:images', function () {
 
 
 // Copy only the needed resources from Bower
-gulp.task('bowercopy', ['bowercopy:jeet', 'bowercopy:normalize', 'bowercopy:sassy-cast', 'bowercopy:jquery', 'bowercopy:fullPage', 'bowercopy:mousewheel']);
+gulp.task('bowercopy', ['bowercopy:jeet', 'bowercopy:normalize', 'bowercopy:sassy-cast', 'bowercopy:jquery', 'bowercopy:fullPage', 'bowercopy:mousewheel', 'bowercopy:waypoints', 'bowercopy:raphael', 'bowercopy:gsap']);
 
 gulp.task('bowercopy:jeet', function () {
   return gulp.src([config.folderBower.jeet + '/scss/jeet/*.scss'])
@@ -205,6 +208,18 @@ gulp.task('bowercopy:fullPage', function () {
 });
 gulp.task('bowercopy:mousewheel', function () {
   return gulp.src([config.folderBower.mousewheel + '/jquery.mousewheel.min.js'])
+  .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
+});
+gulp.task('bowercopy:waypoints', function () {
+  return gulp.src([config.folderBower.waypoints + '/lib/jquery.waypoints.min.js'])
+  .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
+});
+gulp.task('bowercopy:raphael', function () {
+  return gulp.src([config.folderBower.raphael + '/raphael.min.js'])
+  .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
+});
+gulp.task('bowercopy:gsap', function () {
+  return gulp.src([config.folderBower.gsap + '/src/minified/TweenMax.min.js'])
   .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
 });
 

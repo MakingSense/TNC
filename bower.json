@@ -1,13 +1,16 @@
 {
-  "name": "msuif",
-  "description": "Making Sense's UI Dev project Bower Dependencies.",
-  "version": "1.1.1",
+  "name": "tnc",
+  "description": "TNC's UI Dev project Bower Dependencies.",
+  "version": "1.0.0",
   "dependencies": {
     "fullpage.js": "~2.8.4",
     "jeet.gs": "latest",
     "jquery-latest": "jquery#latest",
     "jquery-mousewheel": "~3.1.13",
     "normalize-scss": "latest",
-    "sassy-cast": "https://github.com/HugoGiraudel/SassyCast.git"
+    "sassy-cast": "https://github.com/HugoGiraudel/SassyCast.git",
+    "waypoints": "~4.0.0",
+    "raphael": "~2.2.0",
+    "gsap": "~1.18.5"
   }
 }
