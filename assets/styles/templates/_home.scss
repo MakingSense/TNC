@@ -62,12 +62,12 @@
   margin: 0 auto;
 }
 
-#svg__line {
-  text-align: center;
+div[id*="svg_"] {
   height: 100%;
 
+  text-align: center;
   svg {
-    animation: glow 10s infinite cubic-bezier(0.82, 0.09, 0.53, 0.77);
+    animation: glow 10s infinite cubic-bezier(.82, .09, .53, .77);
   }
 }
 
