@@ -8,11 +8,13 @@
 @keyframes fade-in {
   from {
     visibility: hidden;
+
     opacity: 0;
   }
 
   to {
     visibility: visible;
+
     opacity: 1;
   }
 }
@@ -20,11 +22,13 @@
 @keyframes fade-out {
   from {
     visibility: visible;
+
     opacity: 1;
   }
 
   to {
     visibility: hidden;
+
     opacity: 0;
   }
 }
@@ -46,5 +50,15 @@
 
   to {
     transform: translateY(-100%);
+  }
+}
+///
+@keyframes tnc-preloader {
+  0%,
+  70%,
+  100% {
+    transform: scale3D(1, 1, 1);
+  } 35% {
+    transform: scale3D(0, 0, 1);
   }
 }

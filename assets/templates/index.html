@@ -18,6 +18,7 @@
     <meta property="og:site_name" content="" />
     <!-- Stylesheets and polyfills -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/jquery.mb.YTPlayer.min.css">
     <!-- Mapbox Styles -->
     <link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' rel='stylesheet' type='text/css' />
@@ -39,6 +40,20 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
   </head>
   <body class="">
+
+    <div class="preloader__container">
+      <div class="tnc-cube-grid">
+        <div class="tnc-cube tnc-cube1"></div>
+        <div class="tnc-cube tnc-cube2"></div>
+        <div class="tnc-cube tnc-cube3"></div>
+        <div class="tnc-cube tnc-cube4"></div>
+        <div class="tnc-cube tnc-cube5"></div>
+        <div class="tnc-cube tnc-cube6"></div>
+        <div class="tnc-cube tnc-cube7"></div>
+        <div class="tnc-cube tnc-cube8"></div>
+        <div class="tnc-cube tnc-cube9"></div>
+      </div>
+    </div>
     <!-- Header -->
     <header>
     </header>
@@ -97,11 +112,18 @@
             </div>
             <div class="scroll__source">
               <span class="ms-icon icon-location"></span>
-            </div>
-            <div class="content__container">
-              <h1>Life is a blue line</h1>
               <h3>Scroll up to find the</h3>
               <h3>#sourceofyou</h3>
+            </div>
+            <div class="content__container">
+              <a id="player_1_open" href="#c-video"><span class="ms-icon icon-play"></span></a>
+              <img src="img/main-place.png" alt="">
+            </div>
+          </div>
+          <div class="c-modal c-modal__video" id="c-video">
+            <a id="player_1_close" href="#!" class="c-modal__close">X</a>
+            <div class="c-modal__content">
+              <div id="player_1" class="player" data-property="{videoURL:'https://youtu.be/-twZDMe8tYI',quality: 'hd1080',containment:'self',startAt:60,vol:100,mute:false,autoPlay:false,loop:false,showYTLogo:false}"></div>
             </div>
           </div>
         </div>
@@ -119,8 +141,8 @@
     <script type="text/javascript" src="js/plugins/jquery.fullPage.min.js"></script>
     <!-- Mousewheel Plugin -->
     <script type="text/javascript" src="js/plugins/jquery.mousewheel.min.js"></script>
-    <!-- Waypoints Plugin -->
-    <script type="text/javascript" src="js/plugins/jquery.waypoints.min.js"></script>
+    <!-- YTPlayer Plugin -->
+    <script type="text/javascript" src="js/plugins/jquery.mb.YTPlayer.min.js"></script>
     <!-- Raphael Plugin -->
     <script type="text/javascript" src="js/plugins/raphael.min.js"></script>
     <!-- GSAP Plugin -->

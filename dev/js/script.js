@@ -17,11 +17,14 @@ $(document).ready(function() {
 
         onLeave: function(index, nextIndex, direction) {
             sectionCheck(nextIndex);
-        },
-        // afterLoad: function(anchorLink, index){
-        //     sectionCheck(index);
-        // }
+        }
     });
+    $.fn.fullpage.setAllowScrolling(false);
+    $.fn.fullpage.setKeyboardScrolling(false);
+
+    initPlayer(); //Init main video player
+
+
 
     // $(document).mousewheel(function(event) {
     //     $('#scroll').html(event.clientX);
@@ -30,9 +33,33 @@ $(document).ready(function() {
 
 
     $.fn.fullpage.silentMoveTo(9);
-    $.fn.fullpage.setAllowScrolling(false, 'down');
-    $.fn.fullpage.setKeyboardScrolling(false, 'down');
 });
+
+/*------------------------------------*\
+  #Video Functionalities
+\*------------------------------------*/
+function initPlayer() {
+    var player = $("#player_1");
+    player.YTPlayer();
+    player.on('YTPReady', function(event) {
+        var preloader = $('.preloader__container');
+        preloader.fadeOut('400', function() {
+
+        });
+        $.fn.fullpage.setAllowScrolling(true);
+        $.fn.fullpage.setAllowScrolling(false, 'down');
+        $.fn.fullpage.setKeyboardScrolling(true);
+        $.fn.fullpage.setKeyboardScrolling(false, 'down');
+    });
+
+    $('#player_1_close').on('click', function() {
+        player.YTPPause();
+    });
+
+    $('#player_1_open').on('click', function() {
+        player.YTPPlay();
+    });
+}
 
 /*------------------------------------*\
   #Sections Manipulation
@@ -70,6 +97,7 @@ function sectionCheck(section_index) {
             break;
         case 8:
             var svg = $('#svg_first');
+            $('#player_1_close')[0].click();
             if (!svg.hasClass('animated')) {
                 svg_first();
                 svg.addClass('animated');
