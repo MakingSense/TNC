@@ -72,14 +72,43 @@
           <div class="map__container">
             <div id='map-one' class='map'>
             </div>
+            <div id='directions'>
+              <div id="routes"></div>
+            </div>
             <form action="" class="form">
               <input id="search-input" class="search" type="search" placeholder="Search City">
+              <button id="search-input-btn">Search</button>
             </form>
-            <div class='item__list'>
-              <div class='heading'>
-                <h1>Our WaterSources</h1>
+            <div class='city'>
+              <h2>Oakland, California</h2>
+              <div class="city__information">
+                <div class="city__information-about">
+                  <h3>About Oakland</h3>
+                  <h2>5</h2>                  
+                  <p>Water Sources</p>
+                  <h2>146 km</h2>                  
+                  <p>Average Distance to Sources</p>
+                </div>
+                <div class="city__information-sources">
+                  <h3>Water Sources</h3>
+                  <ul class="reservoirs__list">
+                    <li>Upper San Leandro Reservoir</li>
+                    <li class="active">San Pablo Reservoir</li>
+                    <li>Briones Reservoir</li>
+                    <li>Lafayette Reservoir</li>
+                  </ul>
+                </div>
+                <div class="city__information-goto">
+                  <h3>Go to your Source</h3>
+                  <form action="">
+                    <label for="destination">To:</label>
+                    <input type="text" id="destination" name="destination">
+                    <label for="origin">From:</label>
+                    <input type="text" id="origin" name="origin">
+                    <button class="button">Route</button>
+                  </form>
+                </div>
               </div>
-              <div id='listings' class='listings'></div>
             </div>
           </div>
         </div>
@@ -123,7 +152,7 @@
           <div class="c-modal c-modal__video" id="c-video">
             <a id="player_1_close" href="#!" class="c-modal__close">X</a>
             <div class="c-modal__content">
-              <div id="player_1" class="player" data-property="{videoURL:'https://youtu.be/-twZDMe8tYI',quality: 'hd1080',containment:'self',startAt:60,vol:100,mute:false,autoPlay:false,loop:false,showYTLogo:false}"></div>
+              <div id="player_1" class="player" data-property="{videoURL:'https://youtu.be/-twZDMe8tYI',quality: 'low',containment:'self',startAt:60,vol:100,mute:false,autoPlay:false,loop:false,showYTLogo:false}"></div>
             </div>
           </div>
         </div>
@@ -149,7 +178,7 @@
     <script type="text/javascript" src="js/plugins/TweenMax.min.js"></script>
     <!-- Mapbox Plugin -->
     <script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
-    <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
+    <script src='js/plugins/mapbox.directions.js'></script>
     <!-- Map Script -->
     <script type="text/javascript" src="js/script-maps.js"></script>
     <!-- UI Script -->

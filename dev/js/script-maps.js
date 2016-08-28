@@ -7,7 +7,7 @@
 /*------------------------------------*\
   #Global Vars
 \*------------------------------------*/
-var map, geocoder, locations;
+var map, geocoder, locations, directions;
 var listings = document.getElementById('listings');
 var origin = {
     lat: 22.3077423,
@@ -17,6 +17,8 @@ var destination = {
     lat: 28.274,
     lng: -25.878269
 };
+
+
 
 
 /*------------------------------------*\
@@ -34,12 +36,43 @@ $(window).load(function() {
         searchInMap();
     });
 
+    $('#search-input-btn').on('click', function(event) {
+        event.preventDefault();
+        displayCity();
+    });
 });
 
+function displayCity() {
+    var map_front = $('.map');
+    var search = $('.form .search');
+    var city = $('.city');
+
+    map_front.css('animation-play-state', 'running');
+    search.css('animation-play-state', 'running');
+    city.css('animation-play-state', 'running');
+}
 
 function initMap() {
     map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr')
         .setView(L.latLng(origin.lat, origin.lng), 18);
+
+
+    directions = L.mapbox.directions({
+        profile: 'mapbox.driving',
+        units: 'metric'
+    });
+
+    var routeStyle = {
+        "readonly": true,
+        "routeStyle": {
+            color: '#00bfff',
+            weight: 6,
+            opacity: .85
+        }
+    };
+    var map_directions = L.mapbox.directions.layer(directions, routeStyle).addTo(map);
+
+
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
     locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here   
@@ -71,7 +104,7 @@ function initMap() {
             });
 
             popup += '</div>';
-            WaterSourcesPrinter(locale);
+            //WaterSourcesPrinter(locale);
             locale.bindPopup(popup);
         });
     });
@@ -84,14 +117,14 @@ function initMap() {
             marker.setIcon(L.icon({
                 iconUrl: 'http://image.flaticon.com/icons/svg/71/71696.svg',
                 iconSize: [36, 36],
-                iconAnchor: [28, 28],
+                // iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
             }));
         } else {
             marker.setIcon(L.icon({
                 iconUrl: 'http://image.flaticon.com/icons/svg/179/179529.svg',
                 iconSize: [32, 32],
-                iconAnchor: [28, 28],
+                // iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
             }));
         }
@@ -109,24 +142,12 @@ function setActive(el) {
 }
 
 function traceRoute() {
-    var directions = L.mapbox.directions({
-        profile: 'mapbox.driving'
-    });
 
     // Set the origin and destination for the direction and call the routing service
     directions.setOrigin(L.latLng(origin[0], origin[1]));
     directions.setDestination(L.latLng(destination.lat, destination.lng));
-    var aux = directions.query();
+    var aux = directions.query(L.latLng(origin[0], origin[1]));
 
-    var routeStyle = {
-        "routeStyle": {
-            color: '#46775a',
-            weight: 6,
-            opacity: .75
-        }
-    };
-
-    var directionsLayer = L.mapbox.directions.layer(directions, routeStyle).addTo(map);
     var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
         .addTo(map);
 }
@@ -184,7 +205,7 @@ function filterWaterSourcesbyID(cityID) {
     $.each(waterSources, function(index, val) {
         prop = val.feature.properties;
         if (prop.cities.indexOf(cityID) > -1) {
-            WaterSourcesPrinter(val);
+            //WaterSourcesPrinter(val);
             filteredSources.push(val);
         }
     });

@@ -32,7 +32,7 @@ $(document).ready(function() {
     // });
 
 
-    $.fn.fullpage.silentMoveTo(9);
+    $.fn.fullpage.silentMoveTo(3);
 });
 
 /*------------------------------------*\
