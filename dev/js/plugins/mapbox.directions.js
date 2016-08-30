@@ -23,6 +23,7 @@
     return s
 })({
     1: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -47,6 +48,7 @@
         }
     ],
     2: [
+
         function(require, module, exports) {
             ! function() {
                 var d3 = {
@@ -1148,6 +1150,7 @@
         }, {}
     ],
     3: [
+
         function(require, module, exports) {
             function xhr(url, callback, cors) {
                 var sent = false;
@@ -1254,6 +1257,7 @@
         }, {}
     ],
     4: [
+
         function(require, module, exports) {
             /**
              * Debounces a function by the given threshold.
@@ -1292,6 +1296,7 @@
         }, {}
     ],
     5: [
+
         function(require, module, exports) {
             var polyline = {};
 
@@ -1387,6 +1392,7 @@
         }, {}
     ],
     6: [
+
         function(require, module, exports) {
             (function() {
                 var slice = [].slice;
@@ -1474,6 +1480,7 @@
         }, {}
     ],
     7: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -1633,9 +1640,10 @@
                     return this.getOrigin() && this.getDestination();
                 },
 
-                query: function(opts) {
+                query: function(opts, callback) {
                     if (!opts) opts = {};
                     if (!this.queryable()) return this;
+                    if (callback === undefined) callback = function() {};
 
                     if (this._query) {
                         this._query.abort();
@@ -1666,6 +1674,7 @@
                             this._query = null;
 
                             if (err) {
+                                callback(err);
                                 return this.fire('error', {
                                     error: err.message
                                 });
@@ -1692,6 +1701,8 @@
                             } else {
                                 this.directions.destination = this.destination;
                             }
+
+                            callback(null, this.directions);
 
                             this.fire('load', this.directions);
                         }, this), this);
@@ -1765,6 +1776,7 @@
         }
     ],
     8: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -1809,6 +1821,7 @@
         }
     ],
     9: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -1842,6 +1855,7 @@
         }, {}
     ],
     10: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -2020,6 +2034,7 @@
         }
     ],
     11: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -2093,6 +2108,7 @@
         }
     ],
     12: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -2415,6 +2431,7 @@
         }
     ],
     13: [
+
         function(require, module, exports) {
             'use strict';
 
@@ -2451,6 +2468,7 @@
         }
     ],
     14: [
+
         function(require, module, exports) {
             'use strict';
 

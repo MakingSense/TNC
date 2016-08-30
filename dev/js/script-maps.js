@@ -73,6 +73,7 @@ function initMap() {
     var map_directions = L.mapbox.directions.layer(directions, routeStyle).addTo(map);
 
 
+
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
     locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here   
@@ -131,6 +132,22 @@ function initMap() {
     });
 }
 
+function getDistance(_origin, _destination) {
+    var _origin = L.latLng(_origin[0], _origin[1]);
+    var _destination = L.latLng(_destination[0], _destination[1]);
+    var distance = _origin.distanceTo(_destination);
+    distance = distanceConvert(distance);
+    console.log("DISTANCE: " + distance);
+
+}
+
+function distanceConvert(distance) {
+    if (distance >= 100000) return (distance / 1000).toFixed(0) + ' km';
+    if (distance >= 10000) return (distance / 1000).toFixed(1) + ' km';
+    if (distance >= 100) return (distance / 1000).toFixed(2) + ' km';
+    return distance.toFixed(0) + ' Km';
+}
+
 function setActive(el) {
     var siblings = listings.getElementsByTagName('div');
     for (var i = 0; i < siblings.length; i++) {
@@ -146,7 +163,16 @@ function traceRoute() {
     // Set the origin and destination for the direction and call the routing service
     directions.setOrigin(L.latLng(origin[0], origin[1]));
     directions.setDestination(L.latLng(destination.lat, destination.lng));
-    var aux = directions.query(L.latLng(origin[0], origin[1]));
+
+    var aux = {
+        proximity: L.latLng(origin[0], origin[1])
+    }
+
+    directions.query(aux, function(err, results){
+        console.log(distanceConvert(results.routes[0].distance));
+    });    
+
+    getDistance(origin, [destination.lat, destination.lng]);
 
     var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
         .addTo(map);
