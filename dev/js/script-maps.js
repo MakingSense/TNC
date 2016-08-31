@@ -29,6 +29,7 @@ $(window).load(function() {
     //Access Token Map
     L.mapbox.accessToken = 'pk.eyJ1IjoidG5jLWdsb2JhbHdhdGVyIiwiYSI6ImNpcjVveDV0YTAwOGZnN25uNTltdjdpbzMifQ.2Ff5ioAO5z2s5ltmcBx7cA';
     initMap();
+    // invalidate the size of your map    
 
     //Binding input
     $('#search-input').on('input', function(event) {
@@ -40,6 +41,8 @@ $(window).load(function() {
         event.preventDefault();
         displayCity();
     });
+
+    map.setView([38.5842213, -97.4564217], 5, {reset: true})
 });
 
 function displayCity() {
@@ -53,9 +56,7 @@ function displayCity() {
 }
 
 function initMap() {
-    map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr')
-        .setView(L.latLng(origin.lat, origin.lng), 18);
-
+    map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr').setView(L.latLng(origin.lat, origin.lng), 16);
 
     directions = L.mapbox.directions({
         profile: 'mapbox.driving',
@@ -108,6 +109,7 @@ function initMap() {
             //WaterSourcesPrinter(locale);
             locale.bindPopup(popup);
         });
+        
     });
 
     locations.on('layeradd', function(e) {
@@ -130,6 +132,8 @@ function initMap() {
             }));
         }
     });
+
+    map.invalidateSize();
 }
 
 function getDistance(_origin, _destination) {

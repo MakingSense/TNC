@@ -16,9 +16,9 @@
 .wrapper {
   @include cf();
 
-  position: relative;
-
   display: block;
+
+  position: relative;
 
   width: 100%;
   height: 100%;
@@ -151,22 +151,23 @@ div[id*='svg_'] {
     text-transform: uppercase;
   }
   .icon-location {
-    font-size: toem(95px);
-
     display: block;
+
+    font-size: toem(95px);
 
     margin: 0 auto;
     margin-bottom: torem(15px);
+    animation: bounce 2s infinite;
   }
 }
 
 .share__section {
   background-image: url('../img/section-09.jpg');
   .main__footer {
+    display: block;
+
     position: absolute;
     top: 0;
-
-    display: block;
 
     width: 100%;
     padding: 2.5vh 5vh;
@@ -206,6 +207,11 @@ div[id*='svg_'] {
       width: 100%;
       height: 100%;
     }
+  }
+  .logo {
+    position: absolute;
+    right: 6vh;
+    bottom: 1vh;
   }
   .content__container {
     position: absolute;

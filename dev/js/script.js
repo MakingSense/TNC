@@ -11,7 +11,8 @@
 
 $(document).ready(function() {
     $('#section__container').fullpage({
-        scrollingSpeed: 1200,
+        anchors:['gif', '', 'maps', '', '', '', '', '', ''],
+        scrollingSpeed: 800,
         navigation: true,
         navigationPosition: 'left',
 
@@ -19,6 +20,7 @@ $(document).ready(function() {
             sectionCheck(nextIndex);
         }
     });
+    hideSlidesDots()
     $.fn.fullpage.setAllowScrolling(false);
     $.fn.fullpage.setKeyboardScrolling(false);
 
@@ -32,8 +34,15 @@ $(document).ready(function() {
     // });
 
 
-    $.fn.fullpage.silentMoveTo(3);
+    $.fn.fullpage.silentMoveTo(9);
 });
+
+/*------------------------------------*\
+  #Control Slides Functionalities
+\*------------------------------------*/
+function hideSlidesDots() {
+    $('#fp-nav ul li:nth-child(4), #fp-nav ul li:nth-child(6), #fp-nav ul li:nth-child(8)').css('display', 'none');
+}
 
 /*------------------------------------*\
   #Video Functionalities
@@ -44,12 +53,17 @@ function initPlayer() {
     player.on('YTPReady', function(event) {
         var preloader = $('.preloader__container');
         preloader.fadeOut('400', function() {
+            // your code that shows the map div
+            $('#map-one').show();           
 
         });
         $.fn.fullpage.setAllowScrolling(true);
-        $.fn.fullpage.setAllowScrolling(false, 'down');
+        //$.fn.fullpage.setAllowScrolling(false, 'down');
         $.fn.fullpage.setKeyboardScrolling(true);
-        $.fn.fullpage.setKeyboardScrolling(false, 'down');
+        //$.fn.fullpage.setKeyboardScrolling(false, 'down');
+    });
+    player.on('YTPEnd', function(event) {
+        parent.location.hash = '#!';
     });
 
     $('#player_1_close').on('click', function() {
@@ -139,7 +153,7 @@ svg_first = function() {
 
         tnc_line_1.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);
     };
-    tween = TweenMax.to(triangle, 5, {
+    tween = TweenMax.to(triangle, 2.5, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
@@ -175,7 +189,7 @@ svg_second = function() {
 
         tnc_line_2.setViewBox(((width * scale)), 0, width, height, false);
     };
-    tween = TweenMax.to(triangle, 5, {
+    tween = TweenMax.to(triangle, 2.5, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
@@ -211,7 +225,7 @@ svg_third = function() {
 
         tnc_line_3.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);
     };
-    tween = TweenMax.to(triangle, 5, {
+    tween = TweenMax.to(triangle, 2.5, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
