@@ -2133,19 +2133,19 @@
 
                     this.originMarker = L.marker([0, 0], {
                         draggable: !this.options.readonly,
-                        // icon: L.mapbox.marker.icon({
-                        //     // 'marker-size': 'medium',
-                        //     // 'marker-color': '#3BB2D0',
-                        //     // 'marker-symbol': 'a'
-                        // })
+                        icon: L.mapbox.marker.icon({
+                            'marker-size': 'large',
+                            'marker-color': '#00bfff',
+                            'marker-symbol': 'o'
+                        })
                     }).on('drag', this._drag, this);
 
                     this.destinationMarker = L.marker([0, 0], {
                         draggable: !this.options.readonly,
                         icon: L.mapbox.marker.icon({
-                            'marker-size': 'medium',
-                            'marker-color': '#444',
-                            'marker-symbol': 'b'
+                            'marker-size': 'large',
+                            'marker-color': '#00bfff',
+                            'marker-symbol': 'd'
                         })
                     }).on('drag', this._drag, this);
 

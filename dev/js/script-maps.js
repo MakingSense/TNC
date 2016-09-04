@@ -32,14 +32,22 @@ $(window).load(function() {
     // invalidate the size of your map    
 
     //Binding input
-    $('#search-input').on('input', function(event) {
-        event.preventDefault();
-        searchInMap();
-    });
-
     $('#search-input-btn').on('click', function(event) {
         event.preventDefault();
-        displayCity();
+        searchInMap();        
+        $('#search-input').attr('value', '').val('');
+    });
+
+    $('.city__button').on('click', function(event) {
+        event.preventDefault();
+        hideCity();
+    });
+
+    $('#iconMap').on('click', function(event) {
+        event.preventDefault();
+        $('.map__container').addClass('anim__fade-in');
+        $('.text__container').addClass('text__container--out');
+        $(this).removeAttr('href');
     });
 
     map.setView([38.5842213, -97.4564217], 5, {reset: true})
@@ -47,12 +55,22 @@ $(window).load(function() {
 
 function displayCity() {
     var map_front = $('.map');
-    var search = $('.form .search');
+    var search = $('.form');
     var city = $('.city');
 
-    map_front.css('animation-play-state', 'running');
-    search.css('animation-play-state', 'running');
-    city.css('animation-play-state', 'running');
+    map_front.removeClass('map__height-middle--out').addClass('map__height-middle--in');
+    search.removeClass('search__fade-out--reverse').addClass('search__fade-out');
+    city.removeClass('item-list__fade-in--reverse').addClass('item-list__fade-in');
+}
+
+function hideCity() {
+    var map_front = $('.map');
+    var search = $('.form');
+    var city = $('.city');
+
+    map_front.removeClass('map__height-middle--in').addClass('map__height-middle--out');
+    search.removeClass('search__fade-out').addClass('search__fade-out--reverse');
+    city.removeClass('item-list__fade-in').addClass('item-list__fade-in--reverse');
 }
 
 function initMap() {
@@ -119,7 +137,7 @@ function initMap() {
         if (prop.type == "city") {
             marker.setIcon(L.icon({
                 iconUrl: 'http://image.flaticon.com/icons/svg/71/71696.svg',
-                iconSize: [36, 36],
+                iconSize: [0, 0],
                 // iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
             }));
@@ -197,8 +215,9 @@ function showMap(err, data) {
     if (data.lbounds) {
         map.fitBounds(data.lbounds);
     } else if (data.latlng) {
-        map.setView([data.latlng[0], data.latlng[1]], 18);
+        map.setView([data.latlng[0], data.latlng[1]], 18);        
     }
+    displayCity();
 }
 
 function filterLocations(cityName) {

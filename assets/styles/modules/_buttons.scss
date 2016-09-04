@@ -2,3 +2,28 @@
 /// Buttons
 /// @group Component - Buttons
 ////
+
+.button {
+  display: inline-block;
+
+  font-size: torem(16px);
+  font-weight: 700;
+  line-height: 1.2;
+
+  padding: 16px 40px;
+
+  transition: all .25s ease;
+  text-align: center!important;
+  vertical-align: middle;
+  text-decoration: none;
+
+  color: #fff;
+  border: none;
+  background-color: $tnc-color--primary;
+
+  -webkit-appearance: none;
+  text-transform: uppercase;
+  &:hover {
+  	background-color: shade($tnc-color--primary, 15%);
+  }
+}
