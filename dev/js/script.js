@@ -41,7 +41,7 @@ $(document).ready(function() {
   #Control Slides Functionalities
 \*------------------------------------*/
 function hideSlidesDots() {
-    $('#fp-nav ul li:nth-child(4), #fp-nav ul li:nth-child(6), #fp-nav ul li:nth-child(8)').css('display', 'none');
+    $('#fp-nav ul li:nth-child(2), #fp-nav ul li:nth-child(4), #fp-nav ul li:nth-child(6), #fp-nav ul li:nth-child(8)').css('display', 'none');
 }
 
 /*------------------------------------*\
@@ -58,9 +58,7 @@ function initPlayer() {
 
         });
         $.fn.fullpage.setAllowScrolling(true);
-        //$.fn.fullpage.setAllowScrolling(false, 'down');
         $.fn.fullpage.setKeyboardScrolling(true);
-        //$.fn.fullpage.setKeyboardScrolling(false, 'down');
     });
     player.on('YTPEnd', function(event) {
         parent.location.hash = '#!';
@@ -148,16 +146,19 @@ svg_first = function() {
         tnc_line_1.clear();
         tnc_line_1.path(subpath).attr({
             stroke: '#00bfff',
-            "stroke-width": 5
+            "stroke-width": 4
         }).transform("s" + scale + "," + scale + ",0,0");
 
         tnc_line_1.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);
     };
-    tween = TweenMax.to(triangle, 2.5, {
+    tween = TweenMax.to(triangle, 2, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this
+        onUpdateScope: this,
+        onComplete: function() {
+            $.fn.fullpage.moveSectionUp();
+        }
     });
 };
 
@@ -184,16 +185,19 @@ svg_second = function() {
         tnc_line_2.clear();
         tnc_line_2.path(subpath).attr({
             stroke: '#00bfff',
-            "stroke-width": 5
+            "stroke-width": 4
         }).transform("s" + scale + "," + scale + ",0,0");
 
         tnc_line_2.setViewBox(((width * scale)), 0, width, height, false);
     };
-    tween = TweenMax.to(triangle, 2.5, {
+    tween = TweenMax.to(triangle, 2, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this
+        onUpdateScope: this,
+        onComplete: function() {
+            $.fn.fullpage.moveSectionUp();
+        }
     });
 };
 
@@ -220,15 +224,18 @@ svg_third = function() {
         tnc_line_3.clear();
         tnc_line_3.path(subpath).attr({
             stroke: '#00bfff',
-            "stroke-width": 5
+            "stroke-width": 4
         }).transform("s" + scale + "," + scale + ",0,0");
 
         tnc_line_3.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);
     };
-    tween = TweenMax.to(triangle, 2.5, {
+    tween = TweenMax.to(triangle, 2, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this
+        onUpdateScope: this,
+        onComplete: function() {
+            $.fn.fullpage.moveSectionUp();
+        }
     });
 };

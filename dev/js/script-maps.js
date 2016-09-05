@@ -8,7 +8,7 @@
   #Global Vars
 \*------------------------------------*/
 var map, geocoder, locations, directions;
-var listings = document.getElementById('listings');
+var listings = document.getElementById('reservoirs');
 var origin = {
     lat: 22.3077423,
     lng: 114.2287582
@@ -34,7 +34,7 @@ $(window).load(function() {
     //Binding input
     $('#search-input-btn').on('click', function(event) {
         event.preventDefault();
-        searchInMap();        
+        searchInMap();
         $('#search-input').attr('value', '').val('');
     });
 
@@ -50,17 +50,66 @@ $(window).load(function() {
         $(this).removeAttr('href');
     });
 
-    map.setView([38.5842213, -97.4564217], 5, {reset: true})
+    map.setView([38.5842213, -97.4564217], 5, {
+        reset: true
+    })
 });
 
 function displayCity() {
     var map_front = $('.map');
     var search = $('.form');
     var city = $('.city');
+    map.invalidateSize(16);
 
     map_front.removeClass('map__height-middle--out').addClass('map__height-middle--in');
     search.removeClass('search__fade-out--reverse').addClass('search__fade-out');
     city.removeClass('item-list__fade-in--reverse').addClass('item-list__fade-in');
+}
+
+function displayDataCity(cityName) {
+    var title = $('#cityTitle');
+    var name = $('#cityName');
+    var sources = $('#citySources');
+    var km = $('#cityKmAverage');
+
+    title.html(cityName);
+    name.html('About ' + cityName);
+
+    locations.eachLayer(function(locale) {
+        prop = locale.feature.properties;
+        if (prop.type == "city" && prop.city_name == cityName) {
+            sources.html(prop.sources_count);
+        }
+    });
+
+    km.html(calcutaKMAVG(cityName));
+}
+
+function calcutaKMAVG(cityName){
+    var wsIDs = [];
+    var ws = [];
+    var totalKM = 0;
+    locations.eachLayer(function(locale) {
+        prop = locale.feature.properties;
+        if (prop.type == "city" && prop.city_name == cityName) {
+            wsIDs = prop.sources;
+        }
+    });
+
+    locations.eachLayer(function(locale) {
+        prop = locale.feature.properties;
+        if (prop.type == "water_source" && wsIDs.indexOf(prop.id) > -1) {
+            var aux = locale.getLatLng();
+            ws.push(aux);
+        }
+    });
+
+    $.each(ws, function(index, val) {
+        var distance = getDistance(origin, [val.lat, val.lng]);
+        totalKM = totalKM + distance;
+    });    
+
+    return distanceConvert(totalKM/ws.length);
 }
 
 function hideCity() {
@@ -74,7 +123,7 @@ function hideCity() {
 }
 
 function initMap() {
-    map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr').setView(L.latLng(origin.lat, origin.lng), 16);
+    map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr').setView(L.latLng(origin.lat, origin.lng), 17);
 
     directions = L.mapbox.directions({
         profile: 'mapbox.driving',
@@ -119,15 +168,15 @@ function initMap() {
                 destination = locale.getLatLng();
                 traceRoute();
 
-                // 2. Set active the markers associated listing.
-                //setActive(listing);
+                //2. Set active the markers associated listing.
+                setActive(listing);
             });
 
             popup += '</div>';
             //WaterSourcesPrinter(locale);
             locale.bindPopup(popup);
         });
-        
+
     });
 
     locations.on('layeradd', function(e) {
@@ -158,9 +207,9 @@ function getDistance(_origin, _destination) {
     var _origin = L.latLng(_origin[0], _origin[1]);
     var _destination = L.latLng(_destination[0], _destination[1]);
     var distance = _origin.distanceTo(_destination);
-    distance = distanceConvert(distance);
-    console.log("DISTANCE: " + distance);
-
+    //distance = distanceConvert(distance);
+    //console.log("DISTANCE: " + distance);
+    return distance;
 }
 
 function distanceConvert(distance) {
@@ -171,7 +220,7 @@ function distanceConvert(distance) {
 }
 
 function setActive(el) {
-    var siblings = listings.getElementsByTagName('div');
+    var siblings = listings.getElementsByTagName('li');
     for (var i = 0; i < siblings.length; i++) {
         siblings[i].className = siblings[i].className
             .replace(/active/, '').replace(/\s\s*$/, '');
@@ -190,9 +239,9 @@ function traceRoute() {
         proximity: L.latLng(origin[0], origin[1])
     }
 
-    directions.query(aux, function(err, results){
+    directions.query(aux, function(err, results) {
         console.log(distanceConvert(results.routes[0].distance));
-    });    
+    });
 
     getDistance(origin, [destination.lat, destination.lng]);
 
@@ -215,9 +264,10 @@ function showMap(err, data) {
     if (data.lbounds) {
         map.fitBounds(data.lbounds);
     } else if (data.latlng) {
-        map.setView([data.latlng[0], data.latlng[1]], 18);        
+        map.setView([data.latlng[0], data.latlng[1]], 18);
     }
     displayCity();
+    displayDataCity(data.results.features[0].text);
 }
 
 function filterLocations(cityName) {
@@ -254,7 +304,7 @@ function filterWaterSourcesbyID(cityID) {
     $.each(waterSources, function(index, val) {
         prop = val.feature.properties;
         if (prop.cities.indexOf(cityID) > -1) {
-            //WaterSourcesPrinter(val);
+            WaterSourcesPrinter(val);
             filteredSources.push(val);
         }
     });
@@ -263,24 +313,22 @@ function filterWaterSourcesbyID(cityID) {
 
 function WaterSourcesPrinter(locale) {
     var prop = locale.feature.properties;
-    var listing = listings.appendChild(document.createElement('div'));
-    listing.className = 'item';
+    var listing = listings.appendChild(document.createElement('li'));
 
     var link = listing.appendChild(document.createElement('a'));
     link.href = '#';
     link.className = 'title';
 
     link.innerHTML = prop.name;
-    link.innerHTML += '<small class="quiet">' + prop.type + '</small>';
-
-    var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = prop.id;
 
     link.onclick = function() {
         setActive(listing);
 
         // When a menu item is clicked, animate the map to center
         // its associated locale and open its popup.
+        map.panTo(locale.getLatLng());
+        destination = locale.getLatLng();
+        traceRoute();
         map.setView(locale.getLatLng(), 18);
         locale.openPopup();
         return false;

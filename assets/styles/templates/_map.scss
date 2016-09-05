@@ -341,12 +341,13 @@
           }
           &.active {
             position: relative;
+            display: inline-block;
 
             color: $tnc-font-color;
             &:before {
               position: absolute;
               top: 0;
-              left: 20%;
+              left: -20%;
 
               font-size: torem(35px);
               font-weight: 600;
