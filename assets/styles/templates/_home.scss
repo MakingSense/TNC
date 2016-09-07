@@ -89,9 +89,11 @@
   background-size: cover;
   &-2 {
     background-image: url('../img/section-08.jpg');
+    background-position: center center;
   }
   &-3 {
     background-image: url('../img/section-07.jpg');
+    background-position: center center;
   }
   &-4 {
     background-image: url('../img/section-06.jpg');
@@ -104,11 +106,11 @@
     background-image: url('../img/section-04.jpg');
   }
   &-7 {
-    background-image: url('../img/section-02.jpg');
+    background-image: url('../img/section-03.jpg');
     background-position: center center;
   }
   &-8 {
-    background-image: url('../img/section-04.jpg');
+    background-image: url('../img/section-02.jpg');
   }
   .section__footer {
     position: absolute;
@@ -171,6 +173,7 @@ div[id*='svg_'] {
 
 .share__section {
   background-image: url('../img/section-09.jpg');
+  background-position: center center;
   .main__footer {
     display: block;
 
