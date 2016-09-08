@@ -135,6 +135,8 @@ gulp.task('webfont:generate',function(){
     }))
     .pipe(iconfont({
       fontName: fontName,
+      normalize: true,
+      fontHeight: 1001,
       formats: ['ttf', 'eot', 'woff', 'woff2', 'svg']
      }))
     .pipe(gulp.dest(config.folderDev.fonts));
