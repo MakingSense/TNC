@@ -180,7 +180,7 @@ gulp.task('kraken', function () {
 
 // Kraken image optimization task definition
 gulp.task('copy:images', function () {
-  gulp.src(config.folderAssets.base + '/images/*.*')
+  gulp.src(config.folderAssets.base + '/images/**/*.*')
   .pipe(gulp.dest(config.folderDev.base + '/img/'));
 });
 

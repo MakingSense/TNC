@@ -100,7 +100,6 @@
     background-position: bottom center;
   }
   &-5 {
-    background-image: url('../img/section-05.jpg');
   }
   &-6 {
     background-image: url('../img/section-04.jpg');
@@ -247,6 +246,9 @@ div[id*='svg_'] {
 
     text-align: center;
     .gif__main {
+      width: 426px;
+      margin: 0 auto;
+
       border: 1px solid $tnc-font-color;
     }
     .gif__list {

@@ -25,6 +25,8 @@ $(document).ready(function() {
     $.fn.fullpage.setKeyboardScrolling(false);
 
     initPlayer(); //Init main video player
+    bingindGIF();
+    peopleBinding();
 
 
 
@@ -34,7 +36,7 @@ $(document).ready(function() {
     // });
 
 
-    $.fn.fullpage.silentMoveTo(1);
+    $.fn.fullpage.silentMoveTo(5);
 });
 
 /*------------------------------------*\
@@ -118,6 +120,30 @@ function sectionCheck(section_index) {
         default:
             break;
     }
+}
+
+/*------------------------------------*\
+  #GIF Section Binding
+\*------------------------------------*/
+function bingindGIF() {
+    var itemList = $('.gif__list li a img');
+    var gifMain = $('.gif__main img');
+    $.each(itemList, function(index, val) {
+         $(this).on('click', function(event) {
+             event.preventDefault();
+             gifMain.attr('src', $(this).attr('src'));
+         });
+    });
+}
+
+function peopleBinding() {
+    var people = $('.people__nav a');
+    $.each(people, function(index, val) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            $(this).parent().siblings('.people__modal').addClass('anim__people__full');
+        });        
+    });
 }
 
 /*------------------------------------*\
