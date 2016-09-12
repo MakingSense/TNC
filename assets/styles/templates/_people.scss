@@ -91,8 +91,76 @@
         background-size: cover;
       }
     }
+    &__modal {
+      &__close {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        h2 {
+          display: inline-block;
+
+          font-size: torem(24px);
+          font-weight: 700;
+
+          padding: torem(5px) torem(10px);
+
+          vertical-align: middle;
+          text-transform: uppercase;
+
+          border: 1px solid $tnc-font-color;
+        }
+        a {
+          display: inline-block;
+
+          font-size: torem(48px);
+          font-weight: 400;
+
+          margin-left: torem(16px);
+
+          vertical-align: middle;
+
+          color: $tnc-font-color;
+          &:hover {
+            color: shade($tnc-font-color, 30%);
+          }
+        }
+      }
+      &__content {
+        .item__info {
+          position: absolute;
+
+          width: 100%;
+          max-width: torem(340px);
+          padding: torem(16px);
+
+          color: #fff;
+          border: 1px solid $tnc-font-color;
+          background: rgba(#000, .5);
+          &:nth-child(1) {
+            top: 25%;
+            left: 42%;
+          }
+          &:nth-child(2) {
+            top: 55%;
+            left: 15%;
+          }
+          &:nth-child(3) {
+            top: 70%;
+            left: 55%;
+          }
+          p {
+            font-size: torem(15px);
+            line-height: 1.4;
+
+            margin: 0;
+          }
+        }
+      }
+    }
     &__nav {
       position: relative;
+
+      padding-top: 100%;
 
       text-align: center;
     }

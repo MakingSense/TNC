@@ -17,7 +17,7 @@ $(document).ready(function() {
         navigationPosition: 'left',
 
         onLeave: function(index, nextIndex, direction) {
-            sectionCheck(nextIndex);
+            sectionCheck(nextIndex, direction);
         }
     });
     hideSlidesDots()
@@ -27,16 +27,11 @@ $(document).ready(function() {
     initPlayer(); //Init main video player
     bingindGIF();
     peopleBinding();
+    closeModal();
+    shares();
 
 
-
-    // $(document).mousewheel(function(event) {
-    //     $('#scroll').html(event.clientX);
-    //     console.log(event.clientX, event.clientY, event.deltaFactor);
-    // });
-
-
-    $.fn.fullpage.silentMoveTo(5);
+    $.fn.fullpage.silentMoveTo(9);
 });
 
 /*------------------------------------*\
@@ -78,7 +73,7 @@ function initPlayer() {
 /*------------------------------------*\
   #Sections Manipulation
 \*------------------------------------*/
-function sectionCheck(section_index) {
+function sectionCheck(section_index, direction) {
     switch (section_index) {
         case 1:
 
@@ -101,12 +96,28 @@ function sectionCheck(section_index) {
                 svg_third();
                 svg.addClass('animated');
             }
+            else {
+                if(direction == 'down') {
+                    $.fn.fullpage.moveSectionDown();
+                }
+                else{
+                    $.fn.fullpage.moveSectionUp();
+                } 
+            }
             break;
         case 7:
             var svg = $('#svg_second');
             if (!svg.hasClass('animated')) {
                 svg_second();
                 svg.addClass('animated');
+            }
+            else {
+                if(direction == 'down') {
+                    $.fn.fullpage.moveSectionDown();
+                }
+                else{
+                    $.fn.fullpage.moveSectionUp();
+                } 
             }
             break;
         case 8:
@@ -115,6 +126,14 @@ function sectionCheck(section_index) {
             if (!svg.hasClass('animated')) {
                 svg_first();
                 svg.addClass('animated');
+            }
+            else {
+                if(direction == 'down') {
+                    $.fn.fullpage.moveSectionDown();
+                }
+                else{
+                    $.fn.fullpage.moveSectionUp();
+                } 
             }
             break;
         default:
@@ -128,10 +147,15 @@ function sectionCheck(section_index) {
 function bingindGIF() {
     var itemList = $('.gif__list li a img');
     var gifMain = $('.gif__main img');
+    var twitter = $('#twitter');
+    var facebook = $('#facebook');
     $.each(itemList, function(index, val) {
          $(this).on('click', function(event) {
              event.preventDefault();
              gifMain.attr('src', $(this).attr('src'));
+             gifMain.attr('data-name', $(this).attr('data-name'));
+             twitter.attr('data-name', $(this).attr('data-name'));
+             facebook.attr('data-name', $(this).attr('data-name'));
          });
     });
 }
@@ -144,6 +168,41 @@ function peopleBinding() {
             $(this).parent().siblings('.people__modal').addClass('anim__people__full');
         });        
     });
+}
+
+function closeModal() {
+    var modalClose = $('.modal__close');
+    $.each(modalClose, function(index, val) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            $.each($('.people__modal'), function(index, val) {
+                if($(this).hasClass('anim__people__full')){
+                    $(this).removeClass('anim__people__full');
+                }                
+            });
+        });        
+    });
+}
+
+/*------------------------------------*\
+    Shares Functions
+\*------------------------------------*/
+
+function shares() {
+    var shareUrl = $("link[rel=canonical]").attr("href");
+
+    var facebookPromise = jQuery('#facebook').socialShare({
+        network: 'facebook',
+        jsonURL: '//graph.facebook.com/?id=' + shareUrl,
+        typeofcount: 'shares'
+    });
+
+    var twitterPromise = jQuery('#twitter').socialShare({
+        network: 'twitter',
+        jsonURL: '//graph.facebook.com/?id=' + shareUrl,
+        cachecontrol: true,
+        typeofcount: 'count'
+    }); 
 }
 
 /*------------------------------------*\

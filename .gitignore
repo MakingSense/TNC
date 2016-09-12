@@ -13,6 +13,5 @@ dev/css/
 dev/data/
 dev/img/
 dev/js/vendor/
-dev/js/*.js
 dev/fonts/
 dev/*.html
