@@ -4,11 +4,11 @@
 ////
 
 .button {
-  display: inline-block;
-
   font-size: torem(16px);
   font-weight: 700;
   line-height: 1.2;
+
+  display: inline-block;
 
   padding: 16px 40px;
 
@@ -16,14 +16,23 @@
   text-align: center !important;
   vertical-align: middle;
   text-decoration: none;
+  text-transform: uppercase;
 
   color: #fff;
   border: none;
   background-color: $tnc-color--primary;
 
   -webkit-appearance: none;
-  text-transform: uppercase;
   &:hover {
-  	background-color: shade($tnc-color--primary, 15%);
+    background-color: shade($tnc-color--primary, 15%);
+  }
+  &__hollow {
+    color: $tnc-color--primary;
+    border: 1px solid $tnc-color--primary;
+    background-color: transparent;
+    &:hover {
+      color: #fff;
+      background-color: $tnc-color--primary;
+    }
   }
 }

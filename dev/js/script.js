@@ -51,7 +51,7 @@ function initPlayer() {
         var preloader = $('.preloader__container');
         preloader.fadeOut('400', function() {
             // your code that shows the map div
-            $('#map-one').show();           
+            $('#map-one').show();
 
         });
         $.fn.fullpage.setAllowScrolling(true);
@@ -102,7 +102,7 @@ function sectionCheck(section_index, direction) {
                 }
                 else{
                     $.fn.fullpage.moveSectionUp();
-                } 
+                }
             }
             break;
         case 7:
@@ -117,7 +117,7 @@ function sectionCheck(section_index, direction) {
                 }
                 else{
                     $.fn.fullpage.moveSectionUp();
-                } 
+                }
             }
             break;
         case 8:
@@ -133,7 +133,7 @@ function sectionCheck(section_index, direction) {
                 }
                 else{
                     $.fn.fullpage.moveSectionUp();
-                } 
+                }
             }
             break;
         default:
@@ -166,7 +166,7 @@ function peopleBinding() {
         $(this).on('click', function(event) {
             event.preventDefault();
             $(this).parent().siblings('.people__modal').addClass('anim__people__full');
-        });        
+        });
     });
 }
 
@@ -178,9 +178,9 @@ function closeModal() {
             $.each($('.people__modal'), function(index, val) {
                 if($(this).hasClass('anim__people__full')){
                     $(this).removeClass('anim__people__full');
-                }                
+                }
             });
-        });        
+        });
     });
 }
 
@@ -202,7 +202,7 @@ function shares() {
         jsonURL: '//graph.facebook.com/?id=' + shareUrl,
         cachecontrol: true,
         typeofcount: 'count'
-    }); 
+    });
 }
 
 /*------------------------------------*\

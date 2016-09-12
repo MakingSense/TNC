@@ -17,9 +17,9 @@
 
     background: rgba(255,255,255, .5);
     &:nth-child(3) {
-      background-image: url('../img/people/gustavo.jpg');
+      background-image: url('../img/people/gustavo-alone.jpg');
       background-repeat: no-repeat;
-      background-position: 80% center;
+      background-position: center center;
       background-size: cover;
       .people__modal {
         position: absolute;
@@ -42,7 +42,9 @@
       }
     }
     &:nth-child(2) {
-      background-image: url('../img/people/sara.jpg');
+      border-right: 1px dashed $tnc-color--primary;
+      border-left: 1px dashed $tnc-color--primary;
+      background-image: url('../img/people/sara-alone.jpg');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
@@ -67,9 +69,9 @@
       }
     }
     &:nth-child(1) {
-      background-image: url('../img/people/gustavo.jpg');
+      background-image: url('../img/people/iqra-alone.jpg');
       background-repeat: no-repeat;
-      background-position: 80% center;
+      background-position: center center;
       background-size: cover;
       .people__modal {
         position: absolute;
@@ -85,7 +87,7 @@
 
         opacity: 0;
         background: rgba(#fff, .4);
-        background-image: url('../img/people/gustavo.jpg');
+        background-image: url('../img/people/iqra.jpg');
         background-repeat: no-repeat;
         background-position: 80% center;
         background-size: cover;
@@ -97,10 +99,10 @@
         top: 5%;
         right: 5%;
         h2 {
-          display: inline-block;
-
           font-size: torem(24px);
           font-weight: 700;
+
+          display: inline-block;
 
           padding: torem(5px) torem(10px);
 
@@ -110,10 +112,10 @@
           border: 1px solid $tnc-font-color;
         }
         a {
-          display: inline-block;
-
           font-size: torem(48px);
           font-weight: 400;
+
+          display: inline-block;
 
           margin-left: torem(16px);
 
@@ -160,9 +162,72 @@
     &__nav {
       position: relative;
 
-      padding-top: 100%;
+      padding-top: 55vh;
 
       text-align: center;
+      .ms-icon {
+        font-size: torem(90px);
+
+        display: block;
+
+        margin-bottom: torem(16px);
+      }
+    }
+  }
+  .people__illustration {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+
+    transform: translate(-50%, 0);
+    text-align: center;
+    .ms-icon {
+      font-size: torem(110px);
+      line-height: .3;
+    }
+    h1 {
+      font-family: 'Whitney Condensed';
+      font-size: torem(48px);
+      line-height: 1;
+
+      display: inline-block;
+
+      margin: 0;
+      padding: 0 torem(5px) torem(5px) torem(5px);
+
+      vertical-align: middle;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+
+      border-bottom: 1px solid $tnc-font-color;
+    }
+    h4 {
+      line-height: 1;
+
+      display: block;
+
+      margin: 0;
+
+      vertical-align: middle;
+      text-transform: uppercase;
+      span {
+        font-weight: 700;
+      }
+    }
+    h5 {
+      margin: torem(5px) 0 0 0;
+      text-transform: uppercase;
+    }
+    .icon-fish {
+      margin-right: torem(10px);
+
+      vertical-align: text-top;
+    }
+    .icon-fish:last-of-type {
+      margin-right: 0;
+      margin-left: torem(10px);
+
+      transform: scaleX(-1);
     }
   }
 }

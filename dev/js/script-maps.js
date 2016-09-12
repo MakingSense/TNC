@@ -29,7 +29,7 @@ $(window).load(function() {
     //Access Token Map
     L.mapbox.accessToken = 'pk.eyJ1IjoidG5jLWdsb2JhbHdhdGVyIiwiYSI6ImNpcjVveDV0YTAwOGZnN25uNTltdjdpbzMifQ.2Ff5ioAO5z2s5ltmcBx7cA';
     initMap();
-    // invalidate the size of your map    
+    // invalidate the size of your map
 
     //Binding input
     $('#search-input-btn').on('click', function(event) {
@@ -107,7 +107,7 @@ function calcutaKMAVG(cityName){
     $.each(ws, function(index, val) {
         var distance = getDistance(origin, [val.lat, val.lng]);
         totalKM = totalKM + distance;
-    });    
+    });
 
     return distanceConvert(totalKM/ws.length);
 }
@@ -116,10 +116,12 @@ function hideCity() {
     var map_front = $('.map');
     var search = $('.form');
     var city = $('.city');
+    var wsList = $('.reservoirs__list');
 
     map_front.removeClass('map__height-middle--in').addClass('map__height-middle--out');
     search.removeClass('search__fade-out').addClass('search__fade-out--reverse');
     city.removeClass('item-list__fade-in').addClass('item-list__fade-in--reverse');
+    wsList.empty();
 }
 
 function initMap() {
@@ -144,7 +146,7 @@ function initMap() {
 
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
-    locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here   
+    locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
     map.attributionControl.setPosition('bottomleft');
 
     locations.on('ready', function() {
@@ -155,7 +157,7 @@ function initMap() {
             var prop = locale.feature.properties;
 
             // Each marker on the map.
-            var popup = '<h3>Type:</h3><div>' + prop.type;
+            var popup = '<h3>Water Source Name:</h3><div>' + prop.name;
 
             if (prop.crossStreet) {
                 popup += '<br /><small class="quiet">' + prop.name + '</small>';
