@@ -31,13 +31,13 @@
         height: 100vh;
         margin: 0;
 
-        transition: all 1.5s ease-in;
+        transition: opacity, width 1.5s ease-in;
 
         opacity: 0;
         background: rgba(#fff, .4);
         background-image: url('../img/people/gustavo.jpg');
         background-repeat: no-repeat;
-        background-position: 80% center;
+        background-position: 81% center;
         background-size: cover;
       }
     }
@@ -58,7 +58,7 @@
         height: 100vh;
         margin: 0;
 
-        transition: all 1.5s ease-in;
+        transition: opacity, width 1.5s ease-in;
 
         opacity: 0;
         background: rgba(#fff, .4);
@@ -83,14 +83,13 @@
         height: 100vh;
         margin: 0;
 
-        transition: all 1.5s ease-in;
+        transition: opacity, width 1.5s ease-in;
 
         opacity: 0;
         background: rgba(#fff, .4);
         background-image: url('../img/people/iqra.jpg');
         background-repeat: no-repeat;
-        background-position: 80% center;
-        background-size: cover;
+        background-position: -25% center;
       }
     }
     &__modal {
@@ -99,10 +98,10 @@
         top: 5%;
         right: 5%;
         h2 {
-          display: inline-block;
-
           font-size: torem(24px);
           font-weight: 700;
+
+          display: inline-block;
 
           padding: torem(5px) torem(10px);
 
@@ -112,10 +111,10 @@
           border: 1px solid $tnc-font-color;
         }
         a {
-          display: inline-block;
-
           font-size: torem(48px);
           font-weight: 400;
+
+          display: inline-block;
 
           margin-left: torem(16px);
 
@@ -135,18 +134,20 @@
           max-width: torem(340px);
           padding: torem(16px);
 
+          transition: all .25s ease;
+
+          opacity: 1;
           color: #fff;
           border: 1px solid $tnc-font-color;
           background: rgba(#000, .5);
-          opacity: 0;
-          transition: all .25s ease;
           .ms-icon {
+            font-size: 80px;
+
             position: absolute;
-            color: $tnc-font-color;
             top: -55px;
             left: -40px;
 
-            font-size: 80px;
+            color: $tnc-font-color;
           }
           &:nth-child(1) {
             top: 25%;
@@ -172,13 +173,13 @@
     &__nav {
       position: relative;
 
-      padding-top: 55vh;
+      padding-top: 70vh;
 
       text-align: center;
       .ms-icon {
-        display: block;
-
         font-size: torem(90px);
+
+        display: block;
 
         margin-bottom: torem(16px);
       }
@@ -196,11 +197,11 @@
       line-height: .3;
     }
     h1 {
-      display: inline-block;
-
       font-family: 'Whitney Condensed';
       font-size: torem(48px);
       line-height: 1;
+
+      display: inline-block;
 
       margin: 0;
       padding: 0 torem(5px) torem(5px) torem(5px);
@@ -212,9 +213,9 @@
       border-bottom: 1px solid $tnc-font-color;
     }
     h4 {
-      display: block;
-
       line-height: 1;
+
+      display: block;
 
       margin: 0;
 
@@ -243,7 +244,7 @@
   }
 }
 
-@keyframes people__full {
+@keyframes people__full--center {
   to {
     z-index: 1;
     left: 0;
@@ -253,6 +254,39 @@
     opacity: 1;
   }
 }
-.anim__people__full {
-  animation: people__full 1s ease-in forwards;
+.anim__people__full--center {
+  animation: people__full--center 1s ease-in forwards;
+}
+
+@keyframes people__full--right {
+  to {
+    width: 100%;
+
+    opacity: 1;
+  }
+}
+.anim__people__full--right {
+  z-index: 5 !important;
+  right: 0 !important;
+  left: initial !important;
+
+  animation: people__full--right 1s ease-in forwards;
+}
+
+@keyframes people__full--left {
+  to {
+    width: 100%;
+
+    opacity: 1;
+  }
+}
+.anim__people__full--left {
+  z-index: 5 !important;
+  right: initial !important;
+  left: 0 !important;
+
+  animation: people__full--left 1s ease-in forwards;
+
+  background-position: left center !important;
+  background-size: cover !important;
 }

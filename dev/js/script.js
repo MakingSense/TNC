@@ -11,7 +11,7 @@
 
 $(document).ready(function() {
     $('#section__container').fullpage({
-        anchors:['gif', '', 'maps', '', '', '', '', '', ''],
+        anchors: ['gif', '', 'maps', '', '', '', '', '', ''],
         scrollingSpeed: 800,
         navigation: true,
         navigationPosition: 'left',
@@ -29,6 +29,7 @@ $(document).ready(function() {
     peopleBinding();
     closeModal();
     shares();
+    scrollLocation();
 
 
     $.fn.fullpage.silentMoveTo(9);
@@ -45,7 +46,8 @@ function hideSlidesDots() {
   #Video Functionalities
 \*------------------------------------*/
 var player = $("#player_1");
-function initPlayer() {    
+
+function initPlayer() {
     player.YTPlayer();
     player.on('YTPReady', function(event) {
         var preloader = $('.preloader__container');
@@ -82,8 +84,7 @@ function sectionCheck(section_index, direction) {
             if (!svg.hasClass('animated')) {
                 svg_four();
                 svg.addClass('animated');
-            }
-            else {
+            } else {
                 changeSection(direction, section_index);
             }
             break;
@@ -91,7 +92,7 @@ function sectionCheck(section_index, direction) {
 
             break;
         case 4:
-            setTimeout(function(){
+            setTimeout(function() {
                 changeSection(direction, section_index);
             }, 500)
             break;
@@ -103,8 +104,7 @@ function sectionCheck(section_index, direction) {
             if (!svg.hasClass('animated')) {
                 svg_third();
                 svg.addClass('animated');
-            }
-            else {
+            } else {
                 changeSection(direction, section_index);
             }
             break;
@@ -120,14 +120,13 @@ function sectionCheck(section_index, direction) {
             if (!svg.hasClass('animated')) {
                 svg_first();
                 svg.addClass('animated');
-            }
-            else {
-                changeSection(direction, section_index);                
+            } else {
+                changeSection(direction, section_index);
             }
             break;
         case 9:
             var svg = $('#svg_first');
-            if(direction == "down" && $('#svg_first').hasClass('animated')){
+            if (direction == "down" && $('#svg_first').hasClass('animated')) {
                 $('#player_1').YTPStop();
             }
             break;
@@ -137,14 +136,13 @@ function sectionCheck(section_index, direction) {
 }
 
 function changeSection(direction, index) {
-    if(direction == 'down') {
-        setTimeout(function(){
+    if (direction == 'down') {
+        setTimeout(function() {
             $.fn.fullpage.moveTo((index + 1), 0);
         }, 1000)
-        
-    }
-    else{
-        setTimeout(function(){
+
+    } else {
+        setTimeout(function() {
             $.fn.fullpage.moveTo((index - 1), 0);
         }, 1000)
     }
@@ -159,23 +157,37 @@ function bingindGIF() {
     var twitter = $('#twitter');
     var facebook = $('#facebook');
     $.each(itemList, function(index, val) {
-         $(this).on('click', function(event) {
-             event.preventDefault();
-             var src = $(this).attr('src');
-             gifMain.attr('src', (src.substr(0, src.length - 3) + 'gif'));
-             gifMain.attr('data-name', $(this).attr('data-name'));
-             twitter.attr('data-name', $(this).attr('data-name'));
-             facebook.attr('data-name', $(this).attr('data-name'));
-         });
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            var src = $(this).attr('src');
+            gifMain.attr('src', (src.substr(0, src.length - 3) + 'gif'));
+            gifMain.attr('data-name', $(this).attr('data-name'));
+            twitter.attr('data-name', $(this).attr('data-name'));
+            facebook.attr('data-name', $(this).attr('data-name'));
+        });
     });
 }
 
 function peopleBinding() {
     var people = $('.people__nav a');
+
     $.each(people, function(index, val) {
         $(this).on('click', function(event) {
             event.preventDefault();
-            $(this).parent().siblings('.people__modal').addClass('anim__people__full');
+            var typeAnim = $(this).attr('data-anim');
+            switch (typeAnim) {
+                case "center":
+                    $(this).parent().siblings('.people__modal').addClass('anim__people__full--center');
+                    break;
+                case "right":
+                    $(this).parent().siblings('.people__modal').addClass('anim__people__full--right');
+                    break;
+                case "left":
+                    $(this).parent().siblings('.people__modal').addClass('anim__people__full--left');
+                    break;
+                default:
+                    break;
+            }
         });
     });
 }
@@ -185,11 +197,30 @@ function closeModal() {
     $.each(modalClose, function(index, val) {
         $(this).on('click', function(event) {
             event.preventDefault();
-            $.each($('.people__modal'), function(index, val) {
-                if($(this).hasClass('anim__people__full')){
-                    $(this).removeClass('anim__people__full');
-                }
-            });
+            var typeAnim = $(this).attr('data-anim');
+            switch (typeAnim) {
+                case "center":
+                    $(this).parent().parent().removeClass('anim__people__full--center');
+                    break;
+                case "right":
+                    $(this).parent().parent().removeClass('anim__people__full--right');
+                    break;
+                case "left":
+                    $(this).parent().parent().removeClass('anim__people__full--left');
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+}
+
+function scrollLocation() {
+    var scroll = $('.scrollLocation');
+    $.each(scroll, function(index, val) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            $.fn.fullpage.moveSectionUp();
         });
     });
 }
@@ -241,7 +272,7 @@ svg_first = function() {
         tnc_line_1.clear();
         tnc_line_1.path(subpath).attr({
             stroke: '#00bfff',
-            "stroke-width": 4
+            "stroke-width": 3
         }).transform("s" + scale + "," + scale + ",0,0");
 
         tnc_line_1.setViewBox(-220, -409.45, width, height, false);
@@ -280,7 +311,7 @@ svg_second = function() {
         tnc_line_2.clear();
         tnc_line_2.path(subpath).attr({
             stroke: '#00bfff',
-            "stroke-width": 4
+            "stroke-width": 3
         }).transform("s" + scale + "," + scale + ",0,0");
 
         tnc_line_2.setViewBox(((width * scale)), 0, width, height, false);
@@ -316,7 +347,7 @@ svg_third = function() {
         tnc_line_3.clear();
         tnc_line_3.path(subpath).attr({
             stroke: '#00bfff',
-            "stroke-width": 4
+            "stroke-width": 3
         }).transform("s" + scale + "," + scale + ",0,0");
 
         tnc_line_3.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);
@@ -355,7 +386,7 @@ svg_four = function() {
         tnc_line_3.clear();
         tnc_line_3.path(subpath).attr({
             stroke: '#00bfff',
-            "stroke-width": 4
+            "stroke-width": 3
         }).transform("s" + scale + "," + scale + ",0,0");
 
         tnc_line_3.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);

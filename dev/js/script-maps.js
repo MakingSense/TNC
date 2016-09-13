@@ -50,7 +50,7 @@ $(window).load(function() {
         $(this).removeAttr('href');
     });
 
-    map.setView([38.5842213, -97.4564217], 5, {
+    map.setView([38.5842213, -97.4564217], 4, {
         reset: true
     })
 });
@@ -125,7 +125,7 @@ function hideCity() {
 }
 
 function initMap() {
-    map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr').setView(L.latLng(origin.lat, origin.lng), 17);
+    map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr').setView(L.latLng(origin.lat, origin.lng), 8);
 
     directions = L.mapbox.directions({
         profile: 'mapbox.driving',
@@ -194,7 +194,7 @@ function initMap() {
             }));
         } else {
             marker.setIcon(L.icon({
-                iconUrl: 'http://image.flaticon.com/icons/svg/179/179529.svg',
+                iconUrl: '../img/icon-drop.svg',
                 iconSize: [32, 32],
                 // iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
