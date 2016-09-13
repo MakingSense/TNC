@@ -77,11 +77,11 @@
             </div>
             <h4><span>1. </span>Pick your gif</h4>
             <ul class="gif__list">
-              <li><a href="#"><img data-name="ahh" src="img/gifs/gif_ahh.gif" alt=""></a></li>
-              <li><a href="#"><img data-name="cold" src="img/gifs/gif_cold.gif" alt=""></a></li>
-              <li><a href="#"><img data-name="dog" src="img/gifs/gif_dog.gif" alt=""></a></li>
-              <li><a href="#"><img data-name="runner" src="img/gifs/gif_runner.gif" alt=""></a></li>
-              <li><a href="#"><img data-name="wild" src="img/gifs/gif_wild.gif" alt=""></a></li>
+              <li><a href="#"><img data-name="ahh" src="img/gifs/gif_ahh.jpg" alt=""></a></li>
+              <li><a href="#"><img data-name="cold" src="img/gifs/gif_cold.jpg" alt=""></a></li>
+              <li><a href="#"><img data-name="dog" src="img/gifs/gif_dog.jpg" alt=""></a></li>
+              <li><a href="#"><img data-name="runner" src="img/gifs/gif_runner.jpg" alt=""></a></li>
+              <li><a href="#"><img data-name="wild" src="img/gifs/gif_wild.jpg" alt=""></a></li>
             </ul>
             <h4><span>2. </span>Share your gif with the world</h4>
             <ul class="socials__holder">
@@ -98,6 +98,9 @@
           </div>
         </div>
         <div class="section section-2">
+          <div id="svg_four">
+
+          </div>
           <div class="section__footer">
             <a href="#">#Sourceofyou</a>
           </div>
@@ -155,11 +158,9 @@
           </div>
         </div>
         <div class="section section-4">
-          <div class="wrapper">
-            <div class="scroll__source">
-              <span class="ms-icon icon-location"></span>
-              <p>You are here</p>
-            </div>
+          <div class="scroll__source">
+            <span class="ms-icon icon-location"></span>
+            <p>You are here</p>
           </div>
           <div class="section__footer">
             <a href="#">#Sourceofyou</a>
@@ -216,12 +217,15 @@
                 </div>
                 <div class="people__modal__content">
                   <div class="item__info">
+                    <span class="ms-icon icon-location"></span>
                     <p>New York is one city that invests heavily in upstream conservation, and I realize how lucky I am to have a reliable source of clean water every day.This journey to the Catskills is not only a journey to my water source, but a journey to the source of life for the City of New York.</p>
                   </div>
                   <div class="item__info">
+                    <span class="ms-icon icon-location"></span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis cumque obcaecati numquam quo illum iure ex, natus iusto! Atque repellendus nihil ratione, magni doloremque provident libero explicabo cumque deleniti eos?</p>
                   </div>
                   <div class="item__info">
+                    <span class="ms-icon icon-location"></span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat molestiae iure obcaecati ipsa expedita ullam quae laudantium, fugit aliquam enim voluptatibus consequuntur consequatur dignissimos dolores blanditiis minima, architecto distinctio deleniti!</p>
                   </div>
                 </div>
@@ -263,15 +267,15 @@
           </div>
         </div>
         <div class="section main__section">
-          <div class="wrapper">
-            <div class="logo">
-              <img src="img/tnc-logo.svg" alt="">
-            </div>
-            <div class="scroll__source">
+          <div class="scroll__source">
               <span class="ms-icon icon-location"></span>
               <h3>Scroll up to find the</h3>
               <h3>#sourceofyou</h3>
             </div>
+          <div class="wrapper">
+            <div class="logo">
+              <img src="img/tnc-logo.svg" alt="">
+            </div>            
             <div class="content__container">
               <a id="player_1_open" href="#c-video"><span class="ms-icon icon-play"></span></a>
               <!-- <img src="img/main-place.png" alt=""> -->
@@ -281,7 +285,7 @@
           <div class="c-modal c-modal__video" id="c-video">
             <a id="player_1_close" href="#!" class="c-modal__close">X</a>
             <div class="c-modal__content">
-              <div id="player_1" class="player" data-property="{videoURL:'https://youtu.be/v-RE7RUzjf8',quality: 'low',containment:'self',startAt:4,vol:100,mute:false,autoPlay:false,loop:false,showYTLogo:false}"></div>
+              <div id="player_1" class="player" data-property="{videoURL:'https://youtu.be/v-RE7RUzjf8',quality: 'low',containment:'self',vol:100,mute:false,autoPlay:false,loop:false,showYTLogo:false,stopMovieOnBlur:false}"></div>
             </div>
           </div>
         </div>

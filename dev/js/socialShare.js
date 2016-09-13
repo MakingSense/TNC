@@ -44,7 +44,7 @@ jQuery.fn.socialShare = function(opts) {
                         '&caption=' + url +
                         '&href=' + url +
                         '&description=' + content +
-                        '&picture=' + image +
+                        '&picture=' + ("http://tnc.com/images/gif_" + name + ".jpg") +
                         '&redirect_uri=https://www.facebook.com',
                         'facebook-share-dialog',
                         'width=800, height=600, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');

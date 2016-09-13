@@ -44,8 +44,8 @@ function hideSlidesDots() {
 /*------------------------------------*\
   #Video Functionalities
 \*------------------------------------*/
-function initPlayer() {
-    var player = $("#player_1");
+var player = $("#player_1");
+function initPlayer() {    
     player.YTPlayer();
     player.on('YTPReady', function(event) {
         var preloader = $('.preloader__container');
@@ -60,9 +60,8 @@ function initPlayer() {
     player.on('YTPEnd', function(event) {
         parent.location.hash = '#!';
     });
-
     $('#player_1_close').on('click', function() {
-        player.YTPPause();
+        player.YTPStop();
     });
 
     $('#player_1_open').on('click', function() {
@@ -79,13 +78,22 @@ function sectionCheck(section_index, direction) {
 
             break;
         case 2:
-
+            var svg = $('#svg_four');
+            if (!svg.hasClass('animated')) {
+                svg_four();
+                svg.addClass('animated');
+            }
+            else {
+                changeSection(direction, section_index);
+            }
             break;
         case 3:
 
             break;
         case 4:
-
+            setTimeout(function(){
+                changeSection(direction, section_index);
+            }, 500)
             break;
         case 5:
 
@@ -97,12 +105,7 @@ function sectionCheck(section_index, direction) {
                 svg.addClass('animated');
             }
             else {
-                if(direction == 'down') {
-                    $.fn.fullpage.moveSectionDown();
-                }
-                else{
-                    $.fn.fullpage.moveSectionUp();
-                }
+                changeSection(direction, section_index);
             }
             break;
         case 7:
@@ -111,33 +114,39 @@ function sectionCheck(section_index, direction) {
                 svg_second();
                 svg.addClass('animated');
             }
-            else {
-                if(direction == 'down') {
-                    $.fn.fullpage.moveSectionDown();
-                }
-                else{
-                    $.fn.fullpage.moveSectionUp();
-                }
-            }
             break;
         case 8:
             var svg = $('#svg_first');
-            $('#player_1_close')[0].click();
             if (!svg.hasClass('animated')) {
                 svg_first();
                 svg.addClass('animated');
             }
             else {
-                if(direction == 'down') {
-                    $.fn.fullpage.moveSectionDown();
-                }
-                else{
-                    $.fn.fullpage.moveSectionUp();
-                }
+                changeSection(direction, section_index);                
+            }
+            break;
+        case 9:
+            var svg = $('#svg_first');
+            if(direction == "down" && $('#svg_first').hasClass('animated')){
+                $('#player_1').YTPStop();
             }
             break;
         default:
             break;
+    }
+}
+
+function changeSection(direction, index) {
+    if(direction == 'down') {
+        setTimeout(function(){
+            $.fn.fullpage.moveTo((index + 1), 0);
+        }, 1000)
+        
+    }
+    else{
+        setTimeout(function(){
+            $.fn.fullpage.moveTo((index - 1), 0);
+        }, 1000)
     }
 }
 
@@ -152,7 +161,8 @@ function bingindGIF() {
     $.each(itemList, function(index, val) {
          $(this).on('click', function(event) {
              event.preventDefault();
-             gifMain.attr('src', $(this).attr('src'));
+             var src = $(this).attr('src');
+             gifMain.attr('src', (src.substr(0, src.length - 3) + 'gif'));
              gifMain.attr('data-name', $(this).attr('data-name'));
              twitter.attr('data-name', $(this).attr('data-name'));
              facebook.attr('data-name', $(this).attr('data-name'));
@@ -209,11 +219,11 @@ function shares() {
   #SVG Drawing
 \*------------------------------------*/
 svg_first = function() {
-    var width = 260,
+    var width = 1600,
         height = 955,
-        scale = 1.25;
+        scale = 1.0;
     var tnc_line_1 = new Raphael('svg_first', width, height);
-    var tnc_line_1_pathString = 'M376.159,671.922c0-3.313,2.687-6,6-6s6,2.687,6,6s-2.687,6-6,6S376.159,675.235,376.159,671.922 M551.464,496.459 c0-3.313,2.687-6,6-6s6,2.687,6,6s-2.687,6-6,6S551.464,499.772,551.464,496.459 M530.172,147.636c0-3.313,2.687-6,6-6s6,2.687,6,6 c0,3.314-2.687,6-6,6S530.172,150.95,530.172,147.636 M395.668,800c0,0,10.418-13.028,16.946-35.225 c15.938-54.218-44.042-68.08-29.208-115.551c23.425-74.961,153.641-77.382,178.895-120.564c17.647-30.169-58.138-83.259-60-124.867 c-1.871-41.842,69.024-49.872,66.614-96.437c-1.535-29.69-38.464-41.412-47.23-69.79c-7.766-25.144,47.292-35.786,33.982-67.5 C540.923,134.931,429.373,90.114,396.3,58.674C363.783,27.764,426.006,0,426.006,0';
+    var tnc_line_1_pathString = 'M200.608-136.906c0-1.657 1.344-3 3-3s3 1.343 3 3-1.344 3-3 3-3-1.343-3-3M40.5 60.4c0-1.657 1.344-3 3-3s3 1.343 3 3-1.344 3-3 3-3-1.343-3-3M187.867 397.908c0-1.657 1.344-3 3-3s3 1.343 3 3-1.344 3-3 3-3-1.343-3-3 M184.867 397.908c0-3.313 2.687-6 6-6s6 2.687 6 6-2.687 6-6 6-6-2.687-6-6m-147.4-337.9c0-3.312 2.687-6 6-6s6 2.688 6 6-2.687 6-6 6-6-2.686-6-6m159.708-196.822c0-3.313 2.687-6 6-6s6 2.687 6 6c0 3.314-2.687 6-6 6s-6-2.686-6-6m386.707 682.45s2.118-32.662 24.553-48.182c33.56-23.215 139.356-11.39 145.097-32.195 17.305-62.705-610.728-23.918-609.993-94.88-1.104-22.427 25.736-38.972 19.118-56.988-15.9-43.28-85.668-27.943-73.902-90.08 4.78-26.84 38.997-41.12 37.135-82.727C124.02 98.743 25.43 70.597 23.02 24.032 23.013-17.5 200.355-57.238 204.5-121.5c4-62-71.206-58.56-97.604-84.08C32.5-277.5 446.5-295.5 542.732-333.72 584.428-350.277 584-410.834 584-410.834';
 
     var triangle = tnc_line_1.path(tnc_line_1_pathString).attr({
         stroke: '#00bfff',
@@ -234,7 +244,7 @@ svg_first = function() {
             "stroke-width": 4
         }).transform("s" + scale + "," + scale + ",0,0");
 
-        tnc_line_1.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);
+        tnc_line_1.setViewBox(-220, -409.45, width, height, false);
     };
     tween = TweenMax.to(triangle, 2, {
         length: obj.pathLength,
@@ -279,10 +289,7 @@ svg_second = function() {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this,
-        onComplete: function() {
-            $.fn.fullpage.moveSectionUp();
-        }
+        onUpdateScope: this
     });
 };
 
@@ -291,6 +298,45 @@ svg_third = function() {
         height = 955,
         scale = 1.25;
     var tnc_line_3 = new Raphael('svg_third', width, height);
+    var tnc_line_3_pathString = 'M376.159,671.922c0-3.313,2.687-6,6-6s6,2.687,6,6s-2.687,6-6,6S376.159,675.235,376.159,671.922 M551.464,496.459 c0-3.313,2.687-6,6-6s6,2.687,6,6s-2.687,6-6,6S551.464,499.772,551.464,496.459 M530.172,147.636c0-3.313,2.687-6,6-6s6,2.687,6,6 c0,3.314-2.687,6-6,6S530.172,150.95,530.172,147.636 M395.668,800c0,0,10.418-13.028,16.946-35.225 c15.938-54.218-44.042-68.08-29.208-115.551c23.425-74.961,153.641-77.382,178.895-120.564c17.647-30.169-58.138-83.259-60-124.867 c-1.871-41.842,69.024-49.872,66.614-96.437c-1.535-29.69-38.464-41.412-47.23-69.79c-7.766-25.144,47.292-35.786,33.982-67.5 C540.923,134.931,429.373,90.114,396.3,58.674C363.783,27.764,426.006,0,426.006,0';
+
+    var triangle = tnc_line_3.path(tnc_line_3_pathString).attr({
+        stroke: '#00bfff',
+        opacity: 0
+    });
+    var obj = {
+        length: 0,
+        pathLength: triangle.getTotalLength()
+    };
+    var drawLine = function() {
+        var offset, subpath;
+        offset = obj.pathLength * tween.progress();
+
+        subpath = triangle.getSubpath(0, offset);
+        tnc_line_3.clear();
+        tnc_line_3.path(subpath).attr({
+            stroke: '#00bfff',
+            "stroke-width": 4
+        }).transform("s" + scale + "," + scale + ",0,0");
+
+        tnc_line_3.setViewBox(((width * scale) + (width / 2)), 0, width, height, false);
+    };
+    tween = TweenMax.to(triangle, 2, {
+        length: obj.pathLength,
+        onUpdate: drawLine,
+        ease: Circ.easeIn,
+        onUpdateScope: this,
+        onComplete: function() {
+            $.fn.fullpage.moveSectionUp();
+        }
+    });
+};
+
+svg_four = function() {
+    var width = 260,
+        height = 955,
+        scale = 1.25;
+    var tnc_line_3 = new Raphael('svg_four', width, height);
     var tnc_line_3_pathString = 'M376.159,671.922c0-3.313,2.687-6,6-6s6,2.687,6,6s-2.687,6-6,6S376.159,675.235,376.159,671.922 M551.464,496.459 c0-3.313,2.687-6,6-6s6,2.687,6,6s-2.687,6-6,6S551.464,499.772,551.464,496.459 M530.172,147.636c0-3.313,2.687-6,6-6s6,2.687,6,6 c0,3.314-2.687,6-6,6S530.172,150.95,530.172,147.636 M395.668,800c0,0,10.418-13.028,16.946-35.225 c15.938-54.218-44.042-68.08-29.208-115.551c23.425-74.961,153.641-77.382,178.895-120.564c17.647-30.169-58.138-83.259-60-124.867 c-1.871-41.842,69.024-49.872,66.614-96.437c-1.535-29.69-38.464-41.412-47.23-69.79c-7.766-25.144,47.292-35.786,33.982-67.5 C540.923,134.931,429.373,90.114,396.3,58.674C363.783,27.764,426.006,0,426.006,0';
 
     var triangle = tnc_line_3.path(tnc_line_3_pathString).attr({
