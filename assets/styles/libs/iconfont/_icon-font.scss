@@ -40,42 +40,46 @@
     content: "\E004";
   }
 
-  .icon-location:before {
+  .icon-location-empty:before {
     content: "\E005";
   }
 
-  .icon-map:before {
+  .icon-location:before {
     content: "\E006";
   }
 
-  .icon-mountain:before {
+  .icon-map:before {
     content: "\E007";
   }
 
-  .icon-play:before {
+  .icon-mountain:before {
     content: "\E008";
   }
 
-  .icon-shoe:before {
+  .icon-play:before {
     content: "\E009";
   }
 
-  .icon-star-full:before {
+  .icon-shoe:before {
     content: "\E00A";
   }
 
-  .icon-star-half:before {
+  .icon-star-full:before {
     content: "\E00B";
   }
 
-  .icon-star-quarter:before {
+  .icon-star-half:before {
     content: "\E00C";
   }
 
-  .icon-star-three-quarters:before {
+  .icon-star-quarter:before {
     content: "\E00D";
   }
 
-  .icon-twitter:before {
+  .icon-star-three-quarters:before {
     content: "\E00E";
+  }
+
+  .icon-twitter:before {
+    content: "\E00F";
   }

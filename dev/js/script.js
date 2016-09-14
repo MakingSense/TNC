@@ -27,6 +27,7 @@ $(document).ready(function() {
     initPlayer(); //Init main video player
     bingindGIF();
     peopleBinding();
+    peopleModalBinding();
     closeModal();
     shares();
     scrollLocation();
@@ -188,6 +189,16 @@ function peopleBinding() {
                 default:
                     break;
             }
+        });
+    });
+}
+
+function peopleModalBinding() {
+    var drops = $('.people__container .people__modal__content .item__info .ms-icon');
+    $.each(drops, function(index, val) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            $(this).parent().toggleClass('active');
         });
     });
 }
