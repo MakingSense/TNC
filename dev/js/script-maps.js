@@ -117,12 +117,14 @@ function hideCity() {
     var search = $('.form');
     var city = $('.city');
     var wsList = $('.reservoirs__list');
+    var route = $('.route__line');
 
     map_front.removeClass('map__height-middle--in').addClass('map__height-middle--out');
     search.removeClass('search__fade-out').addClass('search__fade-out--reverse');
     city.removeClass('item-list__fade-in').addClass('item-list__fade-in--reverse');
     wsList.empty();
     $('#destination, #origin').val('');
+    route.children('div').removeClass('active');
 }
 
 function initMap() {
@@ -210,8 +212,6 @@ function getDistance(_origin, _destination) {
     var _origin = L.latLng(_origin[0], _origin[1]);
     var _destination = L.latLng(_destination[0], _destination[1]);
     var distance = _origin.distanceTo(_destination);
-    //distance = distanceConvert(distance);
-    //console.log("DISTANCE: " + distance);
     return distance;
 }
 
@@ -232,6 +232,20 @@ function setActive(el) {
     el.className += ' active';
 }
 
+$('#routeButton').on('click', function(event) {
+    event.preventDefault();
+    bindButtonRoute();
+});
+
+function bindButtonRoute(){
+    var link = "https://www.google.com/maps?";
+    var loc_origin = "saddr=" + origin[0] + ',' + origin[1];
+    var loc_destination = "&daddr=" + destination.lat + ',' + destination.lng;
+    link = link.concat(loc_origin.concat(loc_destination));
+    var win = window.open(link, 'blank');
+    win.focus();
+}
+
 function traceRoute() {
 
     // Set the origin and destination for the direction and call the routing service
@@ -243,13 +257,20 @@ function traceRoute() {
     }
 
     directions.query(aux, function(err, results) {
-        console.log(distanceConvert(results.routes[0].distance));
+        drawLineKM(distanceConvert(results.routes[0].distance));
     });
 
     getDistance(origin, [destination.lat, destination.lng]);
 
     var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
         .addTo(map);
+}
+
+function drawLineKM(km) {
+    var route = $('.route__line');
+    route.children('div').removeClass('active');
+    route.children('div').children('span').html(km);
+    route.children('div').addClass('active');
 }
 
 
@@ -272,6 +293,10 @@ function showMap(err, data) {
     displayCity();
     displayDataCity(data.results.features[0].text);
     $('#origin').val(data.results.features[0].text);
+    $('#origin').attr({
+        geolat: data.latlng[0],
+        geolon: data.latlng[1]
+    });
 }
 
 function filterLocations(cityName) {
@@ -333,6 +358,10 @@ function WaterSourcesPrinter(locale) {
         map.panTo(locale.getLatLng());
         destination = locale.getLatLng();
         $('#destination').val(prop.name);
+        $('#destination').attr({
+            geolat: destination.lat,
+            geolon: destination.lng
+        });
         traceRoute();
         map.setView(locale.getLatLng(), 18);
         locale.openPopup();

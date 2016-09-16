@@ -33,7 +33,7 @@ $(document).ready(function() {
     scrollLocation();
 
 
-    $.fn.fullpage.silentMoveTo(3);
+    $.fn.fullpage.silentMoveTo(9);
 });
 
 /*------------------------------------*\
@@ -130,7 +130,7 @@ function sectionCheck(section_index, direction) {
                 svg.addClass('animated');
             } else {
                 changeSection(direction, section_index);
-            }            
+            }
             break;
         case 9:
             var svg = $('#svg_first');

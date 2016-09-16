@@ -31,7 +31,7 @@ jQuery.fn.socialShare = function(opts) {
             switch (settings.network) {
                 case 'twitter':
                     var via = jQuery(this).attr('meta-via');
-                    window.open('http://twitter.com/share?text=' + (content.concat(name)).concat(" water!") +
+                    window.open('http://twitter.com/share?text=' + content +
                         '&url=' + url +
                         (via == undefined ? '' : ('&via=' + via)),
                         'twitterwindow',
