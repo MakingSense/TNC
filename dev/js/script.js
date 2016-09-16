@@ -12,7 +12,7 @@
 $(document).ready(function() {
     $('#section__container').fullpage({
         anchors: ['gif', '', 'maps', '', '', '', '', '', ''],
-        scrollingSpeed: 800,
+        scrollingSpeed: 1200,
         navigation: true,
         navigationPosition: 'left',
 
@@ -147,12 +147,12 @@ function changeSection(direction, index) {
     if (direction == 'down') {
         setTimeout(function() {
             $.fn.fullpage.moveTo((index + 1), 0);
-        }, 1000)
+        }, 1500)
 
     } else {
         setTimeout(function() {
             $.fn.fullpage.moveTo((index - 1), 0);
-        }, 1000)
+        }, 1500)
     }
 }
 
