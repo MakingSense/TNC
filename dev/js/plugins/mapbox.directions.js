@@ -2136,7 +2136,7 @@
                         icon: L.mapbox.marker.icon({
                             'marker-size': 'large',
                             'marker-color': '#00bfff',
-                            'marker-symbol': 'o'
+                            'marker-symbol': 'f'
                         })
                     }).on('drag', this._drag, this);
 
@@ -2145,7 +2145,7 @@
                         icon: L.mapbox.marker.icon({
                             'marker-size': 'large',
                             'marker-color': '#00bfff',
-                            'marker-symbol': 'd'
+                            'marker-symbol': 't'
                         })
                     }).on('drag', this._drag, this);
 

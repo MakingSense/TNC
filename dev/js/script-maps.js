@@ -122,6 +122,7 @@ function hideCity() {
     search.removeClass('search__fade-out').addClass('search__fade-out--reverse');
     city.removeClass('item-list__fade-in').addClass('item-list__fade-in--reverse');
     wsList.empty();
+    $('#destination, #origin').val('');
 }
 
 function initMap() {
@@ -270,6 +271,7 @@ function showMap(err, data) {
     }
     displayCity();
     displayDataCity(data.results.features[0].text);
+    $('#origin').val(data.results.features[0].text);
 }
 
 function filterLocations(cityName) {
@@ -330,6 +332,7 @@ function WaterSourcesPrinter(locale) {
         // its associated locale and open its popup.
         map.panTo(locale.getLatLng());
         destination = locale.getLatLng();
+        $('#destination').val(prop.name);
         traceRoute();
         map.setView(locale.getLatLng(), 18);
         locale.openPopup();

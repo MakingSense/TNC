@@ -33,7 +33,7 @@ $(document).ready(function() {
     scrollLocation();
 
 
-    $.fn.fullpage.silentMoveTo(9);
+    $.fn.fullpage.silentMoveTo(3);
 });
 
 /*------------------------------------*\
@@ -92,7 +92,7 @@ function sectionCheck(section_index, direction) {
                 svg_four();
                 svg.addClass('animated');
             } else {
-                //changeSection(direction, section_index);
+                changeSection(direction, section_index);
             }
             break;
         case 3:
@@ -112,7 +112,7 @@ function sectionCheck(section_index, direction) {
                 svg_third();
                 svg.addClass('animated');
             } else {
-                //changeSection(direction, section_index);
+                changeSection(direction, section_index);
             }
             break;
         case 7:
@@ -121,6 +121,7 @@ function sectionCheck(section_index, direction) {
                 svg_second();
                 svg.addClass('animated');
             }
+            bulletInformation();
             break;
         case 8:
             var svg = $('#svg_first');
@@ -129,7 +130,7 @@ function sectionCheck(section_index, direction) {
                 svg.addClass('animated');
             } else {
                 changeSection(direction, section_index);
-            }
+            }            
             break;
         case 9:
             var svg = $('#svg_first');
@@ -239,6 +240,13 @@ function scrollLocation() {
             event.preventDefault();
             $.fn.fullpage.moveSectionUp();
         });
+    });
+}
+
+function bulletInformation() {
+    var bullets = $('.bullet__information');
+    $.each(bullets, function(index, val) {
+        $(this).addClass('anim__fade-in');
     });
 }
 

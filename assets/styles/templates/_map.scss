@@ -233,6 +233,37 @@
 
     text-transform: uppercase;
   }
+  .route__line {
+    div {
+      position: absolute;
+      top: 37px;
+      right: 3%;
+
+      width: 0;
+      transition: width 1.5s ease;
+      height: 6px;
+
+      background: #00bfff;
+      &:after, &:before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        background: $tnc-font-color;
+        border-radius: 9999px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+      &:after {
+        right: 0;
+        left: 100%;
+      }
+      &.active {
+        width: 30%;        
+      }
+    }
+  }
   > h2 {
     color: $tnc-font-color-dark;
   }
@@ -339,8 +370,9 @@
             margin-bottom: 0;
           }
           &.active {
-            position: relative;
             display: inline-block;
+
+            position: relative;
 
             color: $tnc-font-color;
             &:before {
