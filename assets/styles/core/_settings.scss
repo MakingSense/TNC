@@ -57,9 +57,9 @@ $tnc-breakpoints          : (
 'desktop-fhd'             : (max-width: 1920px),
 'desktop'                 : (max-width: 1366px),
 'macbook'                 : (max-width: 1280px),
-'ipad'                    : (min-width: 1023px, max-width: 1024px),
-'isdesktop'               : (min-width: 1024px),
-'ismobile'                : (max-width: 1024px),
+'ipad'                    : (max-width: 1024px),
+'ipad-portrait'           : (max-width: 768px),
+'iphone6-plus'            : (max-width: 414px),
 'iphone'                  : (max-width: 980px)
 );
 

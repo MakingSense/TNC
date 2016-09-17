@@ -163,8 +163,62 @@ div[id*='svg_'] {
     }
   }
 }
+@include respond-to('ipad') {
+  #svg_first {
+    svg {
+      width: 126%;
+
+      transform: translate(-9%,0);
+    }
+  }
+  #svg_second {
+    svg {
+      width: 125%;
+
+      transform: translate(-9%, 0);
+    }
+  }
+}
+
+@include respond-to('ipad-portrait') {
+  #svg_first {
+    svg {
+      width: 200%;
+
+      transform: translate(-14%, 2%) scale(1.1);
+    }
+  }
+  #svg_second {
+    svg {
+      width: 220%;
+
+      transform: translate(-22%, 1%) scale(1.05);
+    }
+  }
+}
+
+@include respond-to('iphone6-plus') {
+  #svg_first {
+    svg {
+      width: 500%;
+
+      transform: translate(-4%, 2%) scale(1.1);
+    }
+  }
+  #svg_second {
+    svg {
+      width: 420%;
+    }
+  }
+}
+
+
 
 .scroll__source {
+  @include respond-to('iphone6-plus') {
+    width: 80%;
+  }
+
   position: absolute;
   top: 0;
   left: 50%;
@@ -214,6 +268,9 @@ div[id*='svg_'] {
   }
   .main__footer {
     @include cf();
+    @include respond-to('ipad-portrait') {
+      padding: torem(10px) 3vh;
+    }
 
     display: block;
 
@@ -229,6 +286,12 @@ div[id*='svg_'] {
       @include column(1/5, $gutter: 1);
       @include respond-to('desktop') {
         @include column(2/7, $gutter: 1);
+      }
+      @include respond-to('ipad') {
+        @include column(2.5/7, $gutter: 1);
+      }
+      @include respond-to('ipad-portrait') {
+        display: none;
       }
       img {
         padding: torem(5px);
@@ -256,6 +319,14 @@ div[id*='svg_'] {
         font-size: 95%;
 
         padding: torem(3px);
+      }
+      @include respond-to('ipad') {
+        @include column(4.5/7, $gutter: 1);
+
+        font-size: 90%;
+      }
+      @include respond-to('ipad-portrait') {
+        @include column(7/7, $gutter: 0);
       }
 
       padding: torem(10px);
@@ -290,9 +361,17 @@ div[id*='svg_'] {
   }
   &__container {
     @include center(torem(840px));
+    @include respond-to('iphone6-plus') {
+      max-width: 75%;
+      padding-top: 10%;
+    }
 
     text-align: center;
     .gif__main {
+      @include respond-to('iphone6-plus') {
+        max-width: 100%;
+      }
+
       width: 426px;
       margin: 0 auto;
       img {
@@ -301,13 +380,33 @@ div[id*='svg_'] {
     }
     .gif__list {
       @include cf();
+      @include respond-to('ipad-portrait') {
+        padding: 0 12%;
+      }
+      @include respond-to('iphone6-plus') {
+        padding: 0;
+      }
 
       margin: 0;
-      padding: 0;
+      padding: 0 2%;
 
       list-style-type: none;
+
+      text-align: center;
       li {
         @include column(1/5, $gutter: 1);
+        @include respond-to('ipad-portrait') {
+          @include column(1/3, $gutter: 2, $cycle: 3);
+
+          margin-bottom: 2%;
+        }
+        @include respond-to('iphone6-plus') {
+          min-width: 95px;
+        }
+
+        min-width: 125px;
+
+        text-align: center;
         img {
           border: 1px dashed $tnc-font-color;
         }
@@ -342,6 +441,10 @@ div[id*='svg_'] {
       }
     }
     .share__illustration {
+      @include respond-to('iphone6-plus') {
+        display: none;
+      }
+
       position: absolute;
       bottom: 3%;
       left: 50%;
@@ -392,6 +495,10 @@ div[id*='svg_'] {
 .section-7 {
   .bullet__information__container {
     .bullet__information {
+      @include respond-to('ipad') {
+        max-width: torem(330px);
+      }
+
       position: absolute;
       z-index: 9999;
 
@@ -409,6 +516,9 @@ div[id*='svg_'] {
         @include respond-to('desktop') {
           font-size: torem(28px);
         }
+        @include respond-to('ipad') {
+          font-size: torem(24px);
+        }
 
         margin: 0;
       }
@@ -416,6 +526,10 @@ div[id*='svg_'] {
         @include respond-to('desktop') {
           font-size: torem(16px);
           line-height: 1.5;
+        }
+        @include respond-to('ipad') {
+          font-size: torem(15px);
+          line-height: 1.45;
         }
 
         font-size: torem(18px);
@@ -429,6 +543,18 @@ div[id*='svg_'] {
         @include respond-to('desktop') {
           top: 7%;
           left: 65%;
+        }
+        @include respond-to('ipad') {
+          top: 10%;
+          left: 60%;
+        }
+        @include respond-to('ipad-portrait') {
+          top: 10%;
+          left: 40%;
+        }
+        @include respond-to('iphone6-plus') {
+          top: 5%;
+          left: 10%;
         }
 
         top: 10%;
@@ -444,6 +570,18 @@ div[id*='svg_'] {
           top: 42%;
           left: 54%;
         }
+        @include respond-to('ipad') {
+          top: 52%;
+          left: 54%;
+        }
+        @include respond-to('ipad-portrait') {
+          top: 70%;
+          left: 20%;
+        }
+        @include respond-to('iphone6-plus') {
+          top: 62%;
+          left: 10%;
+        }
 
         top: 50%;
         left: 52%;
@@ -457,6 +595,18 @@ div[id*='svg_'] {
         @include respond-to('desktop') {
           top: 35%;
           left: 8%;
+        }
+        @include respond-to('ipad') {
+          top: 45%;
+          left: 5%;
+        }
+        @include respond-to('ipad-portrait') {
+          top: 45%;
+          left: 54%;
+        }
+        @include respond-to('iphone6-plus') {
+          top: 31%;
+          left: 14%;
         }
 
         top: 25%;
@@ -480,6 +630,24 @@ div[id*='svg_'] {
           left: 35.5%;
 
           width: 18.5%;
+        }
+        @include respond-to('ipad') {
+          top: 29.2%;
+          left: 31.5%;
+
+          width: 22.5%;
+        }
+        @include respond-to('ipad-portrait') {
+          top: 29.2%;
+          left: 21%;
+
+          width: 39.5%;
+        }
+        @include respond-to('iphone6-plus') {
+          top: 29.2%;
+          left: 3%;
+
+          width: 56.5%;
         }
 
         z-index: 0;
@@ -517,11 +685,29 @@ div[id*='svg_'] {
     }
   }
   .logo {
+    @include respond-to('iphone6-plus') {
+      position: absolute;
+      right: 50%;
+
+      transform: translate(50%, 0);
+      text-align: center;
+      img {
+        width: 80%;
+      }
+    }
+
     position: absolute;
     right: 6vh;
     bottom: 1vh;
   }
   .content__container {
+    @include respond-to('ipad-portrait') {
+      width: 80%;
+    }
+    @include respond-to('iphone6-plus') {
+      width: 100%;
+    }
+
     position: absolute;
     top: 65%;
     left: 50%;

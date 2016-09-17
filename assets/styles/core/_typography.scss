@@ -106,6 +106,9 @@ h2 {
 
 h3 {
   font-size: $tnc-headers-h3-font-size;
+  @include respond-to('iphone6-plus'){
+    font-size: torem(19px);
+  }
   font-weight: $tnc-font-weight-light;
 }
 

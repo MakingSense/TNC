@@ -253,6 +253,9 @@
       @include respond-to('desktop') {
         font-size: torem(40px);
       }
+      @include respond-to('ipad-portrait') {
+        font-size: torem(32px);
+      }
 
       display: inline-block;
 
@@ -278,12 +281,16 @@
 
       vertical-align: middle;
       text-transform: uppercase;
+      
       span {
         font-weight: 700;
       }
     }
     h5 {
       margin: torem(5px) 0 0 0;
+      @include respond-to('ipad-portrait') {
+        font-size: torem(14px);
+      }
 
       text-transform: uppercase;
     }
