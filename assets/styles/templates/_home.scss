@@ -84,6 +84,8 @@
 }
 
 .section {
+  overflow: hidden;
+
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
@@ -132,9 +134,34 @@
 }
 
 div[id*='svg_'] {
+  @include respond-to('desktop') {
+    svg {
+      max-height: 100vh;
+    }
+  }
+
   height: 100%;
 
   text-align: center;
+}
+@include respond-to('desktop') {
+  #svg_second {
+    svg {
+      width: 100%;
+    }
+  }
+}
+@include respond-to('macbook') {
+  #svg_first {
+    svg {
+      width: 105%;
+    }
+  }
+  #svg_second {
+    svg {
+      width: 103%;
+    }
+  }
 }
 
 .scroll__source {
@@ -197,9 +224,12 @@ div[id*='svg_'] {
     padding: torem(10px) 5vh;
 
     color: $tnc-color--footer;
-    background-color: $tnc-background--footer;
+    background-color: rgba($tnc-background--footer, .88);
     .logos__container {
       @include column(1/5, $gutter: 1);
+      @include respond-to('desktop') {
+        @include column(2/7, $gutter: 1);
+      }
       img {
         padding: torem(5px);
 
@@ -220,6 +250,13 @@ div[id*='svg_'] {
     }
     .content__container {
       @include column(4/5, $gutter: 1);
+      @include respond-to('desktop') {
+        @include column(5/7, $gutter: 1);
+
+        font-size: 95%;
+
+        padding: torem(3px);
+      }
 
       padding: torem(10px);
       p {
@@ -311,6 +348,10 @@ div[id*='svg_'] {
 
       transform: translate(-50%, 0);
       h1 {
+        @include respond-to('desktop') {
+          font-size: torem(40px);
+        }
+
         display: inline-block;
 
         font-family: 'Whitney Condensed';
@@ -365,9 +406,18 @@ div[id*='svg_'] {
       border-left: 1px solid;
       background: rgba($tnc-font-color-dark, .7);
       h2 {
+        @include respond-to('desktop') {
+          font-size: torem(28px);
+        }
+
         margin: 0;
       }
       p {
+        @include respond-to('desktop') {
+          font-size: torem(16px);
+          line-height: 1.5;
+        }
+
         font-size: torem(18px);
         line-height: 1.6;
 
@@ -376,6 +426,11 @@ div[id*='svg_'] {
         color: $tnc-font-color-white;
       }
       &:nth-of-type(1) {
+        @include respond-to('desktop') {
+          top: 7%;
+          left: 65%;
+        }
+
         top: 10%;
         left: 67%;
 
@@ -385,6 +440,11 @@ div[id*='svg_'] {
         border-bottom-right-radius: 10px;
       }
       &:nth-of-type(2) {
+        @include respond-to('desktop') {
+          top: 42%;
+          left: 54%;
+        }
+
         top: 50%;
         left: 52%;
 
@@ -394,6 +454,11 @@ div[id*='svg_'] {
         border-bottom-right-radius: 10px;
       }
       &:nth-of-type(3) {
+        @include respond-to('desktop') {
+          top: 35%;
+          left: 8%;
+        }
+
         top: 25%;
         left: 10%;
 
@@ -404,7 +469,19 @@ div[id*='svg_'] {
         border-left: none;
       }
       &.bg-water {
-        animation-delay: .15s;
+        @include respond-to('desktop') {
+          top: 29%;
+          left: 32%;
+
+          width: 17%;
+        }
+        @include respond-to('macbook') {
+          top: 28.2%;
+          left: 35.5%;
+
+          width: 18.5%;
+        }
+
         z-index: 0;
         top: 29%;
         left: 37%;
@@ -413,6 +490,7 @@ div[id*='svg_'] {
         height: 20%;
 
         transform: rotate(30deg);
+        animation-delay: .15s;
 
         border: none;
         border-radius: 50px;

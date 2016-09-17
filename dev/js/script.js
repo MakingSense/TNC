@@ -92,7 +92,7 @@ function sectionCheck(section_index, direction) {
                 svg_four();
                 svg.addClass('animated');
             } else {
-                changeSection(direction, section_index);
+                //changeSection(direction, section_index);
             }
             break;
         case 3:
@@ -100,7 +100,7 @@ function sectionCheck(section_index, direction) {
             break;
         case 4:
             setTimeout(function() {
-                changeSection(direction, section_index);
+                //changeSection(direction, section_index);
             }, 500)
             break;
         case 5:
@@ -112,7 +112,7 @@ function sectionCheck(section_index, direction) {
                 svg_third();
                 svg.addClass('animated');
             } else {
-                changeSection(direction, section_index);
+                //changeSection(direction, section_index);
             }
             break;
         case 7:
@@ -129,7 +129,7 @@ function sectionCheck(section_index, direction) {
                 svg_first();
                 svg.addClass('animated');
             } else {
-                changeSection(direction, section_index);
+                //changeSection(direction, section_index);
             }
             break;
         case 9:
