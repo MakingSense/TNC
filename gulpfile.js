@@ -19,6 +19,15 @@ iconfontCss = require('gulp-iconfont-css'),
 autoprefixer = require('gulp-autoprefixer'),
 // Kraken image optimization plugin
 kraken = require('gulp-kraken');
+// Clean CSS
+cleanCSS = require('gulp-clean-css');
+// ConcatJS
+concat = require('gulp-concat');
+uglify = require('gulp-uglify');
+pump = require('pump');
+
+// ZIP
+zip = require('gulp-zip');
 
 // Project settings
 var config = {
@@ -26,11 +35,16 @@ var config = {
   folderDev: {
     base: 'dev',
     css: 'dev/css',
+    csstest: 'dev/css/test',
     fonts: 'dev/fonts'
   }, // If this path gets changed, remember to update .gitignore with the proper path to ignore images and css
   folderAssets: {
     base: 'assets',
     styles: 'assets/styles'
+  },
+  folderDist: {
+    base: 'dist',
+    styles: 'dist/css'
   },
   folderBower: {
     base: 'bower_components',
@@ -104,22 +118,68 @@ gulp.task('serve:sassdoc', function() {
 // Process HTML task definition
 gulp.task('processHtml', function () {
   return gulp.src(config.folderAssets.base + '/templates/*.html')
-    .pipe(processHtml())
     .pipe(gulp.dest(config.folderDev.base))
     .pipe(browserSync.reload({
       stream: true
     }));
 });
 
+gulp.task('processHtml:deploy', function () {
+  return gulp.src(config.folderAssets.base + '/templates/*.html')
+    .pipe(processHtml())
+    .pipe(gulp.dest(config.folderDist.base));
+});
+
 
 // PostCSS autoprefixer task definition
 gulp.task('autoprefixer', function () {
-  return gulp.src(config.folderDev + 'styles.css')
+  return gulp.src('dev/css/styles.css')
     .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
+      browsers: ['last 2 versions', '> 1%', 'last 3 iOS versions', 'Firefox > 20', 'ie 9'],
       cascade: false
     }))
-    .pipe(gulp.dest(config.folderDev.css));
+    .pipe(gulp.dest('dev/css/'));
+});
+
+gulp.task('minify-css',['autoprefixer'], function() {
+    return gulp.src('dev/css/styles.css')
+    .pipe(cleanCSS({debug: true}, function(details) {
+        console.log('File: ' + details.name + ' -- Original Size: ' + details.stats.originalSize);
+        console.log('File: ' + details.name + ' -- Minified Size: ' + details.stats.minifiedSize);
+    }))
+    .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('concatpluginsJS', function() {
+  return gulp.src(['./dev/js/plugins/jquery.fullPage.min.js', './dev/js/plugins/jquery.mousewheel.min.js', './dev/js/plugins/jquery.mb.YTPlayer.js', './dev/js/plugins/raphael.min.js', './dev/js/plugins/TweenMax.min.js', './dev/js/plugins/mapbox.directions.js'])
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('./dist/js/plugins/'));
+});
+
+gulp.task('concatscriptJS', function() {
+  return gulp.src(['./dev/js/socialShare.js', './dev/js/script-maps.js', './dev/js/script.js'])
+    .pipe(concat('script.js'))
+    .pipe(gulp.dest('./dist/js/'));
+});
+
+gulp.task('pluginsJS',['concatpluginsJS'], function (cb) {
+  pump([
+        gulp.src('./dist/js/plugins/app.js'),
+        uglify(),
+        gulp.dest('dist/js/plugins/')
+    ],
+    cb
+  );
+});
+
+gulp.task('scriptsJS',['concatscriptJS'], function (cb) {
+  pump([
+        gulp.src('./dist/js/script.js'),
+        uglify(),
+        gulp.dest('dist/js/')
+    ],
+    cb
+  );
 });
 
 
@@ -175,13 +235,24 @@ gulp.task('kraken', function () {
       lossy: true,
       concurrency: 6
   }))
-  .pipe(gulp.dest(config.folderDev.base + '/img/'));
+  .pipe(gulp.dest('./dist/img/'));
 });
 
 // Kraken image optimization task definition
 gulp.task('copy:images', function () {
   gulp.src(config.folderAssets.base + '/images/**/*.*')
   .pipe(gulp.dest(config.folderDev.base + '/img/'));
+});
+
+
+gulp.task('copydeploy:data', function () {
+  gulp.src(config.folderDev.base + '/data/**/*.*')
+  .pipe(gulp.dest(config.folderDist.base + '/data/'));
+});
+
+gulp.task('copydeploy:fonts', function () {
+  gulp.src(config.folderDev.base + '/fonts/**/*.*')
+  .pipe(gulp.dest(config.folderDist.base + '/fonts/'));
 });
 
 
@@ -236,12 +307,20 @@ gulp.task('clean:fonts', function() {
   return del.sync([config.folderDev.fonts, config.folderAssets.base + '/libs/iconfont']);
 });
 
+// ZIP Compression
+gulp.task('deploy', ['deploy:files'], function () {
+  var aux = new Date();
+    return gulp.src('./dist/**/*.*')
+        .pipe(zip('TNC Deploy --' + aux.toDateString() + '.zip'))
+        .pipe(gulp.dest('./'));
+});
+
 
 // Watch for changes
 gulp.task('run', ['build', 'serve'], function (){
   gulp.watch(config.folderAssets.base + '/**/*.scss', ['sass']);
   gulp.watch(config.folderAssets.base + '/icons/*.svg', ['build']);
-  gulp.watch(config.folderDev.css + '/*.css', ['autoprefixer']);
+  gulp.watch(config.folderDev.css + '/*.css');
   gulp.watch(config.folderAssets.base + '/images/*.*', ['copy:images']);
   gulp.watch(config.folderAssets.base + '/templates/*.html', ['processHtml']);
   // Uncomment if want to watch for js changes
@@ -249,4 +328,12 @@ gulp.task('run', ['build', 'serve'], function (){
 });
 
 // Define build task
-gulp.task('build', ['sass:build' ,'autoprefixer', 'processHtml', 'copy:images']);
+gulp.task('build', ['sass:build' ,'processHtml', 'copy:images']);
+
+gulp.task('compressJS', ['pluginsJS', 'scriptsJS']);
+gulp.task('compressCSS', ['minify-css']);
+gulp.task('copydeploy', ['copydeploy:data', 'copydeploy:fonts']);
+
+
+
+gulp.task('deploy:files', ['processHtml:deploy', 'copydeploy', 'compressJS', 'compressCSS', 'kraken']);
