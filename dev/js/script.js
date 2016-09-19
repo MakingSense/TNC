@@ -49,6 +49,8 @@ function hideSlidesDots() {
 var player = $("#player_1");
 var player_2 = $("#player_2");
 var player_3 = $("#player_3");
+var player_4 = $("#player_4");
+var player_5 = $("#player_5");
 
 function initPlayer() {
     player.YTPlayer();
@@ -100,6 +102,28 @@ function initPlayerSeekers() {
         event.preventDefault();
         if(parent.location.hash != '#video') {
             player_3.YTPStop();
+        }
+    });
+
+    player_4.YTPlayer();
+    player_4.on('YTPEnd', function(event) {
+        parent.location.hash = '#!';
+    });
+    player_4.on('YTPPlay', function(event) {
+        event.preventDefault();
+        if(parent.location.hash != '#video') {
+            player_4.YTPStop();
+        }
+    });
+
+    player_5.YTPlayer();
+    player_5.on('YTPEnd', function(event) {
+        parent.location.hash = '#!';
+    });
+    player_5.on('YTPPlay', function(event) {
+        event.preventDefault();
+        if(parent.location.hash != '#video') {
+            player_5.YTPStop();
         }
     });
 }

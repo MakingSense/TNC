@@ -4,6 +4,10 @@
 /// @author MS
 ////
 
+.mb_YTPlayer .loading {
+  display: none !important;
+}
+
 .people__container {
   @include cf();
 
@@ -225,10 +229,19 @@
           }
           &:nth-child(2) {
             z-index: 20;
-            top: 35%;
-            left: 46%;
+            top: 20%;
+            right: 15%;
+            height: 65%;
 
-            max-width: 40%;
+            max-width: 60%;
+            .ms-icon {
+              font-size: 70px;
+
+              position: absolute;
+              top: -40px;
+              right: -65px;
+              left: initial;
+            }
           }
           &:nth-child(3) {
             z-index: 5;
