@@ -59,11 +59,31 @@ function displayCity() {
     var map_front = $('.map');
     var search = $('.form');
     var city = $('.city');
+    var cityData = $('.city .city__founded');
+    var cityWrong = $('.city .city__wrong');
     map.invalidateSize(16);
 
     map_front.removeClass('map__height-middle--out').addClass('map__height-middle--in');
     search.removeClass('search__fade-out--reverse').addClass('search__fade-out');
     city.removeClass('item-list__fade-in--reverse').addClass('item-list__fade-in');
+    cityWrong.removeClass('city__founded-anim-out').addClass('city__founded-anim-out');
+    cityData.removeClass('city__founded-anim-out').addClass('city__founded-anim-in');
+}
+
+function displayCityWrong() {
+    var map_front = $('.map');
+    var search = $('.form');
+    var city = $('.city');
+    var cityData = $('.city .city__founded');
+    var cityWrong = $('.city .city__wrong');
+    map.invalidateSize(16);
+
+    map_front.removeClass('map__height-middle--out').addClass('map__height-middle--in');
+    search.removeClass('search__fade-out--reverse').addClass('search__fade-out');
+    city.removeClass('item-list__fade-in--reverse').addClass('item-list__fade-in');
+    cityData.removeClass('city__founded-anim-out').addClass('city__founded-anim-out');
+    cityWrong.removeClass('city__founded-anim-out').addClass('city__founded-anim-in');
+
 }
 
 function displayDataCity(cityName) {
@@ -308,11 +328,13 @@ function showMap(err, data) {
         }
         else {
             console.log('WRONG CITY');
-        }        
+            displayCityWrong();
+        }
     }
     else {
         console.log('WRONG CITY');
-    }     
+        displayCityWrong();
+    }
 }
 
 function filterLocations(cityName) {
@@ -327,8 +349,8 @@ function checkCityExist(city) {
         if (prop.type == "city") {
             if(prop.city_name == city){
                 aux = true;
-            }            
-        }        
+            }
+        }
     });
     return aux;
 }

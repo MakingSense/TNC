@@ -126,35 +126,41 @@
             </form>
             <div class='city'>
               <a class="city__button" href="#"></a>
-              <h2 id="cityTitle">Oakland, California</h2>
-              <span class="route__line">
-                <div>
-                  <span>12500KM</span>
+              <div class="city__founded">
+                <h2 id="cityTitle">Oakland, California</h2>
+                <span class="route__line">
+                  <div>
+                    <span>12500KM</span>
+                  </div>
+                </span>
+                <div class="city__information">
+                  <div class="city__information-about">
+                    <h3 id="cityName">About Oakland</h3>
+                    <h2 id="citySources"></h2>
+                    <p>Water Sources</p>
+                    <h2 id="cityKmAverage"></h2>
+                    <p>Average Distance to Sources</p>
+                  </div>
+                  <div class="city__information-sources">
+                    <h3>Water Sources</h3>
+                    <ul id="reservoirs" class="reservoirs__list">
+                    </ul>
+                  </div>
+                  <div class="city__information-goto">
+                    <h3>Go to your Source</h3>
+                    <form action="">
+                      <label for="destination">To:</label>
+                      <input type="text" id="destination" geolat="" geolon="" name="destination">
+                      <label for="origin">From:</label>
+                      <input type="text" id="origin" geolat="" geolon="" name="origin">
+                      <button id="routeButton" class="button">Route</button>
+                    </form>
+                  </div>
                 </div>
-              </span>
-              <div class="city__information">
-                <div class="city__information-about">
-                  <h3 id="cityName">About Oakland</h3>
-                  <h2 id="citySources"></h2>
-                  <p>Water Sources</p>
-                  <h2 id="cityKmAverage"></h2>
-                  <p>Average Distance to Sources</p>
-                </div>
-                <div class="city__information-sources">
-                  <h3>Water Sources</h3>
-                  <ul id="reservoirs" class="reservoirs__list">
-                  </ul>
-                </div>
-                <div class="city__information-goto">
-                  <h3>Go to your Source</h3>
-                  <form action="">
-                    <label for="destination">To:</label>
-                    <input type="text" id="destination" geolat="" geolon="" name="destination">
-                    <label for="origin">From:</label>
-                    <input type="text" id="origin" geolat="" geolon="" name="origin">
-                    <button id="routeButton" class="button">Route</button>
-                  </form>
-                </div>
+              </div>
+              <div class="city__wrong">
+                <h2>Wipeout!</h2>
+                <p>Unfortunately, we don't currently have a source info for your location.</p>
               </div>
             </div>
           </div>
