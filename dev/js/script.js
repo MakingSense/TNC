@@ -47,6 +47,8 @@ function hideSlidesDots() {
   #Video Functionalities
 \*------------------------------------*/
 var player = $("#player_1");
+var player_2 = $("#player_2");
+var player_3 = $("#player_3");
 
 function initPlayer() {
     player.YTPlayer();
@@ -54,7 +56,7 @@ function initPlayer() {
         var preloader = $('.preloader__container');
         preloader.fadeOut('400', function() {
             // your code that shows the map div
-            $('#map-one').show();
+            //$('#map-one').show();
 
         });
         $.fn.fullpage.setAllowScrolling(true);
@@ -75,6 +77,30 @@ function initPlayer() {
 
     $('#player_1_open').on('click', function() {
         player.YTPPlay();
+    });
+}
+
+function initPlayerSeekers() {
+    player_2.YTPlayer();
+    player_2.on('YTPEnd', function(event) {
+        parent.location.hash = '#!';
+    });
+    player_2.on('YTPPlay', function(event) {
+        event.preventDefault();
+        if(parent.location.hash != '#video') {
+            player_2.YTPStop();
+        }
+    });
+
+    player_3.YTPlayer();
+    player_3.on('YTPEnd', function(event) {
+        parent.location.hash = '#!';
+    });
+    player_3.on('YTPPlay', function(event) {
+        event.preventDefault();
+        if(parent.location.hash != '#video') {
+            player_3.YTPStop();
+        }
     });
 }
 
@@ -104,6 +130,7 @@ function sectionCheck(section_index, direction) {
             }, 500)
             break;
         case 5:
+            initPlayerSeekers();
 
             break;
         case 6:
@@ -127,8 +154,8 @@ function sectionCheck(section_index, direction) {
 
             }
             else{
-                bulletInformation();   
-            }         
+                bulletInformation();
+            }
             break;
         case 8:
             var svg = $('#svg_first');
@@ -234,6 +261,13 @@ function peopleModalBinding() {
         $(this).on('click', function(event) {
             event.preventDefault();
             $(this).parent().toggleClass('active');
+            if($(this).parent().hasClass('video__item') && $(this).parent().hasClass('active') ){
+                window.location.hash = '#video';
+                $(this).siblings('.player').YTPPlay();
+            }
+            else {
+                $(this).siblings('.player').YTPStop();
+            }
         });
     });
 }
