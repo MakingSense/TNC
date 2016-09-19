@@ -220,7 +220,7 @@ div[id*='svg_'] {
   }
 
   position: absolute;
-  top: 0;
+  top: 2%;
   left: 50%;
 
   transform: translate(-50%, 0%);
@@ -251,7 +251,7 @@ div[id*='svg_'] {
   .icon-location {
     display: block;
 
-    font-size: toem(80px);
+    font-size: toem(64px);
 
     margin: 0 auto;
     margin-bottom: torem(15px);
@@ -340,6 +340,13 @@ div[id*='svg_'] {
         margin-bottom: toem(10px);
 
         text-transform: uppercase;
+        a {
+          color: $tnc-color--footer;
+          &:hover {
+            color: shade($tnc-color--footer, 20%);
+            text-decoration: underline;
+          }
+        }
       }
       small {
         font-family: 'Whitney Pro';
@@ -560,8 +567,6 @@ div[id*='svg_'] {
         top: 10%;
         left: 67%;
 
-        animation-delay: 1s;
-
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
       }
@@ -585,8 +590,6 @@ div[id*='svg_'] {
 
         top: 50%;
         left: 52%;
-
-        animation-delay: 2s;
 
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
@@ -612,7 +615,6 @@ div[id*='svg_'] {
         top: 25%;
         left: 10%;
 
-        animation-delay: 3s;
         text-align: right;
 
         border-right: 1px solid;

@@ -25,6 +25,7 @@ cleanCSS = require('gulp-clean-css');
 concat = require('gulp-concat');
 uglify = require('gulp-uglify');
 pump = require('pump');
+svgo = require('gulp-svgo');
 
 // ZIP
 zip = require('gulp-zip');
@@ -141,7 +142,7 @@ gulp.task('autoprefixer', function () {
     .pipe(gulp.dest('dev/css/'));
 });
 
-gulp.task('minify-css',['autoprefixer'], function() {
+gulp.task('minify-css',['autoprefixer','minify-css-plugin'], function() {
     return gulp.src('dev/css/styles.css')
     .pipe(cleanCSS({debug: true}, function(details) {
         console.log('File: ' + details.name + ' -- Original Size: ' + details.stats.originalSize);
@@ -150,8 +151,17 @@ gulp.task('minify-css',['autoprefixer'], function() {
     .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('minify-css-plugin', function() {
+    return gulp.src('dev/css/jquery.mb.YTPlayer.min.css')
+    .pipe(cleanCSS({debug: true}, function(details) {
+        console.log('File: ' + details.name + ' -- Original Size: ' + details.stats.originalSize);
+        console.log('File: ' + details.name + ' -- Minified Size: ' + details.stats.minifiedSize);
+    }))
+    .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('concatpluginsJS', function() {
-  return gulp.src(['./dev/js/plugins/jquery.fullPage.min.js', './dev/js/plugins/jquery.mousewheel.min.js', './dev/js/plugins/jquery.mb.YTPlayer.js', './dev/js/plugins/raphael.min.js', './dev/js/plugins/TweenMax.min.js', './dev/js/plugins/mapbox.directions.js'])
+  return gulp.src(['./dev/js/plugins/jquery.fullPage.min.js', './dev/js/plugins/jquery.mousewheel.min.js', './dev/js/plugins/jquery.mb.YTPlayer.js', './dev/js/plugins/raphael.min.js', './dev/js/plugins/TweenMax.min.js','./dev/js/plugins/mapbox.js', './dev/js/plugins/mapbox.directions.js'])
     .pipe(concat('app.js'))
     .pipe(gulp.dest('./dist/js/plugins/'));
 });
@@ -227,8 +237,8 @@ gulp.task('doc:generate', function () {
 
 
 // Kraken image optimization task definition
-gulp.task('kraken', function () {
-  gulp.src(config.folderAssets.base + '/images/*.*')
+gulp.task('kraken',['svgo'], function () {
+  gulp.src(config.folderAssets.base + '/images/**/*.jpg')
   .pipe(kraken({
       key: 'b87e244345e0334cdfdcb06151d0736e',
       secret: '7c5349c43fac3efa4256014de693b2aa7ee96885',
@@ -242,6 +252,17 @@ gulp.task('kraken', function () {
 gulp.task('copy:images', function () {
   gulp.src(config.folderAssets.base + '/images/**/*.*')
   .pipe(gulp.dest(config.folderDev.base + '/img/'));
+});
+
+gulp.task('copy:images:deploy', function () {
+  gulp.src(config.folderAssets.base + '/images/**/*.*')
+  .pipe(gulp.dest('./dist/img/'));
+});
+
+gulp.task('svgo', function() {
+    gulp.src(config.folderAssets.base + '/images/**/*.svg')
+        .pipe(svgo())
+        .pipe(gulp.dest('./dist/img/'));
 });
 
 
@@ -308,7 +329,7 @@ gulp.task('clean:fonts', function() {
 });
 
 // ZIP Compression
-gulp.task('deploy', ['deploy:files'], function () {
+gulp.task('deploy', ['deploy:files', 'copy:images:deploy'], function () {
   var aux = new Date();
     return gulp.src('./dist/**/*.*')
         .pipe(zip('TNC Deploy --' + aux.toDateString() + '.zip'))
@@ -336,4 +357,4 @@ gulp.task('copydeploy', ['copydeploy:data', 'copydeploy:fonts']);
 
 
 
-gulp.task('deploy:files', ['processHtml:deploy', 'copydeploy', 'compressJS', 'compressCSS', 'kraken']);
+gulp.task('deploy:files', ['processHtml:deploy', 'copydeploy', 'compressJS', 'compressCSS']);

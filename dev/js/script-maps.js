@@ -174,7 +174,13 @@ function initMap() {
                 traceRoute();
 
                 //2. Set active the markers associated listing.
-                setActive(listing);
+                //setActive(listing);
+
+                $('#destination').val(prop.name);
+                $('#destination').attr({
+                    geolat: destination.lat,
+                    geolon: destination.lng
+                });
             });
 
             popup += '</div>';
@@ -216,10 +222,10 @@ function getDistance(_origin, _destination) {
 }
 
 function distanceConvert(distance) {
-    if (distance >= 100000) return (distance / 1000).toFixed(0) + ' km';
-    if (distance >= 10000) return (distance / 1000).toFixed(1) + ' km';
-    if (distance >= 100) return (distance / 1000).toFixed(2) + ' km';
-    return distance.toFixed(0) + ' Km';
+    if (distance >= 100000) return ((distance / 1000).toFixed(0)*0.621) + ' MI';
+    if (distance >= 10000) return ((distance / 1000).toFixed(1)*0.621) + ' MI';
+    if (distance >= 100) return ((distance / 1000).toFixed(2)*0.621) + ' MI';
+    return (distance.toFixed(0)*0.621) + ' MI';
 }
 
 function setActive(el) {
@@ -283,25 +289,48 @@ function searchInMap() {
 }
 
 function showMap(err, data) {
-    filterLocations(data.results.features[0].text);
-    origin = data.latlng;
-    if (data.lbounds) {
-        map.fitBounds(data.lbounds);
-    } else if (data.latlng) {
-        map.setView([data.latlng[0], data.latlng[1]], 18);
+    if(data.results.features.length > 0) {
+        if(checkCityExist(data.results.features[0].text)) {
+            filterLocations(data.results.features[0].text);
+            origin = data.latlng;
+            if (data.lbounds) {
+                map.fitBounds(data.lbounds);
+            } else if (data.latlng) {
+                map.setView([data.latlng[0], data.latlng[1]], 18);
+            }
+            displayCity();
+            displayDataCity(data.results.features[0].text);
+            $('#origin').val(data.results.features[0].text);
+            $('#origin').attr({
+                geolat: data.latlng[0],
+                geolon: data.latlng[1]
+            });
+        }
+        else {
+            console.log('WRONG CITY');
+        }        
     }
-    displayCity();
-    displayDataCity(data.results.features[0].text);
-    $('#origin').val(data.results.features[0].text);
-    $('#origin').attr({
-        geolat: data.latlng[0],
-        geolon: data.latlng[1]
-    });
+    else {
+        console.log('WRONG CITY');
+    }     
 }
 
 function filterLocations(cityName) {
     $('.listings .item').remove();
     filterWaterSourcesbyID(nametoID(cityName));
+}
+
+function checkCityExist(city) {
+    var aux = false;
+    locations.eachLayer(function(locale) {
+        prop = locale.feature.properties;
+        if (prop.type == "city") {
+            if(prop.city_name == city){
+                aux = true;
+            }            
+        }        
+    });
+    return aux;
 }
 
 function nametoID(cityName) {

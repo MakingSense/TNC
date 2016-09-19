@@ -65,6 +65,7 @@
     "gulp-processhtml": "~1.1.0",
     "gulp-sass": "~2.3.1",
     "gulp-sourcemaps": "~1.6.0",
+    "gulp-svgo": "^1.0.3",
     "gulp-uglify": "^2.0.0",
     "gulp-zip": "^3.2.0",
     "node-sass": "~2.1.1",

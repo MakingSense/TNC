@@ -92,7 +92,7 @@ function sectionCheck(section_index, direction) {
                 svg_four();
                 svg.addClass('animated');
             } else {
-                //changeSection(direction, section_index);
+               changeSection(direction, section_index);
             }
             break;
         case 3:
@@ -100,7 +100,7 @@ function sectionCheck(section_index, direction) {
             break;
         case 4:
             setTimeout(function() {
-                //changeSection(direction, section_index);
+                changeSection(direction, section_index);
             }, 500)
             break;
         case 5:
@@ -112,16 +112,23 @@ function sectionCheck(section_index, direction) {
                 svg_third();
                 svg.addClass('animated');
             } else {
-                //changeSection(direction, section_index);
+                changeSection(direction, section_index);
             }
             break;
         case 7:
             var svg = $('#svg_second');
             if (!svg.hasClass('animated')) {
                 svg_second();
+                $('.bullet__information:nth-child(4)').css('animation-delay', 2).addClass('anim__fade-in');
                 svg.addClass('animated');
+                $.fn.fullpage.setAllowScrolling(false);
+                $.fn.fullpage.setKeyboardScrolling(false);
+                pointsInformation();
+
             }
-            bulletInformation();
+            else{
+                bulletInformation();   
+            }         
             break;
         case 8:
             var svg = $('#svg_first');
@@ -129,7 +136,7 @@ function sectionCheck(section_index, direction) {
                 svg_first();
                 svg.addClass('animated');
             } else {
-                //changeSection(direction, section_index);
+                changeSection(direction, section_index);
             }
             break;
         case 9:
@@ -155,6 +162,27 @@ function changeSection(direction, index) {
         }, 1500)
     }
 }
+
+
+function pointsInformation(){
+    var count = 0;
+    var bullets = $('.bullet__information');
+
+    $('.section-7').on('mousewheel', function(event) {
+        if(event.deltaY == 1 && count <= 3){
+            $(bullets[count-1]).removeClass('anim__fade-in');
+            $(bullets[count]).addClass('anim__fade-in');
+            count++;
+        }
+
+        if(count == 4) {
+            $.fn.fullpage.setAllowScrolling(true);
+            $.fn.fullpage.setKeyboardScrolling(true);
+        }
+    });
+}
+
+
 
 /*------------------------------------*\
   #GIF Section Binding
