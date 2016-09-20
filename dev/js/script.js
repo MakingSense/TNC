@@ -434,7 +434,9 @@ svg_first = function() {
         ease: Circ.easeIn,
         onUpdateScope: this,
         onComplete: function() {
-            $.fn.fullpage.moveSectionUp();
+            setTimeout(function() {
+                $.fn.fullpage.moveSectionUp();
+            }, 1000)
         }
     });
 };
@@ -509,6 +511,8 @@ svg_third = function() {
         ease: Circ.easeIn,
         onUpdateScope: this,
         onComplete: function() {
+
+
             $.fn.fullpage.moveSectionUp();
         }
     });
@@ -548,6 +552,8 @@ svg_four = function() {
         ease: Circ.easeIn,
         onUpdateScope: this,
         onComplete: function() {
+
+
             $.fn.fullpage.moveSectionUp();
         }
     });
