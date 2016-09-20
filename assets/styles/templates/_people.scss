@@ -106,10 +106,10 @@
             font-size: torem(19px);
           }
 
-          display: inline-block;
-
           font-size: torem(24px);
           font-weight: 700;
+
+          display: inline-block;
 
           padding: torem(5px) torem(10px);
 
@@ -119,10 +119,10 @@
           border: 1px solid $tnc-font-color;
         }
         a {
-          display: inline-block;
-
           font-size: torem(48px);
           font-weight: 400;
+
+          display: inline-block;
 
           margin-left: torem(16px);
 
@@ -143,6 +143,7 @@
           padding: 0;
 
           transition: opacity .15s linear;
+          animation: bounce 1.2s infinite;
 
           opacity: 1;
           color: #fff;
@@ -151,6 +152,8 @@
           .player {
             width: 100% !important;
             height: 100% !important;
+
+            opacity: 0;
             .mbYTP_wrapper iframe {
               margin-left: 0 !important;
             }
@@ -165,25 +168,25 @@
             }
           }
           .ms-icon {
+            font-size: 70px;
+
             position: absolute;
             top: -40px;
             left: -65px;
-
-            font-size: 70px;
 
             cursor: pointer;
             animation: none;
 
             color: $tnc-font-color;
             &:after {
-              position: absolute;
-              top: 95%;
-              left: 50%;
-
               font-family: 'Whitney Condensed';
               font-size: torem(55px);
               font-weight: 300;
               line-height: 1;
+
+              position: absolute;
+              top: 95%;
+              left: 50%;
 
               content: '+';
               transition: all .15s linear;
@@ -198,16 +201,16 @@
             opacity: 0;
             color: transparent;
           }
-          &:hover {
-            .ms-icon {
-              animation: bounce .8s infinite;
-            }
-          }
           &.active {
             width: 100%;
             padding: torem(16px);
 
+            animation: none;
+
             border: 1px solid $tnc-font-color;
+            .player {
+              opacity: 1;
+            }
             p {
               opacity: 1;
               color: inherit;
@@ -226,6 +229,8 @@
           &:nth-child(1) {
             top: 65%;
             left: 22%;
+
+            animation-delay: .5s;
           }
           &:nth-child(2) {
             z-index: 20;
@@ -234,6 +239,8 @@
 
             max-width: 55%;
             height: 60%;
+
+            animation-delay: .7s;
             &.video__item {
               max-width: 59%;
             }
@@ -249,12 +256,12 @@
               }
             }
             .ms-icon {
+              font-size: 70px;
+
               position: absolute;
               top: -40px;
               right: -65px;
               left: initial;
-
-              font-size: 70px;
             }
           }
           &:nth-child(3) {
@@ -265,6 +272,8 @@
 
             max-width: 55%;
             height: 60%;
+
+            animation-delay: .3s;
           }
           p {
             font-size: torem(15px);
@@ -282,9 +291,9 @@
 
       text-align: center;
       .ms-icon {
-        display: block;
-
         font-size: torem(90px);
+
+        display: block;
 
         margin-bottom: torem(16px);
       }
@@ -309,11 +318,11 @@
         font-size: torem(32px);
       }
 
-      display: inline-block;
-
       font-family: 'Whitney Condensed';
       font-size: torem(48px);
       line-height: 1;
+
+      display: inline-block;
 
       margin: 0;
       padding: 0 torem(5px) torem(5px) torem(5px);
@@ -325,9 +334,9 @@
       border-bottom: 1px solid $tnc-font-color;
     }
     h4 {
-      display: block;
-
       line-height: 1;
+
+      display: block;
 
       margin: 0;
 
@@ -420,8 +429,8 @@
     background-size: 83% !important;
   }
   @include respond-to('macbook') {
-    background-size: 91% !important;
     background-position: -85% center !important;
+    background-size: 91% !important;
   }
 
   z-index: 5 !important;

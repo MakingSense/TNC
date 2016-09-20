@@ -161,7 +161,7 @@ gulp.task('minify-css-plugin', function() {
 });
 
 gulp.task('concatpluginsJS', function() {
-  return gulp.src(['./dev/js/plugins/jquery.fullPage.min.js', './dev/js/plugins/jquery.mousewheel.min.js', './dev/js/plugins/jquery.mb.YTPlayer.js', './dev/js/plugins/raphael.min.js', './dev/js/plugins/TweenMax.min.js','./dev/js/plugins/mapbox.js', './dev/js/plugins/mapbox.directions.js'])
+  return gulp.src(['./dev/js/plugins/modernizr.min.js', './dev/js/plugins/detectizr.min.js', './dev/js/plugins/jquery.fullPage.min.js', './dev/js/plugins/jquery.mousewheel.min.js', './dev/js/plugins/jquery.mb.YTPlayer.js', './dev/js/plugins/raphael.min.js', './dev/js/plugins/TweenMax.min.js','./dev/js/plugins/mapbox.js', './dev/js/plugins/mapbox.directions.js'])
     .pipe(concat('app.js'))
     .pipe(gulp.dest('./dist/js/plugins/'));
 });

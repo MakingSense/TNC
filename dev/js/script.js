@@ -8,6 +8,11 @@
 /*------------------------------------*\
   #Ready
 \*------------------------------------*/
+var _deviceModel;
+
+// $(window).load(function() {
+//     _deviceModel = Detectizr.device.model;
+// });
 
 $(document).ready(function() {
     $('#section__container').fullpage({
@@ -34,6 +39,8 @@ $(document).ready(function() {
 
 
     $.fn.fullpage.silentMoveTo(9);
+
+    preloader();
 });
 
 /*------------------------------------*\
@@ -41,6 +48,14 @@ $(document).ready(function() {
 \*------------------------------------*/
 function hideSlidesDots() {
     $('#fp-nav ul li:nth-child(2), #fp-nav ul li:nth-child(4), #fp-nav ul li:nth-child(6), #fp-nav ul li:nth-child(8)').css('display', 'none');
+}
+
+function preloader() {
+    var preloader = $('.preloader__container');
+    preloader.fadeOut('400', function() {
+    });
+    $.fn.fullpage.setAllowScrolling(true);
+    $.fn.fullpage.setKeyboardScrolling(true);
 }
 
 /*------------------------------------*\
@@ -55,11 +70,7 @@ var player_5 = $("#player_5");
 function initPlayer() {
     player.YTPlayer();
     player.on('YTPReady', function(event) {
-        var preloader = $('.preloader__container');
-        preloader.fadeOut('400', function() {
-        });
-        $.fn.fullpage.setAllowScrolling(true);
-        $.fn.fullpage.setKeyboardScrolling(true);
+
     });
     player.on('YTPEnd', function(event) {
         parent.location.hash = '#!';
@@ -215,11 +226,40 @@ function changeSection(direction, index) {
 function pointsInformation(){
     var count = 0;
     var scrollCount = 0;
+    var maxCount = 8;
     var bullets = $('.bullet__information');
+    var ts;
+
+    $('.section-7').bind('touchstart', function(e) {
+        ts = e.originalEvent.touches[0].clientY;
+    });
+
+    $('.section-7').bind('touchend', function(e) {
+        if(count <= 3){
+            $(bullets[count-1]).removeClass('anim__fade-in');
+            $(bullets[count]).addClass('anim__fade-in');
+            scrollCount = 0;
+            count++;
+        }
+        if(count == 4) {
+            $.fn.fullpage.setAllowScrolling(true);
+            $.fn.fullpage.setKeyboardScrolling(true);
+        }
+    });
+
+    $('.section-7').bind('touchmove', function(e) {
+        var te = e.originalEvent.changedTouches[0].clientY;
+        if (ts > te) {
+            console.log('down');
+        } else {
+            console.log('up');
+        }
+    });
 
     $('.section-7').on('mousewheel', function(event) {
         scrollCount++;
-        if(event.deltaY == 1 && count <= 3 && scrollCount >= 5){
+
+        if(event.deltaY == 1 && count <= 3 && scrollCount >= 8){
             $(bullets[count-1]).removeClass('anim__fade-in');
             $(bullets[count]).addClass('anim__fade-in');
             scrollCount = 0;

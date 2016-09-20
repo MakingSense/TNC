@@ -24,8 +24,7 @@ var destination = {
 /*------------------------------------*\
   #Load
 \*------------------------------------*/
-
-$(window).load(function() {
+$(window).on('load', function() {
     //Access Token Map
     L.mapbox.accessToken = 'pk.eyJ1IjoidG5jLWdsb2JhbHdhdGVyIiwiYSI6ImNpcjVveDV0YTAwOGZnN25uNTltdjdpbzMifQ.2Ff5ioAO5z2s5ltmcBx7cA';
     initMap();
