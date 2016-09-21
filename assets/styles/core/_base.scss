@@ -5,7 +5,7 @@
 ////
 
 
-@import "./typography";
+@import './typography';
 
 
 *,
@@ -16,8 +16,10 @@
 
 body,
 html {
-  overflow-x: hidden;
   font: $tnc-font;
+
+  overflow: hidden;
+
   color: $tnc-font-color;
 }
 
@@ -27,15 +29,18 @@ body {
 
 img {
   display: inline-block;
-  height: auto;
+
   max-width: 100%;
+  height: auto;
+
   outline: 0;
 }
 
 fieldset {
-  border: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+
+  border: none;
 }
 
 blockquote {
@@ -44,8 +49,8 @@ blockquote {
 
 menu,
 nav {
-	ul,
-	li {
+  ul,
+  li {
     margin: 0;
     padding: 0;
   }
@@ -55,6 +60,7 @@ hr {
   width: 100%;
   height: 20px;
   margin: 0 0 20px;
+
   border: none;
   border-bottom: 1px dashed;
 }
@@ -66,6 +72,6 @@ button {
 }
 
 a {
-	text-decoration: none;
   transition: all $tnc-transition-duration $tnc-transition-timing;
+  text-decoration: none;
 }

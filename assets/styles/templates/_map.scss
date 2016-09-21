@@ -224,10 +224,30 @@
     opacity: 1;
   }
   to {
+    @include respond-to('desktop-mac') {
+    }
+
     z-index: 15;
     top: 10%;
 
     opacity: 1;
+  }
+}
+
+@include respond-to('desktop-mac') {
+  @keyframes search__fade-out {
+    from {
+      z-index: 15;
+      top: 100%;
+
+      opacity: 1;
+    }
+    to {
+      z-index: 15;
+      top: 12%;
+
+      opacity: 1;
+    }
   }
 }
 
@@ -290,7 +310,7 @@
     }
   }
   h2 {
-    @include respond-to('desktop') {
+    @include respond-to('desktop-mac') {
       font-size: torem(28px);
       line-height: 1;
 
@@ -431,7 +451,7 @@
       @include respond-to('ipad') {
         @include column(1/3, $gutter: 1);
       }
-      @include respond-to('desktop') {
+      @include respond-to('desktop-mac') {
         padding: toem(5px) toem(10px) toem(10px) toem(10px);
       }
       @include respond-to('iphone6-plus') {
@@ -444,7 +464,7 @@
 
       padding: toem(16px);
       h3 {
-        @include respond-to('desktop') {
+        @include respond-to('desktop-mac') {
           font-size: torem(20px);
         }
         @include respond-to('ipad-portrait') {
@@ -471,7 +491,7 @@
         margin: 0;
       }
       h2 {
-        @include respond-to('desktop') {
+        @include respond-to('desktop-mac') {
           font-size: torem(84px);
         }
         @include respond-to('ipad-portrait') {
@@ -482,7 +502,7 @@
         font-weight: 600;
         line-height: 1;
         &:last-of-type {
-          @include respond-to('desktop') {
+          @include respond-to('desktop-mac') {
             font-size: torem(32px);
           }
           @include respond-to('ipad-portrait') {
@@ -515,7 +535,7 @@
 
       text-align: center;
       .reservoirs__list {
-        @include respond-to('desktop') {
+        @include respond-to('desktop-mac') {
           margin-top: torem(13px);
         }
 
@@ -529,7 +549,7 @@
           @include respond-to('ipad-portrait') {
             font-size: torem(13px);
           }
-          @include respond-to('desktop') {
+          @include respond-to('desktop-mac') {
             margin-bottom: torem(8px);
           }
 
@@ -638,7 +658,7 @@
     height: 37.5vh;
 
     opacity: 1;
-    background: rgba(255,255,255, .2);
+    background: rgba(255,255,255, .7);
   }
 }
 
@@ -651,12 +671,16 @@
 
 @keyframes city__founded-anim-in {
   from {
+    z-index: -9999;
+
     height: 0;
 
     opacity: 0;
   }
   to {
+    z-index: 10;
     //height: 37.5vh;
+
     opacity: 1;
     background: transparent;
   }
@@ -669,6 +693,8 @@
     background: transparent;
   }
   to {
+    z-index: -9999;
+
     height: 0;
 
     opacity: 0;

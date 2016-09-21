@@ -55,6 +55,7 @@ $tnc-wrapper-min-width    : torem(1200px);
 ///
 $tnc-breakpoints          : (
 'desktop-fhd'             : (max-width: 1920px),
+'desktop-mac'             : (max-width: 1440px),
 'desktop'                 : (max-width: 1366px),
 'macbook'                 : (max-width: 1280px),
 'ipad'                    : (max-width: 1024px),

@@ -375,13 +375,6 @@
   }
 }
 .anim__people__full--center {
-  @include respond-to('desktop') {
-    background-size: 83% !important;
-  }
-  @include respond-to('macbook') {
-    background-size: 91% !important;
-  }
-
   z-index: 1 !important;
   left: 0 !important;
 
@@ -389,8 +382,7 @@
 
   animation: people__full--center 1s ease-in forwards;
 
-  background-position: center center !important;
-  background-size: initial !important;
+  background-size: cover !important;
 }
 
 @keyframes people__full--right {
@@ -399,14 +391,6 @@
   }
 }
 .anim__people__full--right {
-  @include respond-to('desktop') {
-    background-size: 83% !important;
-  }
-  @include respond-to('macbook') {
-    background-position: 230% center !important;
-    background-size: 91% !important;
-  }
-
   z-index: 5 !important;
   right: 0 !important;
   left: initial !important;
@@ -415,8 +399,7 @@
 
   animation: people__full--right 1s ease-in forwards;
 
-  background-position: 155% center !important;
-  background-size: initial !important;
+  background-size: cover !important;
 }
 
 @keyframes people__full--left {
@@ -425,14 +408,6 @@
   }
 }
 .anim__people__full--left {
-  @include respond-to('desktop') {
-    background-size: 83% !important;
-  }
-  @include respond-to('macbook') {
-    background-position: -85% center !important;
-    background-size: 91% !important;
-  }
-
   z-index: 5 !important;
   right: initial !important;
   left: 0 !important;
@@ -441,6 +416,5 @@
 
   animation: people__full--left 1s ease-in forwards;
 
-  background-position: -34% center !important;
-  background-size: initial !important;
+  background-size: cover !important;
 }

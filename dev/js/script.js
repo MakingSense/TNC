@@ -8,26 +8,28 @@
 /*------------------------------------*\
   #Ready
 \*------------------------------------*/
-var _deviceModel;
+var _osName;
 
-// $(window).load(function() {
-//     _deviceModel = Detectizr.device.model;
-// });
+$(window).on('load', function(event) {
+    _osName = Detectizr.os.name;
+});
 
 $(document).ready(function() {
     $('#section__container').fullpage({
         anchors: ['gif', '', 'maps', '', '', '', '', '', ''],
-        scrollingSpeed: 1200,
         navigation: true,
         navigationPosition: 'left',
+        scrollingSpeed: 1300,
+        touchSensitivity: 30,
+        fitToSectionDelay: 500,
 
         onLeave: function(index, nextIndex, direction) {
             sectionCheck(nextIndex, direction);
         }
     });
     hideSlidesDots()
-    $.fn.fullpage.setAllowScrolling(false);
-    $.fn.fullpage.setKeyboardScrolling(false);
+    //$.fn.fullpage.setAllowScrolling(false);
+    //$.fn.fullpage.setKeyboardScrolling(false);
 
     initPlayer(); //Init main video player
     bingindGIF();
@@ -44,7 +46,7 @@ $(document).ready(function() {
         preloader();
     }, 3500);
 
-    
+
 });
 
 /*------------------------------------*\
@@ -101,17 +103,17 @@ function sectionCheck(section_index, direction) {
         case 2:
             var svg = $('#svg_four');
             if (!svg.hasClass('animated')) {
-                svg_four();
-                svg.addClass('animated');
+                // svg_four();
+                // svg.addClass('animated');
             } else {
-               changeSection(direction, section_index);
+               //changeSection(direction, section_index);
             }
             break;
         case 3:
             break;
         case 4:
             setTimeout(function() {
-                changeSection(direction, section_index);
+                //changeSection(direction, section_index);
             }, 500)
             break;
         case 5:
@@ -120,25 +122,25 @@ function sectionCheck(section_index, direction) {
         case 6:
             var svg = $('#svg_third');
             if (!svg.hasClass('animated')) {
-                svg_third();
-                svg.addClass('animated');
+                // svg_third();
+                // svg.addClass('animated');
             } else {
-                changeSection(direction, section_index);
+                //changeSection(direction, section_index);
             }
             break;
         case 7:
             var svg = $('#svg_second');
             if (!svg.hasClass('animated')) {
                 svg_second();
-                $('.bullet__information:nth-child(4)').css('animation-delay', 2).addClass('anim__fade-in');
+                // $('.bullet__information:nth-child(4)').css('animation-delay', 2).addClass('anim__fade-in');
                 svg.addClass('animated');
-                $.fn.fullpage.setAllowScrolling(false);
-                $.fn.fullpage.setKeyboardScrolling(false);
-                pointsInformation();
+                // $.fn.fullpage.setAllowScrolling(false);
+                // $.fn.fullpage.setKeyboardScrolling(false);
+                //pointsInformation();
 
             }
             else{
-                bulletInformation();
+                //bulletInformation();
             }
             break;
         case 8:
@@ -147,7 +149,7 @@ function sectionCheck(section_index, direction) {
                 svg_first();
                 svg.addClass('animated');
             } else {
-                changeSection(direction, section_index);
+                //changeSection(direction, section_index);
             }
             break;
         case 9:
@@ -161,18 +163,18 @@ function sectionCheck(section_index, direction) {
     }
 }
 
-function changeSection(direction, index) {
-    if (direction == 'down') {
-        setTimeout(function() {
-            $.fn.fullpage.moveTo((index + 1), 0);
-        }, 1500)
+// function changeSection(direction, index) {
+//     if (direction == 'down') {
+//         setTimeout(function() {
+//             $.fn.fullpage.moveTo((index + 1), 0);
+//         }, 1500)
 
-    } else {
-        setTimeout(function() {
-            $.fn.fullpage.moveTo((index - 1), 0);
-        }, 1500)
-    }
-}
+//     } else {
+//         setTimeout(function() {
+//             $.fn.fullpage.moveTo((index - 1), 0);
+//         }, 1500)
+//     }
+// }
 
 
 function pointsInformation(){
@@ -199,7 +201,11 @@ function pointsInformation(){
         scrollCount++;
         event.preventDefault();
 
-        if(event.deltaY == 1 && count <= 3 && scrollCount >= 8){
+        if(_osName != 'windows') {
+            maxCount = 30;
+        }
+
+        if(event.deltaY == 1 && count <= 3 && scrollCount >= maxCount){
             $(bullets[count-1]).removeClass('anim__fade-in');
             $(bullets[count]).addClass('anim__fade-in');
             scrollCount = 0;
@@ -267,7 +273,7 @@ function peopleModalBinding() {
             $(this).parent().toggleClass('active');
             var player = $(this).siblings('.player');
             if($(this).parent().hasClass('video__item') && $(this).parent().hasClass('active') ){
-                window.location.hash = '#video';                
+                window.location.hash = '#video';
                 player.YTPlayer();
                 player.on('YTPEnd', function(event) {
                     parent.location.hash = '#!';
@@ -385,7 +391,7 @@ svg_first = function() {
         onUpdateScope: this,
         onComplete: function() {
             setTimeout(function() {
-                $.fn.fullpage.moveSectionUp();
+                //$.fn.fullpage.moveSectionUp();
             }, 1000)
         }
     });
@@ -462,7 +468,7 @@ svg_third = function() {
         onUpdateScope: this,
         onComplete: function() {
             setTimeout(function() {
-                $.fn.fullpage.moveSectionUp();
+                //$.fn.fullpage.moveSectionUp();
             }, 1000)
         }
     });
@@ -503,7 +509,7 @@ svg_four = function() {
         onUpdateScope: this,
         onComplete: function() {
             setTimeout(function() {
-                $.fn.fullpage.moveSectionUp();
+                //$.fn.fullpage.moveSectionUp();
             }, 1000)
         }
     });
