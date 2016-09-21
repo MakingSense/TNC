@@ -40,7 +40,11 @@ $(document).ready(function() {
 
     $.fn.fullpage.silentMoveTo(9);
 
-    preloader();
+    setTimeout(function() {
+        preloader();
+    }, 3500);
+
+    
 });
 
 /*------------------------------------*\
@@ -62,10 +66,6 @@ function preloader() {
   #Video Functionalities
 \*------------------------------------*/
 var player = $("#player_1");
-var player_2 = $("#player_2");
-var player_3 = $("#player_3");
-var player_4 = $("#player_4");
-var player_5 = $("#player_5");
 
 function initPlayer() {
     player.YTPlayer();
@@ -90,52 +90,6 @@ function initPlayer() {
     });
 }
 
-function initPlayerSeekers() {
-    player_2.YTPlayer();
-    player_2.on('YTPEnd', function(event) {
-        parent.location.hash = '#!';
-    });
-    player_2.on('YTPPlay', function(event) {
-        event.preventDefault();
-        if(parent.location.hash != '#video') {
-            player_2.YTPStop();
-        }
-    });
-
-    player_3.YTPlayer();
-    player_3.on('YTPEnd', function(event) {
-        parent.location.hash = '#!';
-    });
-    player_3.on('YTPPlay', function(event) {
-        event.preventDefault();
-        if(parent.location.hash != '#video') {
-            player_3.YTPStop();
-        }
-    });
-
-    player_4.YTPlayer();
-    player_4.on('YTPEnd', function(event) {
-        parent.location.hash = '#!';
-    });
-    player_4.on('YTPPlay', function(event) {
-        event.preventDefault();
-        if(parent.location.hash != '#video') {
-            player_4.YTPStop();
-        }
-    });
-
-    player_5.YTPlayer();
-    player_5.on('YTPEnd', function(event) {
-        parent.location.hash = '#!';
-    });
-    player_5.on('YTPPlay', function(event) {
-        event.preventDefault();
-        if(parent.location.hash != '#video') {
-            player_5.YTPStop();
-        }
-    });
-}
-
 /*------------------------------------*\
   #Sections Manipulation
 \*------------------------------------*/
@@ -154,7 +108,6 @@ function sectionCheck(section_index, direction) {
             }
             break;
         case 3:
-
             break;
         case 4:
             setTimeout(function() {
@@ -162,7 +115,6 @@ function sectionCheck(section_index, direction) {
             }, 500)
             break;
         case 5:
-            initPlayerSeekers();
 
             break;
         case 6:
@@ -230,10 +182,6 @@ function pointsInformation(){
     var bullets = $('.bullet__information');
     var ts;
 
-    $('.section-7').bind('touchstart', function(e) {
-        ts = e.originalEvent.touches[0].clientY;
-    });
-
     $('.section-7').bind('touchend', function(e) {
         if(count <= 3){
             $(bullets[count-1]).removeClass('anim__fade-in');
@@ -247,17 +195,9 @@ function pointsInformation(){
         }
     });
 
-    $('.section-7').bind('touchmove', function(e) {
-        var te = e.originalEvent.changedTouches[0].clientY;
-        if (ts > te) {
-            console.log('down');
-        } else {
-            console.log('up');
-        }
-    });
-
-    $('.section-7').on('mousewheel', function(event) {
+    $('.section-7').on('mousewheel DOMMouseScroll', function(event) {
         scrollCount++;
+        event.preventDefault();
 
         if(event.deltaY == 1 && count <= 3 && scrollCount >= 8){
             $(bullets[count-1]).removeClass('anim__fade-in');
@@ -325,12 +265,22 @@ function peopleModalBinding() {
         $(this).on('click', function(event) {
             event.preventDefault();
             $(this).parent().toggleClass('active');
+            var player = $(this).siblings('.player');
             if($(this).parent().hasClass('video__item') && $(this).parent().hasClass('active') ){
-                window.location.hash = '#video';
-                $(this).siblings('.player').YTPPlay();
+                window.location.hash = '#video';                
+                player.YTPlayer();
+                player.on('YTPEnd', function(event) {
+                    parent.location.hash = '#!';
+                });
+                player.on('YTPPlay', function(event) {
+                    event.preventDefault();
+                    if(parent.location.hash != '#video') {
+                        player.YTPStop();
+                    }
+                });
             }
             else {
-                $(this).siblings('.player').YTPStop();
+                player.YTPStop();
             }
         });
     });
@@ -511,9 +461,9 @@ svg_third = function() {
         ease: Circ.easeIn,
         onUpdateScope: this,
         onComplete: function() {
-
-
-            $.fn.fullpage.moveSectionUp();
+            setTimeout(function() {
+                $.fn.fullpage.moveSectionUp();
+            }, 1000)
         }
     });
 };
@@ -552,9 +502,9 @@ svg_four = function() {
         ease: Circ.easeIn,
         onUpdateScope: this,
         onComplete: function() {
-
-
-            $.fn.fullpage.moveSectionUp();
+            setTimeout(function() {
+                $.fn.fullpage.moveSectionUp();
+            }, 1000)
         }
     });
 };
