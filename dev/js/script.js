@@ -8,39 +8,36 @@
 /*------------------------------------*\
   #Ready
 \*------------------------------------*/
-var _osName;
-
-$(window).on('load', function(event) {
-    _osName = Detectizr.os.name;
-});
-
 $(document).ready(function() {
     $('#section__container').fullpage({
         anchors: ['gif', '', 'maps', '', '', '', '', '', ''],
         navigation: true,
         navigationPosition: 'left',
-        scrollingSpeed: 1300,
-        touchSensitivity: 30,
+        easingcss3: 'ease-in-out',
+        scrollingSpeed: 2300,
         fitToSectionDelay: 500,
+        touchSensitivity: 25,
 
+        afterLoad: function(anchorLink, index) {
+            sectionAction(index);
+        },
         onLeave: function(index, nextIndex, direction) {
-            sectionCheck(nextIndex, direction);
+            sectionSVG(index);
         }
     });
-    hideSlidesDots()
-    //$.fn.fullpage.setAllowScrolling(false);
-    //$.fn.fullpage.setKeyboardScrolling(false);
-
-    initPlayer(); //Init main video player
+    hideSlidesDots();   
     bingindGIF();
     peopleBinding();
     peopleModalBinding();
     closeModal();
     shares();
     scrollLocation();
+    scrollBinding();
 
 
-    $.fn.fullpage.silentMoveTo(9);
+    $.fn.fullpage.moveTo(9, 0);
+    $.fn.fullpage.setAllowScrolling(false);
+    $.fn.fullpage.setKeyboardScrolling(false);
 
     setTimeout(function() {
         preloader();
@@ -60,16 +57,13 @@ function preloader() {
     var preloader = $('.preloader__container');
     preloader.fadeOut('400', function() {
     });
-    $.fn.fullpage.setAllowScrolling(true);
-    $.fn.fullpage.setKeyboardScrolling(true);
 }
 
 /*------------------------------------*\
   #Video Functionalities
 \*------------------------------------*/
-var player = $("#player_1");
-
 function initPlayer() {
+    var player = $("#player_1");
     player.YTPlayer();
     player.on('YTPReady', function(event) {
 
@@ -85,9 +79,13 @@ function initPlayer() {
     });
     $('#player_1_close').on('click', function() {
         player.YTPStop();
+        player.YTPMute();
+        player.YTPSetVolume(0);
     });
 
     $('#player_1_open').on('click', function() {
+        player.YTPUnmute();
+        player.YTPSetVolume(100);
         player.YTPPlay();
     });
 }
@@ -95,67 +93,26 @@ function initPlayer() {
 /*------------------------------------*\
   #Sections Manipulation
 \*------------------------------------*/
-function sectionCheck(section_index, direction) {
+function sectionSVG(section_index) {
     switch (section_index) {
-        case 1:
-
-            break;
-        case 2:
+        case 3:  
             var svg = $('#svg_four');
             if (!svg.hasClass('animated')) {
-                // svg_four();
-                // svg.addClass('animated');
-            } else {
-               //changeSection(direction, section_index);
-            }
-            break;
-        case 3:
-            break;
-        case 4:
-            setTimeout(function() {
-                //changeSection(direction, section_index);
-            }, 500)
-            break;
-        case 5:
-
-            break;
-        case 6:
+                svg_four();
+                svg.addClass('animated');
+            } 
+        case 7:
             var svg = $('#svg_third');
             if (!svg.hasClass('animated')) {
-                // svg_third();
-                // svg.addClass('animated');
-            } else {
-                //changeSection(direction, section_index);
-            }
-            break;
-        case 7:
-            var svg = $('#svg_second');
-            if (!svg.hasClass('animated')) {
-                svg_second();
-                // $('.bullet__information:nth-child(4)').css('animation-delay', 2).addClass('anim__fade-in');
+                svg_third();
                 svg.addClass('animated');
-                // $.fn.fullpage.setAllowScrolling(false);
-                // $.fn.fullpage.setKeyboardScrolling(false);
-                //pointsInformation();
-
-            }
-            else{
-                //bulletInformation();
-            }
+            }         
             break;
-        case 8:
+        case 9:
             var svg = $('#svg_first');
             if (!svg.hasClass('animated')) {
                 svg_first();
                 svg.addClass('animated');
-            } else {
-                //changeSection(direction, section_index);
-            }
-            break;
-        case 9:
-            var svg = $('#svg_first');
-            if (direction == "down" && $('#svg_first').hasClass('animated')) {
-                $('#player_1').YTPStop();
             }
             break;
         default:
@@ -163,63 +120,59 @@ function sectionCheck(section_index, direction) {
     }
 }
 
-// function changeSection(direction, index) {
-//     if (direction == 'down') {
-//         setTimeout(function() {
-//             $.fn.fullpage.moveTo((index + 1), 0);
-//         }, 1500)
-
-//     } else {
-//         setTimeout(function() {
-//             $.fn.fullpage.moveTo((index - 1), 0);
-//         }, 1500)
-//     }
-// }
-
-
-function pointsInformation(){
-    var count = 0;
-    var scrollCount = 0;
-    var maxCount = 8;
-    var bullets = $('.bullet__information');
-    var ts;
-
-    $('.section-7').bind('touchend', function(e) {
-        if(count <= 3){
-            $(bullets[count-1]).removeClass('anim__fade-in');
-            $(bullets[count]).addClass('anim__fade-in');
-            scrollCount = 0;
-            count++;
-        }
-        if(count == 4) {
-            $.fn.fullpage.setAllowScrolling(true);
-            $.fn.fullpage.setKeyboardScrolling(true);
-        }
-    });
-
-    $('.section-7').on('mousewheel DOMMouseScroll', function(event) {
-        scrollCount++;
-        event.preventDefault();
-
-        if(_osName != 'windows') {
-            maxCount = 30;
-        }
-
-        if(event.deltaY == 1 && count <= 3 && scrollCount >= maxCount){
-            $(bullets[count-1]).removeClass('anim__fade-in');
-            $(bullets[count]).addClass('anim__fade-in');
-            scrollCount = 0;
-            count++;
-        }
-
-        if(count == 4) {
-            $.fn.fullpage.setAllowScrolling(true);
-            $.fn.fullpage.setKeyboardScrolling(true);
-        }
-    });
+/*------------------------------------*\
+  #Sections Manipulation
+\*------------------------------------*/
+function sectionAction(section_index) {
+    switch (section_index) {
+        case 7:
+            var svg = $('#svg_second');
+            if (!svg.hasClass('animated')) {
+                svg_second();
+                bulletInformation();
+                svg.addClass('animated');
+            }
+            break;
+        case 9:
+            initPlayer(); //Init main video player
+            break;
+        default:
+            break;
+    }
 }
 
+function bulletInformation() {
+    var bullets = $('.bullet__information');
 
+    $.each(bullets, function(index, val) {
+        var auxClass = 'anim__info-' + (index + 1);
+
+        $(this).addClass(auxClass);
+    });
+}  
+
+/*------------------------------------*\
+  #Scroll Manipulation
+\*------------------------------------*/
+function scrollBinding(){
+    var sections = $('.main__section, .section-7, .section-5, .section-3, .share__section');
+
+    $.each(sections, function(index, val) {
+        $(this).on('mousewheel DOMMouseScroll', function(event) {
+            event.preventDefault();
+            var active = parseInt($(this).attr('data-index'));
+            var amount = 0;
+            if(event.deltaY == 1 && amount < 1 && active != 1 && $(this).hasClass('active')){
+                $.fn.fullpage.moveTo(active - 2, 0);
+                amount++;
+            }
+            if(event.deltaY == -1 && amount < 1 && active != 9 && $(this).hasClass('active')){
+                $.fn.fullpage.moveTo(active + 2, 0);
+                amount++;
+            }
+        })
+    });         
+};
 
 /*------------------------------------*\
   #GIF Section Binding
@@ -316,22 +269,15 @@ function closeModal() {
 }
 
 function scrollLocation() {
-    var scroll = $('.scrollLocation');
+    var scroll = $('.scrollLocation');    
     $.each(scroll, function(index, val) {
+        var active = parseInt($(this).parent().parent().parent().attr('data-index'));
         $(this).on('click', function(event) {
             event.preventDefault();
-            $.fn.fullpage.moveSectionUp();
+            $.fn.fullpage.moveTo(active - 2);
         });
     });
 }
-
-function bulletInformation() {
-    var bullets = $('.bullet__information');
-    $.each(bullets, function(index, val) {
-        $(this).addClass('anim__fade-in');
-    });
-}
-
 /*------------------------------------*\
     Shares Functions
 \*------------------------------------*/
@@ -384,16 +330,11 @@ svg_first = function() {
 
         tnc_line_1.setViewBox(-220, -409.45, width, 950, false);
     };
-    tween = TweenMax.to(triangle, 2, {
+    tween = TweenMax.to(triangle, 1.8, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this,
-        onComplete: function() {
-            setTimeout(function() {
-                //$.fn.fullpage.moveSectionUp();
-            }, 1000)
-        }
+        onUpdateScope: this
     });
 };
 
@@ -425,7 +366,7 @@ svg_second = function() {
 
         tnc_line_2.setViewBox(-170, 0, width, 950, false);
     };
-    tween = TweenMax.to(triangle, 2, {
+    tween = TweenMax.to(triangle, 4, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
@@ -461,16 +402,11 @@ svg_third = function() {
 
         tnc_line_3.setViewBox(-70, 0, width, 950, false);
     };
-    tween = TweenMax.to(triangle, 2, {
+    tween = TweenMax.to(triangle, 1.6, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this,
-        onComplete: function() {
-            setTimeout(function() {
-                //$.fn.fullpage.moveSectionUp();
-            }, 1000)
-        }
+        onUpdateScope: this        
     });
 };
 
@@ -502,15 +438,10 @@ svg_four = function() {
 
         tnc_line_4.setViewBox(0, 0, width, 950, false);
     };
-    tween = TweenMax.to(triangle, 2, {
+    tween = TweenMax.to(triangle, 1.6, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this,
-        onComplete: function() {
-            setTimeout(function() {
-                //$.fn.fullpage.moveSectionUp();
-            }, 1000)
-        }
+        onUpdateScope: this
     });
 };

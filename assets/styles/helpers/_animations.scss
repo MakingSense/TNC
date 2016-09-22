@@ -15,12 +15,45 @@
   to {
     visibility: visible;
 
-    opacity: 1;
     z-index: 5;
+
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fade-in {
+  from {
+    visibility: hidden;
+
+    opacity: 0;
+  }
+
+  to {
+    visibility: visible;
+
+    z-index: 5;
+
+    opacity: 1;
   }
 }
 .anim__fade-in {
   animation: fade-in 1s ease forwards;
+}
+
+.anim__info-1 {
+  -webkit-animation: fade-in 3300ms 1000ms ease forwards;
+          animation: fade-in 3300ms 1000ms ease forwards;
+}
+.anim__info-2 {
+  -webkit-animation: fade-in 2300ms 1000ms ease forwards;
+          animation: fade-in 2300ms 1000ms ease forwards;
+}
+.anim__info-3 {
+  -webkit-animation: fade-in 1300ms 1000ms ease forwards;
+          animation: fade-in 1300ms 1000ms ease forwards;
+}
+.anim__info-4 {
+  -webkit-animation: fade-in 150ms 500ms ease forwards;
+          animation: fade-in 150ms 500ms ease forwards;
 }
 ///
 @keyframes fade-out {
