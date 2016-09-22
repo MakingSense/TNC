@@ -28,25 +28,18 @@ $(window).on('load', function() {
     // invalidate the size of your map
 
     //Binding input
-    $('#search-input-btn').on('click', function(event) {
+    $('#search-input-btn, #search-inner-button').on('click touchstart', function(event) {
         event.preventDefault();
         var wsList = $('.reservoirs__list');
         wsList.empty();
-        searchInMap();
-        $('#search-input').attr('value', '').val('');
+        searchInMap($(this).siblings('.search').val());
+        $(this).siblings('.search').attr('value', '').val('');
 
     });
 
-    $('.city__button').on('click', function(event) {
-        event.preventDefault();
-        hideCity();
-    });
-
-    $('#iconMap').on('click', function(event) {
-        event.preventDefault();
+    $('#iconMap').on('click touchstart', function(event) {
         $('.map__container').addClass('anim__fade-in');
         $('.text__container').addClass('text__container--out');
-        $(this).removeAttr('href');
     });
 
     map.setView([38.5842213, -97.4564217], 4, {
@@ -186,20 +179,11 @@ function initMap() {
             }
 
             // Marker interaction
-            locale.on('click', function(e) {
+            locale.on('click touchstart', function(e) {
                 // 1. center the map on the selected marker.
                 map.panTo(locale.getLatLng());
                 destination = locale.getLatLng();
                 traceRoute();
-
-                //2. Set active the markers associated listing.
-                //setActive(listing);
-
-                $('#destination').val(prop.name);
-                $('#destination').attr({
-                    geolat: destination.lat,
-                    geolon: destination.lng
-                });
             });
 
             popup += '</div>';
@@ -256,7 +240,7 @@ function setActive(el) {
     el.className += ' active';
 }
 
-$('#routeButton').on('click', function(event) {
+$('#routeButton').on('click touchstart', function(event) {
     event.preventDefault();
     bindButtonRoute();
 });
@@ -295,8 +279,7 @@ function drawLineKM(km) {
 
 
 //Search and position in map
-function searchInMap() {
-    var text = document.getElementById('search-input').value;
+function searchInMap(text) {
     if (text.length >= 5) {
         geocoder.query(text, showMap);
     }
@@ -402,11 +385,6 @@ function WaterSourcesPrinter(locale) {
         // its associated locale and open its popup.
         map.panTo(locale.getLatLng());
         destination = locale.getLatLng();
-        $('#destination').val(prop.name);
-        $('#destination').attr({
-            geolat: destination.lat,
-            geolon: destination.lng
-        });
         traceRoute();
         locale.openPopup();
         return false;

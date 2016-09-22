@@ -93,7 +93,7 @@
         background: rgba(#fff, .4);
         background-image: url('../img/people/iqra.jpg');
         background-repeat: no-repeat;
-        background-position: -25% center;
+        background-position: left center;
       }
     }
     &__modal {
@@ -227,8 +227,8 @@
             }
           }
           &:nth-child(1) {
-            top: 65%;
-            left: 22%;
+            top: 60%;
+            left: 40%;
 
             animation-delay: .5s;
           }

@@ -18,7 +18,8 @@
     <meta property="og:site_name" content="" />
     <!-- Stylesheets and polyfills -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
-    <link rel="stylesheet" type="text/css" href="./css/jquery.mb.YTPlayer.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./css/jquery.mb.YTPlayer.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="./css/mediaelementplayer.css">
     <!-- Mapbox Styles -->
     <link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' rel='stylesheet' type='text/css' />
@@ -85,8 +86,8 @@
             </ul>
             <h4><span>2. </span>Share your gif with the world</h4>
             <ul class="socials__holder">
-                <li><a id="twitter" data-name="Ahh" meta-url="http://tnc.example" meta-content="The water we drink and use every day — where does it come from? Trace a blue line to the source of you!" meta-via=""><i class="ms-icon icon-twitter"></i></a></li>
-                <li><a id="facebook" data-name="Ahh" meta-url="http://tnc.example" meta-title="I found the source of my " meta-content="The water we drink, use to grow food, or even to cool down on a hot summer day — where does it come from? Find out and trace a blue line to the source of your water." meta-image="http://www.nature.org/cs/groups/photoarchivepublic/@photopublic/documents/digitalmedia/fox-kit-new-york-361x248.jpg"><i class="ms-icon icon-facebook"></i></a></li>
+                <li><a id="twitter" data-name="Ahh" meta-url="http://nature.org/sourceofyou/" meta-content="The water we drink and use every day — where does it come from? Trace a blue line to the source of you!" meta-via=""><i class="ms-icon icon-twitter"></i></a></li>
+                <li><a id="facebook" data-name="Ahh" meta-url="http://nature.org/sourceofyou/" meta-title="I found the source of my " meta-content="The water we drink, use to grow food, or even to cool down on a hot summer day — where does it come from? Find out and trace a blue line to the source of your water." meta-image="http://www.nature.org/cs/groups/photoarchivepublic/@photopublic/documents/digitalmedia/fox-kit-new-york-361x248.jpg"><i class="ms-icon icon-facebook"></i></a></li>
             </ul>
             <div class="share__illustration">
               <h4>Share My</h4>
@@ -125,7 +126,6 @@
               <button id="search-input-btn" class="button">Search</button>
             </form>
             <div class='city'>
-              <a class="city__button" href="#"></a>
               <div class="city__founded">
                 <h2 id="cityTitle">Oakland, California</h2>
                 <span class="route__line">
@@ -149,11 +149,9 @@
                   <div class="city__information-goto">
                     <h3>Go to your Source</h3>
                     <form action="">
-                      <label for="destination">To:</label>
-                      <input type="text" id="destination" geolat="" geolon="" name="destination">
-                      <label for="origin">From:</label>
-                      <input type="text" id="origin" geolat="" geolon="" name="origin">
-                      <button id="routeButton" class="button">Route</button>
+                      <label for="destination">Search:</label>
+                      <input type="search" class="search" id="search-inner" name="Search City">
+                      <button id="search-inner-button" class="button">Search</button>
                     </form>
                   </div>
                 </div>
@@ -189,21 +187,25 @@
                 <div class="people__modal__content">
                   <div class="item__info">
                     <span class="ms-icon icon-location-empty"></span>
-                    <p>I think a lot of people forget that although water is, globally, a renewable resource, it is still very locally exhaustible. I think to realize the actual impact we have on our water systems – and just how invaluable water is – we have to know where our water comes from.</p>
+                    <p>I think a lot of people forget that although water is a renewable resource globally, it is still locally exhaustible. To realize the actual impact we have on our water systems – and just how invaluable our water is – we have to know where our water comes from.</p>
                   </div>
                   <div class="item__info video__item">
                     <span class="ms-icon icon-location-empty"></span>
-                    <div id="player_5" class="player" data-property="{videoURL:'https://youtu.be/6kyJ1n6cRaY',quality: 'default',containment:'self',vol:100,mute:false,autoPlay:true,loop:false,showYTLogo:false}"></div>
+                    <video width="100%" height="100%" id="video1" preload="none" class="video1">
+                      <source type="video/youtube" src="http://www.youtube.com/watch?v=6kyJ1n6cRaY" />
+                    </video>
                   </div>
                   <div class="item__info video__item">
                     <span class="ms-icon icon-location-empty"></span>
-                    <div id="player_4" class="player" data-property="{videoURL:'https://youtu.be/qUp_Of5BKdw',quality: 'default',containment:'self',vol:100,mute:false,autoPlay:true,loop:false,showYTLogo:false}"></div>
+                    <video width="100%" height="100%" id="video2" preload="none">
+                      <source type="video/youtube" src="http://www.youtube.com/watch?v=qUp_Of5BKdw" />
+                    </video>
                   </div>
                 </div>
               </div>
             </div>
             <div class="people">
-              <div class="people__nav"><a href="" data-anim="center" class="button button__hollow">SARA(ID)</a></div>
+              <div class="people__nav"><a href="" data-anim="center" class="button button__hollow">SARA (ID)</a></div>
               <div class="people__modal">
                 <div class="people__modal__close">
                   <h2>Sara (ID)</h2>
@@ -212,7 +214,7 @@
                 <div class="people__modal__content">
                   <div class="item__info">
                     <span class="ms-icon icon-location-empty"></span>
-                    <p>The Big Wood River is a part of life here in the Wood River Valley. It provides not only water for drinking,and for watering our lawns, and for washing our dogs, but it also provides water to the ski resort to make snow, which is the biggest part of the livelihood here in the Wood River Valley.</p>
+                    <p>The Big Wood River is a part of life here in Idaho’s Wood River Valley. It not only provides water for drinking, watering our lawns and washing our dogs, but it also provides water to the ski resort to make snow – which is the biggest part of local livelihoods and the economy here.</p>
                   </div>
                   <div class="item__info">
                     <span class="ms-icon icon-location-empty"></span>
@@ -237,7 +239,7 @@
                 <div class="people__modal__content">
                   <div class="item__info">
                     <span class="ms-icon icon-location-empty"></span>
-                    <p>New York is one city that invests heavily in upstream conservation, and I realize how lucky I am to have a reliable source of clean water every day.This journey to the Catskills is not only a journey to my water source, but a journey to the source of life for the City of New York.</p>
+                    <p>New York is one city that invests heavily in upstream conservation, and I realize how lucky I am to have a reliable source of clean water every day. This journey to the Catskills is not only a journey to my water source, but a journey to the source of life for the City of New York.</p>
                   </div>
                   <div class="item__info">
                     <span class="ms-icon icon-location-empty"></span>
@@ -247,7 +249,7 @@
                   </div>
                   <div class="item__info video__item">
                     <span class="ms-icon icon-location-empty"></span>
-                    <div id="player_3" class="player" data-property="{videoURL:'https://youtu.be/hO68XEM8s0s',quality: 'default',containment:'self',vol:100,mute:false,autoPlay:true,loop:false,showYTLogo:false}"></div>
+                    <div id="player_2" class="player" data-property="{videoURL:'https://youtu.be/k6MUPhkfJIQ',quality: 'default',containment:'self',vol:100,mute:false,autoPlay:true,loop:false,showYTLogo:false}"></div>
                   </div>
                 </div>
               </div>
@@ -275,11 +277,11 @@
           <div class="bullet__information__container">
             <div class="bullet__information">
               <h2>Beyond the Faucet</h2>
-              <p>You turn on the tap, and water flows. Is it magic? Of course not. The water that sustains our lives has a source, yet few of us know whether it comes from a faraway lake, a nearby reservoir, or from right under our feet.</p>
+              <p>You turn on the tap, and water flows. Is it magic? Of course not. The water that sustains our lives has a source, yet few of us know whether it comes from a faraway lake, a nearby reservoir or from right under our feet.</p>
             </div>
             <div class="bullet__information">
               <h2>Protecting Our Source</h2>
-              <p>Making sure our water sources are safe and secure isn’t an easy job. Dams, irrigation, and urbanization impact our water, but they also provide us with energy, food, and places to live. That’s why The Nature Conservancy works with policy makers, industry, environmental agencies, and others to find balanced solutions to the issues facing our water security.</p>
+              <p>Making sure our water sources are safe and secure isn’t an easy job. Dams, irrigation and urbanization impact our water, but they also provide us with energy, food and places to live. That’s why The Nature Conservancy works with policy makers, industry, environmental agencies and others to find balanced solutions to the issues facing our water security.</p>
             </div>
             <div class="bullet__information">
               <h2>A Critical Journey</h2>
@@ -340,7 +342,8 @@
     <!-- build:js js/plugins/app.js -->
     <script type="text/javascript" src="js/plugins/jquery.mousewheel.min.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.fullPage.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.mb.YTPlayer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/mediaelement-and-player.min.js"></script>
+    <!-- <script type="text/javascript" src="js/plugins/jquery.mb.YTPlayer.min.js"></script> -->
     <script type="text/javascript" src="js/plugins/raphael.min.js"></script>
     <script type="text/javascript" src="js/plugins/TweenMax.min.js"></script>
     <script type="text/javascript" src='js/plugins/mapbox.js'></script>

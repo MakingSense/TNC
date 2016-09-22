@@ -197,10 +197,12 @@
     text-transform: uppercase;
 
     opacity: 1;
-    border: none;
     border: 1px solid rgba($tnc-color--primary, .2);
+    border-radius: 0;
     outline: none;
     background: rgba(255,255,255, .4);
+
+    -webkit-appearance: none;
     &:focus {
       border: 1px solid rgba($tnc-color--primary, 1);
       background: rgba(255,255,255, .5);
@@ -224,30 +226,9 @@
     opacity: 1;
   }
   to {
-    @include respond-to('desktop-mac') {
-    }
+    z-index: -1;
 
-    z-index: 15;
-    top: 10%;
-
-    opacity: 1;
-  }
-}
-
-@include respond-to('desktop-mac') {
-  @keyframes search__fade-out {
-    from {
-      z-index: 15;
-      top: 100%;
-
-      opacity: 1;
-    }
-    to {
-      z-index: 15;
-      top: 12%;
-
-      opacity: 1;
-    }
+    opacity: 0;
   }
 }
 
@@ -594,6 +575,7 @@
       input {
         display: block;
 
+        box-sizing: border-box;
         width: 100%;
         margin-bottom: torem(5px);
       }

@@ -25,7 +25,8 @@ $(document).ready(function() {
             sectionSVG(index);
         }
     });
-    hideSlidesDots();   
+    //initPlayer(); //Init main video player
+    hideSlidesDots();
     bingindGIF();
     peopleBinding();
     peopleModalBinding();
@@ -55,15 +56,16 @@ function hideSlidesDots() {
 
 function preloader() {
     var preloader = $('.preloader__container');
-    preloader.fadeOut('400', function() {
+        preloader.fadeOut('400', function() {
     });
 }
 
 /*------------------------------------*\
   #Video Functionalities
 \*------------------------------------*/
+var player = $("#player_1");
+
 function initPlayer() {
-    var player = $("#player_1");
     player.YTPlayer();
     player.on('YTPReady', function(event) {
 
@@ -77,36 +79,44 @@ function initPlayer() {
             player.YTPStop();
         }
     });
-    $('#player_1_close').on('click', function() {
+    $('#player_1_close').on('click touchstart', function() {
         player.YTPStop();
         player.YTPMute();
         player.YTPSetVolume(0);
     });
 
-    $('#player_1_open').on('click', function() {
+    $('#player_1_open').on('click touchstart', function() {
         player.YTPUnmute();
         player.YTPSetVolume(100);
         player.YTPPlay();
     });
 }
 
+function closeMap() {
+    event.preventDefault();
+    $('.map__container').removeClass('anim__fade-in');
+    $('.text__container').removeClass('text__container--out');
+    $(this).removeAttr('href');
+};
+
 /*------------------------------------*\
   #Sections Manipulation
 \*------------------------------------*/
 function sectionSVG(section_index) {
     switch (section_index) {
-        case 3:  
+        case 3:
             var svg = $('#svg_four');
+            setTimeout(closeMap(), 1000);
             if (!svg.hasClass('animated')) {
                 svg_four();
                 svg.addClass('animated');
-            } 
+            }
         case 7:
             var svg = $('#svg_third');
             if (!svg.hasClass('animated')) {
                 svg_third();
                 svg.addClass('animated');
-            }         
+            }
             break;
         case 9:
             var svg = $('#svg_first');
@@ -134,7 +144,7 @@ function sectionAction(section_index) {
             }
             break;
         case 9:
-            initPlayer(); //Init main video player
+
             break;
         default:
             break;
@@ -149,15 +159,35 @@ function bulletInformation() {
 
         $(this).addClass(auxClass);
     });
-}  
+}
 
 /*------------------------------------*\
   #Scroll Manipulation
 \*------------------------------------*/
+var ts;
+
 function scrollBinding(){
     var sections = $('.main__section, .section-7, .section-5, .section-3, .share__section');
 
     $.each(sections, function(index, val) {
+        $(this).on('touchstart', function(event) {
+            event.preventDefault();
+            ts = event.originalEvent.touches[0].clientY;
+        });
+        $(this).on('touchmove', function(event) {
+            event.preventDefault();
+            var active = parseInt($(this).attr('data-index'));
+            var amount = 0;
+            var te = event.originalEvent.changedTouches[0].clientY;
+            if (ts < te && amount < 1 && active != 1 && $(this).hasClass('active')) {
+                $.fn.fullpage.moveTo(active - 2, 0);
+                amount++;
+            }
+            if(ts > te && amount < 1 && active != 9 && $(this).hasClass('active')) {
+                $.fn.fullpage.moveTo(active + 2, 0);
+                amount++;
+            }
+        });
         $(this).on('mousewheel DOMMouseScroll', function(event) {
             event.preventDefault();
             var active = parseInt($(this).attr('data-index'));
@@ -171,7 +201,7 @@ function scrollBinding(){
                 amount++;
             }
         })
-    });         
+    });
 };
 
 /*------------------------------------*\
@@ -183,7 +213,7 @@ function bingindGIF() {
     var twitter = $('#twitter');
     var facebook = $('#facebook');
     $.each(itemList, function(index, val) {
-        $(this).on('click', function(event) {
+        $(this).on('click touchstart', function(event) {
             event.preventDefault();
             var src = $(this).attr('src');
             gifMain.attr('src', (src.substr(0, src.length - 3) + 'gif'));
@@ -198,7 +228,7 @@ function peopleBinding() {
     var people = $('.people__nav a');
 
     $.each(people, function(index, val) {
-        $(this).on('click', function(event) {
+        $(this).on('click touchstart', function(event) {
             event.preventDefault();
             var typeAnim = $(this).attr('data-anim');
             switch (typeAnim) {
@@ -218,28 +248,54 @@ function peopleBinding() {
     });
 }
 
+$('#video1').mediaelementplayer();
+$('#video2').mediaelementplayer();
+// var player1 = $('#video1')[0].player;
+// var player2 = $('#video2')[0].player;
+
 function peopleModalBinding() {
     var drops = $('.people__container .people__modal__content .item__info .ms-icon');
     $.each(drops, function(index, val) {
-        $(this).on('click', function(event) {
+        $(this).on('click touchstart', function(event) {
             event.preventDefault();
             $(this).parent().toggleClass('active');
-            var player = $(this).siblings('.player');
+
+            var aux = $(this).parent().siblings();
+
+            $.each(aux, function(index, val) {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                }
+            });
+
+
+            var player = $(this).siblings()[0].player;
+
+
             if($(this).parent().hasClass('video__item') && $(this).parent().hasClass('active') ){
-                window.location.hash = '#video';
-                player.YTPlayer();
-                player.on('YTPEnd', function(event) {
-                    parent.location.hash = '#!';
-                });
-                player.on('YTPPlay', function(event) {
-                    event.preventDefault();
-                    if(parent.location.hash != '#video') {
-                        player.YTPStop();
-                    }
-                });
+                player.play();
+
+                // window.location.hash = '#video';
+                // player.YTPlayer();
+                // player.on('YTPReady', function(event) {
+                //     player.YTPUnmute();
+                //     player.YTPSetVolume(100);
+                //     player.YTPPlay();
+                // });
+                // player.on('YTPEnd', function(event) {
+                //     setTimeout(function (argument) {
+                //         parent.location.hash = '#!';
+                //     }, 1200);
+                // });
+                // player.on('YTPPlay', function(event) {
+                //     event.preventDefault();
+                //     if(parent.location.hash != '#video') {
+                //         player.YTPStop();
+                //     }
+                // });
             }
             else {
-                player.YTPStop();
+                player.pause();
             }
         });
     });
@@ -248,7 +304,7 @@ function peopleModalBinding() {
 function closeModal() {
     var modalClose = $('.modal__close');
     $.each(modalClose, function(index, val) {
-        $(this).on('click', function(event) {
+        $(this).on('click touchstart', function(event) {
             event.preventDefault();
             var typeAnim = $(this).attr('data-anim');
             switch (typeAnim) {
@@ -269,10 +325,10 @@ function closeModal() {
 }
 
 function scrollLocation() {
-    var scroll = $('.scrollLocation');    
+    var scroll = $('.scrollLocation');
     $.each(scroll, function(index, val) {
         var active = parseInt($(this).parent().parent().parent().attr('data-index'));
-        $(this).on('click', function(event) {
+        $(this).on('click touchstart', function(event) {
             event.preventDefault();
             $.fn.fullpage.moveTo(active - 2);
         });
@@ -406,7 +462,7 @@ svg_third = function() {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
-        onUpdateScope: this        
+        onUpdateScope: this
     });
 };
 
