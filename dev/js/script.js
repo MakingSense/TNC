@@ -10,7 +10,7 @@
 \*------------------------------------*/
 $(document).ready(function() {
     $('#section__container').fullpage({
-        anchors: ['gif', '', 'maps', '', '', '', '', '', ''],
+        anchors: ['gif', '', 'map', '', '', '', '', '', ''],
         navigation: true,
         navigationPosition: 'left',
         easingcss3: 'ease-in-out',
@@ -25,6 +25,13 @@ $(document).ready(function() {
             sectionSVG(index);
         }
     });
+    $('.reservoirs__list').mCustomScrollbar({
+        advanced:{
+            updateOnContentResize: false,
+            updateOnImageLoad: false
+        },
+        theme:"minimal"
+    });
     initPlayer(); //Init main video player
     hideSlidesDots();
     bingindGIF();
@@ -34,18 +41,42 @@ $(document).ready(function() {
     shares();
     scrollLocation();
     scrollBinding();
+    checkHash();
 
+});
 
-    $.fn.fullpage.moveTo(9, 0);
-    $.fn.fullpage.setAllowScrolling(false);
-    $.fn.fullpage.setKeyboardScrolling(false);
+/*------------------------------------*\
+  #Hash manipulation
+\*------------------------------------*/
+function checkHash() {
+    var hash = parent.location.hash;
+    switch (hash) {
+        case '#map':
+            $.fn.fullpage.moveTo(3, 0);
+            $.fn.fullpage.setAllowScrolling(false);
+            $.fn.fullpage.setKeyboardScrolling(false);
+            removePreloader();
+            break;
+        case '#gif':
+            $.fn.fullpage.moveTo(1, 0);
+            $.fn.fullpage.setAllowScrolling(false);
+            $.fn.fullpage.setKeyboardScrolling(false);
+            removePreloader();
+            break;
+        default:
+            $.fn.fullpage.moveTo(9, 0);
+            $.fn.fullpage.setAllowScrolling(false);
+            $.fn.fullpage.setKeyboardScrolling(false);
+            removePreloader();
+            break;
+    }
+}
 
+function removePreloader() {
     setTimeout(function() {
         preloader();
     }, 3500);
-
-
-});
+}
 
 /*------------------------------------*\
   #Control Slides Functionalities
@@ -73,12 +104,6 @@ function initPlayer() {
     player.on('YTPEnd', function(event) {
         parent.location.hash = '#!';
     });
-    player.on('YTPPlay', function(event) {
-        // event.preventDefault();
-        // if(parent.location.hash != '#c-video') {
-        //     player.YTPStop();
-        // }
-    });
     $('#player_1_close').on('click touchstart', function() {
         player.YTPStop();
     });
@@ -89,10 +114,10 @@ function initPlayer() {
 }
 
 function closeMap() {
-    // event.preventDefault();
-    // $('.map__container').removeClass('anim__fade-in');
-    // $('.text__container').removeClass('text__container--out');
-    // $(this).removeAttr('href');
+    event.preventDefault();
+    $('.map__container').removeClass('anim__fade-in');
+    $('.text__container').removeClass('text__container--out');
+    $(this).removeAttr('href');
 };
 
 /*------------------------------------*\
@@ -107,6 +132,7 @@ function sectionSVG(section_index) {
                 svg_four();
                 svg.addClass('animated');
             }
+            break;
         case 7:
             var svg = $('#svg_third');
             if (!svg.hasClass('animated')) {
@@ -243,29 +269,25 @@ function peopleBinding() {
     });
 }
 
-// $('#video1').mediaelementplayer();
-// $('#video2').mediaelementplayer();
-// var player1 = $('#video1')[0].player;
-// var player2 = $('#video2')[0].player;
-
 function peopleModalBinding() {
     var drops = $('.people__container .people__modal__content .item__info .ms-icon');
 
     $.each(drops, function(index, val) {
         var container = $(this).parent();
         var player = $(this).siblings('.player');
-        if(container.hasClass('video__item')){            
+        if(container.hasClass('video__item')){
             player.mediaelementplayer({
                 success: function(media, domNode) {
                     var modalClose = $('.modal__close');
-                    
+
                     // add HTML5 events to the YouTube API media object
                     media.addEventListener('play', function() {
                     }, false);
 
                     media.addEventListener('ended', function() {
-                        //$(this).parent().toggleClass('active');
                         media.stop();
+                        var id = $('#' + media.attributes.id);
+                        id.closest('.video__item').toggleClass('active');
                     }, false);
 
                     $.each(modalClose, function(index, val) {
@@ -273,10 +295,10 @@ function peopleModalBinding() {
                             media.stop();
                         });
                     });
-
-                }
+                },
+                features: ['playpause','progress','current','duration','tracks']
             });
-        }  
+        }
         $(this).on('click touchstart', function(event) {
             event.preventDefault();
             container.toggleClass('active');
@@ -291,22 +313,24 @@ function peopleModalBinding() {
 
             if(container.hasClass('active') && container.hasClass('video__item')){
                 var l_player = player[0].player;
-                l_player.play();
+                var aux = player.parent().siblings('.mejs-layers').find('.mejs-overlay-button');
+                setTimeout(aux.trigger('click'), 1000);
+                //l_player.play();
             }
             else {
                 var l_player = player[0].player;
                 l_player.pause();
             }
-        });      
+        });
     });
 }
 
 function closeModal() {
     var modalClose = $('.modal__close');
 
-    $.each(modalClose, function(index, val) {        
+    $.each(modalClose, function(index, val) {
         $(this).on('click touchstart', function(event) {
-            event.preventDefault();            
+            event.preventDefault();
             var typeAnim = $(this).attr('data-anim');
             switch (typeAnim) {
                 case "center":

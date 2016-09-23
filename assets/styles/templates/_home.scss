@@ -366,6 +366,11 @@ div[id*='svg_'] {
       @include respond-to('ipad') {
         @include column(2.5/7, $gutter: 1);
       }
+      @include respond-to('custom-a') {
+        img {
+          width: 43%;
+        }
+      }
       @include respond-to('ipad-portrait') {
         display: none;
       }

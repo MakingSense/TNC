@@ -362,6 +362,7 @@ function filterWaterSourcesbyID(cityID) {
         if (prop.cities.indexOf(cityID) > -1) {
             WaterSourcesPrinter(val);
             filteredSources.push(val);
+            $('.reservoirs__list').mCustomScrollbar("update");
         }
     });
     return filteredSources;

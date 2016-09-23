@@ -57,7 +57,8 @@ var config = {
     mousewheel: 'bower_components/jquery-mousewheel',
     waypoints: 'bower_components/waypoints',
     raphael: 'bower_components/raphael',
-    gsap: 'bower_components/gsap'
+    gsap: 'bower_components/gsap',
+    customScrollbar: 'bower_components/malihu-custom-scrollbar-plugin'
   },
 
   // Sassdoc task options
@@ -292,7 +293,7 @@ gulp.task('copydeploy:fonts', function () {
 
 
 // Copy only the needed resources from Bower
-gulp.task('bowercopy', ['bowercopy:jeet', 'bowercopy:normalize', 'bowercopy:sassy-cast', 'bowercopy:jquery', 'bowercopy:fullPage', 'bowercopy:mousewheel', 'bowercopy:waypoints', 'bowercopy:raphael', 'bowercopy:gsap']);
+gulp.task('bowercopy', ['bowercopy:jeet', 'bowercopy:normalize', 'bowercopy:sassy-cast', 'bowercopy:jquery', 'bowercopy:fullPage', 'bowercopy:mousewheel', 'bowercopy:waypoints', 'bowercopy:raphael', 'bowercopy:gsap', 'bowercopy:customScrollbar', 'bowercopy:customScrollbarCSS']);
 
 gulp.task('bowercopy:jeet', function () {
   return gulp.src([config.folderBower.jeet + '/scss/jeet/*.scss'])
@@ -329,6 +330,14 @@ gulp.task('bowercopy:raphael', function () {
 gulp.task('bowercopy:gsap', function () {
   return gulp.src([config.folderBower.gsap + '/src/minified/TweenMax.min.js'])
   .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
+});
+gulp.task('bowercopy:customScrollbar', function () {
+  return gulp.src([config.folderBower.customScrollbar + '/jquery.mCustomScrollbar.concat.min.js'])
+  .pipe(gulp.dest(config.folderDev.base + '/js/plugins'));
+});
+gulp.task('bowercopy:customScrollbarCSS', function () {
+  return gulp.src([config.folderBower.customScrollbar + '/jquery.mCustomScrollbar.min.css'])
+  .pipe(gulp.dest(config.folderDev.base + '/css'));
 });
 
 

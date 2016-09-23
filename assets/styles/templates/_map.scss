@@ -84,11 +84,12 @@
     color: shade($tnc-font-color, 25%);
   }
   p {
-    font-family: 'Whitney Condensed';
-    font-size: torem(20px);
     @include respond-to('iphone5') {
       font-size: torem(18px);
     }
+
+    font-family: 'Whitney Condensed';
+    font-size: torem(20px);
   }
   &--out {
     animation: text__container--out 1s ease forwards;
@@ -201,9 +202,11 @@
   .search {
     @include respond-to('iphone6') {
       font-size: 16px;
-      padding: 12px 15px;
+
       width: 100%;
-  }
+      padding: 12px 15px;
+    }
+
     font-size: 18px;
 
     display: inline-block;
@@ -356,6 +359,9 @@
           font-size: torem(15px);
 
           left: -60%;
+        }
+        @include respond-to('ipad') {
+          left: -50%;
         }
 
         font-size: torem(20px);
@@ -533,14 +539,19 @@
       @include respond-to('iphone6-plus') {
         display: none;
       }
+      max-height: 230px;
 
       text-align: center;
       .reservoirs__list {
         @include respond-to('desktop-mac') {
           margin-top: torem(13px);
         }
+        height: 230px;
+        max-height: 230px;
+        margin: 0;
+        overflow: hidden;
 
-        margin-top: torem(16px);
+        //margin-top: torem(16px);
         padding: 0;
 
         list-style-type: none;
@@ -557,7 +568,7 @@
           font-size: torem(14px);
           font-weight: 600;
 
-          margin-bottom: torem(10px);
+          padding-bottom: torem(10px);
 
           text-transform: uppercase;
           a {
@@ -620,8 +631,11 @@
 
         border: none;
         border: 1px solid rgba($tnc-color--primary, .2);
+        border-radius: 0;
         outline: none;
         background: rgba(255,255,255, .4);
+
+        -webkit-appearance: none;
         &:focus {
           border: 1px solid rgba($tnc-color--primary, 1);
           background: rgba(255,255,255, .5);
