@@ -3,7 +3,7 @@
   "description": "TNC's UI Dev project Bower Dependencies.",
   "version": "1.0.0",
   "dependencies": {
-    "fullpage.js": "~2.8.4",
+    "fullpage.js": "latest",
     "jeet.gs": "latest",
     "jquery-latest": "jquery#latest",
     "jquery-mousewheel": "~3.1.13",

@@ -25,7 +25,7 @@ $(document).ready(function() {
             sectionSVG(index);
         }
     });
-    //initPlayer(); //Init main video player
+    initPlayer(); //Init main video player
     hideSlidesDots();
     bingindGIF();
     peopleBinding();
@@ -74,29 +74,25 @@ function initPlayer() {
         parent.location.hash = '#!';
     });
     player.on('YTPPlay', function(event) {
-        event.preventDefault();
-        if(parent.location.hash != '#c-video') {
-            player.YTPStop();
-        }
+        // event.preventDefault();
+        // if(parent.location.hash != '#c-video') {
+        //     player.YTPStop();
+        // }
     });
     $('#player_1_close').on('click touchstart', function() {
         player.YTPStop();
-        player.YTPMute();
-        player.YTPSetVolume(0);
     });
 
     $('#player_1_open').on('click touchstart', function() {
-        player.YTPUnmute();
-        player.YTPSetVolume(100);
         player.YTPPlay();
     });
 }
 
 function closeMap() {
-    event.preventDefault();
-    $('.map__container').removeClass('anim__fade-in');
-    $('.text__container').removeClass('text__container--out');
-    $(this).removeAttr('href');
+    // event.preventDefault();
+    // $('.map__container').removeClass('anim__fade-in');
+    // $('.text__container').removeClass('text__container--out');
+    // $(this).removeAttr('href');
 };
 
 /*------------------------------------*\
@@ -171,7 +167,6 @@ function scrollBinding(){
 
     $.each(sections, function(index, val) {
         $(this).on('touchstart', function(event) {
-            event.preventDefault();
             ts = event.originalEvent.touches[0].clientY;
         });
         $(this).on('touchmove', function(event) {
@@ -248,19 +243,45 @@ function peopleBinding() {
     });
 }
 
-$('#video1').mediaelementplayer();
-$('#video2').mediaelementplayer();
+// $('#video1').mediaelementplayer();
+// $('#video2').mediaelementplayer();
 // var player1 = $('#video1')[0].player;
 // var player2 = $('#video2')[0].player;
 
 function peopleModalBinding() {
     var drops = $('.people__container .people__modal__content .item__info .ms-icon');
+
     $.each(drops, function(index, val) {
+        var container = $(this).parent();
+        var player = $(this).siblings('.player');
+        if(container.hasClass('video__item')){            
+            player.mediaelementplayer({
+                success: function(media, domNode) {
+                    var modalClose = $('.modal__close');
+                    
+                    // add HTML5 events to the YouTube API media object
+                    media.addEventListener('play', function() {
+                    }, false);
+
+                    media.addEventListener('ended', function() {
+                        //$(this).parent().toggleClass('active');
+                        media.stop();
+                    }, false);
+
+                    $.each(modalClose, function(index, val) {
+                        $(this).on('click touchstart', function(event) {
+                            media.stop();
+                        });
+                    });
+
+                }
+            });
+        }  
         $(this).on('click touchstart', function(event) {
             event.preventDefault();
-            $(this).parent().toggleClass('active');
+            container.toggleClass('active');
 
-            var aux = $(this).parent().siblings();
+            var aux = container.siblings();
 
             $.each(aux, function(index, val) {
                 if ($(this).hasClass('active')) {
@@ -268,44 +289,24 @@ function peopleModalBinding() {
                 }
             });
 
-
-            var player = $(this).siblings()[0].player;
-
-
-            if($(this).parent().hasClass('video__item') && $(this).parent().hasClass('active') ){
-                player.play();
-
-                // window.location.hash = '#video';
-                // player.YTPlayer();
-                // player.on('YTPReady', function(event) {
-                //     player.YTPUnmute();
-                //     player.YTPSetVolume(100);
-                //     player.YTPPlay();
-                // });
-                // player.on('YTPEnd', function(event) {
-                //     setTimeout(function (argument) {
-                //         parent.location.hash = '#!';
-                //     }, 1200);
-                // });
-                // player.on('YTPPlay', function(event) {
-                //     event.preventDefault();
-                //     if(parent.location.hash != '#video') {
-                //         player.YTPStop();
-                //     }
-                // });
+            if(container.hasClass('active') && container.hasClass('video__item')){
+                var l_player = player[0].player;
+                l_player.play();
             }
             else {
-                player.pause();
+                var l_player = player[0].player;
+                l_player.pause();
             }
-        });
+        });      
     });
 }
 
 function closeModal() {
     var modalClose = $('.modal__close');
-    $.each(modalClose, function(index, val) {
+
+    $.each(modalClose, function(index, val) {        
         $(this).on('click touchstart', function(event) {
-            event.preventDefault();
+            event.preventDefault();            
             var typeAnim = $(this).attr('data-anim');
             switch (typeAnim) {
                 case "center":

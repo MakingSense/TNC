@@ -7,6 +7,9 @@
   @include respond-to('ipad-portrait') {
     font-size: torem(14px);
   }
+  @include respond-to('iphone6-plus') {
+    padding: toem(11px);
+  }
 
   display: inline-block;
 

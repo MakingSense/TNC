@@ -142,7 +142,7 @@ gulp.task('autoprefixer', function () {
     .pipe(gulp.dest('dev/css/'));
 });
 
-gulp.task('minify-css',['autoprefixer','minify-css-plugin'], function() {
+gulp.task('minify-css',['autoprefixer','minify-css-plugin-1','minify-css-plugin-2'], function() {
     return gulp.src('dev/css/styles.css')
     .pipe(cleanCSS({debug: true}, function(details) {
         console.log('File: ' + details.name + ' -- Original Size: ' + details.stats.originalSize);
@@ -151,7 +151,7 @@ gulp.task('minify-css',['autoprefixer','minify-css-plugin'], function() {
     .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('minify-css-plugin', function() {
+gulp.task('minify-css-plugin-1', function() {
     return gulp.src('dev/css/jquery.mb.YTPlayer.min.css')
     .pipe(cleanCSS({debug: true}, function(details) {
         console.log('File: ' + details.name + ' -- Original Size: ' + details.stats.originalSize);
@@ -160,8 +160,17 @@ gulp.task('minify-css-plugin', function() {
     .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('minify-css-plugin-2', function() {
+    return gulp.src('dev/css/mediaelementplayer.css')
+    .pipe(cleanCSS({debug: true}, function(details) {
+        console.log('File: ' + details.name + ' -- Original Size: ' + details.stats.originalSize);
+        console.log('File: ' + details.name + ' -- Minified Size: ' + details.stats.minifiedSize);
+    }))
+    .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('concatpluginsJS', function() {
-  return gulp.src(['./dev/js/plugins/jquery.mousewheel.min.js','./dev/js/plugins/jquery.fullPage.min.js', './dev/js/plugins/jquery.mb.YTPlayer.min.js', './dev/js/plugins/raphael.min.js', './dev/js/plugins/TweenMax.min.js','./dev/js/plugins/mapbox.js', './dev/js/plugins/mapbox.directions.js'])
+  return gulp.src(['./dev/js/plugins/jquery.mousewheel.min.js','./dev/js/plugins/jquery.fullPage.min.js','./dev/js/plugins/mediaelement-and-player.min.js', './dev/js/plugins/jquery.mb.YTPlayer.min.js', './dev/js/plugins/raphael.min.js', './dev/js/plugins/TweenMax.min.js','./dev/js/plugins/mapbox.js', './dev/js/plugins/mapbox.directions.js'])
     .pipe(concat('app.js'))
     .pipe(gulp.dest('./dist/js/plugins/'));
 });
@@ -271,6 +280,11 @@ gulp.task('copydeploy:data', function () {
   .pipe(gulp.dest(config.folderDist.base + '/data/'));
 });
 
+gulp.task('copydeploy:cssfont', function () {
+  gulp.src(config.folderDev.base + '/css/font/*.*')
+  .pipe(gulp.dest(config.folderDist.base + '/css/font/'));
+});
+
 gulp.task('copydeploy:fonts', function () {
   gulp.src(config.folderDev.base + '/fonts/**/*.*')
   .pipe(gulp.dest(config.folderDist.base + '/fonts/'));
@@ -353,7 +367,7 @@ gulp.task('build', ['sass:build' ,'processHtml', 'copy:images']);
 
 gulp.task('compressJS', ['pluginsJS', 'scriptsJS']);
 gulp.task('compressCSS', ['minify-css']);
-gulp.task('copydeploy', ['copydeploy:data', 'copydeploy:fonts']);
+gulp.task('copydeploy', ['copydeploy:data', 'copydeploy:fonts', 'copydeploy:cssfont']);
 
 
 

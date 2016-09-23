@@ -34,7 +34,6 @@ $(window).on('load', function() {
         wsList.empty();
         searchInMap($(this).siblings('.search').val());
         $(this).siblings('.search').attr('value', '').val('');
-
     });
 
     $('#iconMap').on('click touchstart', function(event) {

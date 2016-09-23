@@ -46,6 +46,9 @@
       padding-right: torem(5px);
       padding-left: torem(5px);
     }
+    @include respond-to('iphone5') {
+      font-size: torem(32px);
+    }
 
     font-family: 'Whitney Condensed';
     font-size: torem(52px);
@@ -58,6 +61,9 @@
     @include respond-to('desktop') {
       font-size: torem(20px);
     }
+    @include respond-to('iphone5') {
+      font-size: torem(17px);
+    }
 
     font-family: 'Whitney Pro';
     font-size: torem(23px);
@@ -65,6 +71,9 @@
   .icon-map {
     @include respond-to('desktop') {
       font-size: torem(90px);
+    }
+    @include respond-to('iphone5') {
+      font-size: torem(64px);
     }
 
     font-size: torem(100px);
@@ -77,6 +86,9 @@
   p {
     font-family: 'Whitney Condensed';
     font-size: torem(20px);
+    @include respond-to('iphone5') {
+      font-size: torem(18px);
+    }
   }
   &--out {
     animation: text__container--out 1s ease forwards;
@@ -120,6 +132,9 @@
 .map {
   @include respond-to('iphone6-plus') {
     height: 70vh;
+  }
+  @include respond-to('iphone6') {
+    height: 65vh;
   }
 
   position: relative;
@@ -184,6 +199,11 @@
   transform: translate(-50%, -100%);
   text-align: center;
   .search {
+    @include respond-to('iphone6') {
+      font-size: 16px;
+      padding: 12px 15px;
+      width: 100%;
+  }
     font-size: 18px;
 
     display: inline-block;
