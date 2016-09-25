@@ -20,10 +20,9 @@
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <link rel="stylesheet" type="text/css" href="./css/jquery.mb.YTPlayer.min.css">
     <link rel="stylesheet" type="text/css" href="./css/mediaelementplayer.css">
-    <link rel="stylesheet" type="text/css" href="./css/jquery.mCustomScrollbar.min.css">
-    <!-- Mapbox Styles -->
+    <!-- Mapbox -->
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
-    <link href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' rel='stylesheet' type='text/css' />
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -151,7 +150,7 @@
                     <h3>Go to your Source</h3>
                     <form action="">
                       <label for="destination">Search:</label>
-                      <input type="search" id="search-inner" name="Search City">
+                      <input type="search" id="search-inner" class="search" placeholder="Search City">
                       <button id="search-inner-button" class="button">Search</button>
                     </form>
                   </div>
@@ -160,6 +159,10 @@
               <div class="city__wrong">
                 <h2>Wipeout!</h2>
                 <p>Unfortunately, we don't currently have a source info for your location.</p>
+                <form action="">
+                  <input type="search" id="search-inner-a" class="search" placeholder="Search City">
+                  <button id="search-inner-button-a" class="button">Search</button>
+                </form>
               </div>
             </div>
           </div>
@@ -348,8 +351,6 @@
     <script type="text/javascript" src="js/plugins/jquery.mb.YTPlayer.min.js"></script>
     <script type="text/javascript" src="js/plugins/raphael.min.js"></script>
     <script type="text/javascript" src="js/plugins/TweenMax.min.js"></script>
-    <script type="text/javascript" src='js/plugins/mapbox.js'></script>
-    <script type="text/javascript" src='js/plugins/mapbox.directions.js'></script>
     <!-- /build -->
     <!-- build:js js/script.js -->
     <script type="text/javascript" src="js/socialShare.js"></script>

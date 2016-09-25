@@ -32,8 +32,7 @@ jQuery.fn.socialShare = function(opts) {
                 case 'twitter':
                     var via = jQuery(this).attr('meta-via');
                     window.open('http://twitter.com/share?text=' + content +
-                        '&url=' + url +
-                        (via == undefined ? '' : ('&via=' + via)),
+                        '&url=' + url,
                         'twitterwindow',
                         'width=800, height=600, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
                     break;

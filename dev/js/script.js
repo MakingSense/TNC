@@ -14,8 +14,8 @@ $(document).ready(function() {
         navigation: true,
         navigationPosition: 'left',
         easingcss3: 'ease-in-out',
-        scrollingSpeed: 2300,
-        fitToSectionDelay: 500,
+        scrollingSpeed: 2000,
+        fitToSectionDelay: 1000,
         touchSensitivity: 25,
 
         afterLoad: function(anchorLink, index) {
@@ -24,13 +24,6 @@ $(document).ready(function() {
         onLeave: function(index, nextIndex, direction) {
             sectionSVG(index);
         }
-    });
-    $('.reservoirs__list').mCustomScrollbar({
-        advanced:{
-            updateOnContentResize: false,
-            updateOnImageLoad: false
-        },
-        theme:"minimal"
     });
     initPlayer(); //Init main video player
     hideSlidesDots();
@@ -75,7 +68,7 @@ function checkHash() {
 function removePreloader() {
     setTimeout(function() {
         preloader();
-    }, 3500);
+    }, 4000);
 }
 
 /*------------------------------------*\
@@ -308,6 +301,11 @@ function peopleModalBinding() {
             $.each(aux, function(index, val) {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass('active');
+                    if($(this).hasClass('video__item')){
+                        var player = $(this).children('.player');
+                        var l_player = player[0].player;
+                        l_player.pause();
+                    }
                 }
             });
 

@@ -106,6 +106,10 @@
         position: absolute;
         top: 5%;
         right: 5%;
+        @include respond-to('iphone6-plus') {
+            top: 5%;
+        right: 10%;
+          }
         h2 {
           @include respond-to('macbook') {
             font-size: torem(19px);
@@ -215,6 +219,9 @@
           &.active {
             width: 100%;
             padding: torem(16px);
+            @include respond-to('iphone6-plus') {
+              padding: torem(10px);
+            }
 
             animation: none;
 
@@ -327,6 +334,9 @@
           p {
             font-size: torem(15px);
             line-height: 1.4;
+            @include respond-to('iphone6-plus') {
+              font-size: torem(13.5px);
+            }
 
             margin: 0;
           }
