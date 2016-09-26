@@ -144,6 +144,7 @@ function initMap() {
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
     locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
+    //locations.loadURL('data/data-b.geojson'); // Develop DB
     map.attributionControl.setPosition('bottomleft');
 
     locations.on('ready', function() {
@@ -191,7 +192,7 @@ function initMap() {
             }));
         } else {
             marker.setIcon(L.icon({
-                iconUrl: '../img/icon-drop.svg',
+                iconUrl: './img/icon-drop.svg',
                 iconSize: [32, 32],
                 // iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
@@ -280,12 +281,10 @@ function showMap(err, data) {
             });
         }
         else {
-            console.log('WRONG CITY');
             displayCityWrong();
         }
     }
     else {
-        console.log('WRONG CITY');
         displayCityWrong();
     }
 }
@@ -341,6 +340,7 @@ function filterWaterSourcesbyID(cityID) {
             filteredSources.push(val);
         }
     });
+    filteredSources
     return filteredSources;
 }
 

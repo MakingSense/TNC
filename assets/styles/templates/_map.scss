@@ -46,6 +46,9 @@
       padding-right: torem(5px);
       padding-left: torem(5px);
     }
+    @include respond-to('iphone6-plus') {
+      font-size: torem(36px);
+    }
     @include respond-to('iphone5') {
       font-size: torem(32px);
     }
@@ -116,6 +119,13 @@
   }
 }
 .map__container {
+  @include respond-to('ipad-portrait') {
+    width: 88vw;
+  }
+  @include respond-to('iphone6-plus') {
+    width: 75vw;
+  }
+
   overflow: hidden;
 
   position: relative;
@@ -135,7 +145,10 @@
     height: 70vh;
   }
   @include respond-to('iphone6') {
-    height: 65vh;
+    height: 69vh;
+  }
+  @include respond-to('iphone5') {
+    height: 68vh;
   }
 
   display: block;
@@ -291,8 +304,21 @@
     opacity: 0;
   }
   .city__wrong {
+    @include cf();
+
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
     opacity: 0;
     h2 {
+      @include respond-to('iphone6-plus') {
+        top: 10%;
+
+        transform: translate(-50%, -10%);
+      }
+
       position: absolute;
       top: 30%;
       left: 50%;
@@ -300,6 +326,17 @@
       transform: translate(-50%, -30%);
     }
     p {
+      @include respond-to('iphone6-plus') {
+        top: 35%;
+
+        font-size: torem(15px);
+
+        width: 100%;
+        max-width: none;
+
+        transform: translate(-50%, -35%);
+      }
+
       position: absolute;
       top: 50%;
       left: 50%;
@@ -313,6 +350,11 @@
       text-align: center;
     }
     form {
+      @include respond-to('iphone6-plus') {
+        width: 100%;
+        max-width: none;
+      }
+
       position: absolute;
       top: 70%;
       left: 50%;
@@ -337,16 +379,15 @@
         background: rgba(255,255,255, .4);
 
         -webkit-appearance: none;
-        
         &:focus {
           border: 1px solid rgba($tnc-color--primary, 1);
           background: rgba(255,255,255, .5);
         }
       }
       button {
+        margin-top: 0;
         padding-top: torem(10px);
         padding-bottom: torem(10px);
-        margin-top: 0;
       }
     }
   }
@@ -363,7 +404,7 @@
     @include respond-to('iphone6-plus') {
       font-size: torem(18px);
 
-      margin-bottom: torem(25px);
+      margin-bottom: torem(5px);
     }
 
     font-weight: 600;
@@ -376,6 +417,7 @@
   .route__line {
     div {
       @include respond-to('iphone6-plus') {
+        top: 40px;
         right: 6%;
 
         height: 4px;
@@ -392,13 +434,17 @@
 
       background: #00bfff;
       span {
-        @include respond-to('iphone6-plus') {
-          left: -60%;
-
-          font-size: torem(15px);
-        }
+        
         @include respond-to('ipad') {
           left: -50%;
+        }
+        @include respond-to('ipad-portrait') {
+          wleft: -100% !important;
+        }
+        @include respond-to('iphone6-plus') {
+          left: -150% !important;
+
+          font-size: torem(15px);
         }
 
         position: absolute;
@@ -442,7 +488,7 @@
       }
       &.active {
         @include respond-to('iphone6-plus') {
-          width: 35%;
+          width: 15%;
         }
 
         width: 20%;
@@ -514,6 +560,9 @@
         @include respond-to('ipad-portrait') {
           font-size: torem(17px);
         }
+        @include respond-to('iphone6-plus') {
+          font-size: torem(15px);
+        }
 
         font-family: 'Whitney Condensed';
         font-weight: 600;
@@ -577,13 +626,51 @@
         display: none;
       }
 
+      overflow: hidden;
+
       max-height: 230px;
 
       text-align: center;
+      .reservoirs__controller {
+        @include respond-to('ipad') {
+          right: 3%;
+
+          transform: translate(-3%, -50%);
+        }
+
+        position: absolute;
+        top: 50%;
+        right: 8%;
+
+        transform: translate(-8%, -50%);
+        a {
+          display: block;
+
+          font-size: 18px;
+
+          margin: 25px 0;
+
+          color: $tnc-font-color;
+          &:hover {
+            color: shade($tnc-font-color, 20%);
+          }
+        }
+        &.disable {
+          a {
+            pointer-events: none;
+
+            color: #ccc;
+          }
+        }
+      }
       .reservoirs__list {
         @include respond-to('desktop-mac') {
           margin-top: torem(13px);
         }
+
+        overflow: hidden;
+
+        height: 220px;
         margin: 0;
         margin-top: torem(16px);
         padding: 0;
@@ -679,6 +766,10 @@
         }
       }
       form {
+        @include respond-to('iphone6-plus') {
+          margin-top: toem(10px);
+        }
+
         margin-top: toem(16px);
       }
       .button {

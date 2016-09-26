@@ -4,11 +4,11 @@
 /*----------------------------------*\
 \*----------------------------------*/
 
-
+var __device = Detectizr.device.model;
 /*------------------------------------*\
   #Ready
 \*------------------------------------*/
-$(document).ready(function() {
+$(document).ready(function() {    
     $('#section__container').fullpage({
         anchors: ['gif', '', 'map', '', '', '', '', '', ''],
         navigation: true,
@@ -35,6 +35,30 @@ $(document).ready(function() {
     scrollLocation();
     scrollBinding();
     checkHash();
+
+    var scrolled=0;
+
+    var divHeight = $('.city__information-sources').outerHeight();
+    $('#reservoirs').css('height', (divHeight - 70));
+
+    $("#downClick").on("click" ,function(){
+        scrolled=scrolled+20;
+
+        $("#reservoirs").animate({
+                scrollTop:  scrolled
+           });
+
+    });
+
+    
+    $("#upClick").on("click" ,function(){
+        scrolled=scrolled-20;
+        
+        $("#reservoirs").animate({
+                scrollTop:  scrolled
+           });
+
+    });
 
 });
 
@@ -87,22 +111,38 @@ function preloader() {
 /*------------------------------------*\
   #Video Functionalities
 \*------------------------------------*/
-var player = $("#player_1");
+
 
 function initPlayer() {
-    player.YTPlayer();
-    player.on('YTPReady', function(event) {
+    var player = $("#video5");
 
-    });
-    player.on('YTPEnd', function(event) {
-        parent.location.hash = '#!';
-    });
-    $('#player_1_close').on('click touchstart', function() {
-        player.YTPStop();
-    });
+    player.mediaelementplayer({
+        success: function(media, domNode) {
 
-    $('#player_1_open').on('click touchstart', function() {
-        player.YTPPlay();
+            // add HTML5 events to the YouTube API media object
+            media.addEventListener('play', function() {
+            }, false);
+
+            media.addEventListener('ended', function() {
+                media.stop();
+                parent.location.hash = '#!';
+            }, false);
+
+            $('#player_1_close').on('click touchstart', function() {
+                media.stop();
+                parent.location.hash = '#!';
+            });
+
+            $('#player_1_open').on('click touchstart', function() {
+                if((Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
+                    setTimeout(function(){
+                        $('#c-video .mejs-overlay-button').trigger('click');
+                    }, 1000);
+                }
+                
+            });
+        },
+        features: ['playpause','progress','current','duration','tracks']
     });
 }
 
@@ -302,7 +342,7 @@ function peopleModalBinding() {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass('active');
                     if($(this).hasClass('video__item')){
-                        var player = $(this).children('.player');
+                        var player = $(this).children('.player').find('.player');
                         var l_player = player[0].player;
                         l_player.pause();
                     }
@@ -312,10 +352,11 @@ function peopleModalBinding() {
             if(container.hasClass('active') && container.hasClass('video__item')){
                 var l_player = player[0].player;
                 var aux = player.parent().siblings('.mejs-layers').find('.mejs-overlay-button');
-                setTimeout(aux.trigger('click'), 1000);
-                //l_player.play();
+                if((Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
+                    setTimeout(aux.trigger('click'), 1000);
+                }
             }
-            else {
+            else if(container.hasClass('video__item')) {
                 var l_player = player[0].player;
                 l_player.pause();
             }

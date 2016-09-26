@@ -13,11 +13,11 @@
 
   position: relative;
 
-  height: 100vh;
+  height: 100%;
   .people {
     @include column(1/3, $gutter: 0);
 
-    height: 100vh;
+    height: 100%;
 
     background: rgba(255,255,255, .5);
     &:nth-child(3) {
@@ -32,7 +32,7 @@
         left: 66.66%;
 
         width: 33.33%;
-        height: 100vh;
+        height: 100%;
         margin: 0;
 
         transition: opacity 1.5s ease-in;
@@ -64,7 +64,7 @@
         left: 33.33%;
 
         width: 33.33%;
-        height: 100vh;
+        height: 100%;
         margin: 0;
 
         transition: opacity 1.5s ease-in;
@@ -89,7 +89,7 @@
         left: 0;
 
         width: 33.33%;
-        height: 100vh;
+        height: 100%;
         margin: 0;
 
         transition: opacity 1.5s ease-in;
@@ -103,13 +103,14 @@
     }
     &__modal {
       &__close {
+        @include respond-to('iphone6-plus') {
+          top: 5%;
+          right: 10%;
+        }
+
         position: absolute;
         top: 5%;
         right: 5%;
-        @include respond-to('iphone6-plus') {
-            top: 5%;
-        right: 10%;
-          }
         h2 {
           @include respond-to('macbook') {
             font-size: torem(19px);
@@ -128,12 +129,13 @@
           border: 1px solid $tnc-font-color;
         }
         a {
-          display: inline-block;
-
-          font-size: torem(48px);
           @include respond-to('iphone6') {
             font-size: torem(36px);
           }
+
+          display: inline-block;
+
+          font-size: torem(48px);
           font-weight: 400;
 
           margin-left: torem(16px);
@@ -191,15 +193,16 @@
             opacity: 1;
             color: $tnc-font-color;
             &:after {
+              @include respond-to('iphone6-plus') {
+                font-size: torem(40px);
+              }
+
               position: absolute;
               top: 95%;
               left: 50%;
 
               font-family: 'Whitney Condensed';
               font-size: torem(55px);
-              @include respond-to('iphone6-plus') {
-              font-size: torem(40px);
-            }
               font-weight: 300;
               line-height: 1;
 
@@ -217,11 +220,12 @@
             color: transparent;
           }
           &.active {
-            width: 100%;
-            padding: torem(16px);
             @include respond-to('iphone6-plus') {
               padding: torem(10px);
             }
+
+            width: 100%;
+            padding: torem(16px);
 
             animation: none;
 
@@ -259,6 +263,11 @@
             }
             @include respond-to('iphone6') {
               top: 63%;
+              max-width: 260px;
+            }
+            @include respond-to('iphone5') {
+              top: 60%;
+              max-width: 245px;
             }
 
             top: 60%;
@@ -268,13 +277,12 @@
           }
           &:nth-child(2) {
             @include respond-to('iphone6-plus') {
-              height: 21%;              
+              height: 21%;
             }
             @include respond-to('iphone6') {
               top: 25%;
               right: 20%;
             }
-
 
             z-index: 20;
             top: 20%;
@@ -318,6 +326,7 @@
             @include respond-to('iphone6') {
               top: 15%;
               left: 20%;
+
               height: 35%;
             }
 
@@ -332,11 +341,12 @@
             animation-delay: .3s;
           }
           p {
-            font-size: torem(15px);
-            line-height: 1.4;
             @include respond-to('iphone6-plus') {
               font-size: torem(13.5px);
             }
+
+            font-size: torem(15px);
+            line-height: 1.4;
 
             margin: 0;
           }
@@ -344,6 +354,16 @@
       }
     }
     &__nav {
+      @include respond-to('ipad') {
+        padding-top: calc(65vh - 20px);
+      }
+      @include respond-to('iphone6-plus') {
+        padding-top: 60vh;
+      }
+      @include respond-to('iphone6') {
+        padding-top: 50vh;
+      }
+
       position: relative;
 
       padding-top: 70vh;
