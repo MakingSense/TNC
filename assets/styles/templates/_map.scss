@@ -434,7 +434,7 @@
 
       background: #00bfff;
       span {
-        
+
         @include respond-to('ipad') {
           left: -50%;
         }
@@ -632,6 +632,7 @@
 
       text-align: center;
       .reservoirs__controller {
+        display: none;
         @include respond-to('ipad') {
           right: 3%;
 
@@ -662,6 +663,9 @@
             color: #ccc;
           }
         }
+        &.control--visible {
+          display: block;
+        }
       }
       .reservoirs__list {
         @include respond-to('desktop-mac') {
@@ -670,7 +674,6 @@
 
         overflow: hidden;
 
-        height: 220px;
         margin: 0;
         margin-top: torem(16px);
         padding: 0;

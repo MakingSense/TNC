@@ -8,7 +8,7 @@ var __device = Detectizr.device.model;
 /*------------------------------------*\
   #Ready
 \*------------------------------------*/
-$(document).ready(function() {    
+$(document).ready(function() {
     $('#section__container').fullpage({
         anchors: ['gif', '', 'map', '', '', '', '', '', ''],
         navigation: true,
@@ -38,8 +38,7 @@ $(document).ready(function() {
 
     var scrolled=0;
 
-    var divHeight = $('.city__information-sources').outerHeight();
-    $('#reservoirs').css('height', (divHeight - 70));
+
 
     $("#downClick").on("click" ,function(){
         scrolled=scrolled+20;
@@ -50,10 +49,9 @@ $(document).ready(function() {
 
     });
 
-    
     $("#upClick").on("click" ,function(){
         scrolled=scrolled-20;
-        
+
         $("#reservoirs").animate({
                 scrollTop:  scrolled
            });
@@ -139,7 +137,7 @@ function initPlayer() {
                         $('#c-video .mejs-overlay-button').trigger('click');
                     }, 1000);
                 }
-                
+
             });
         },
         features: ['playpause','progress','current','duration','tracks']

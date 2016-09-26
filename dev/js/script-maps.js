@@ -33,7 +33,9 @@ $(window).on('load', function() {
         var wsList = $('.reservoirs__list');
         wsList.empty();
         searchInMap($(this).siblings('.search').val());
+
         $(this).siblings('.search').attr('value', '').val('');
+        $(this).siblings('.search').blur();
     });
 
     $('#iconMap').on('click touchstart', function(event) {
@@ -143,8 +145,8 @@ function initMap() {
 
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
-    locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
-    //locations.loadURL('data/data-b.geojson'); // Develop DB
+    //locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
+    locations.loadURL('data/data-b.geojson'); // Develop DB
     map.attributionControl.setPosition('bottomleft');
 
     locations.on('ready', function() {
@@ -172,9 +174,9 @@ function initMap() {
             });
             locale.on('hover', function(event) {
                 if (e.type == "mouseenter") {
-                   locale.openPopup();   
-                }             
-            });            
+                   locale.openPopup();
+                }
+            });
         });
 
     });
@@ -243,7 +245,7 @@ function bindButtonRoute(){
 }
 
 function traceRoute() {
-    var distance = getDistance(origin, [destination.lat, destination.lng]);    
+    var distance = getDistance(origin, [destination.lat, destination.lng]);
     drawLineKM(distanceConvert(distance));
 }
 
@@ -365,4 +367,16 @@ function WaterSourcesPrinter(locale) {
         locale.openPopup();
         return false;
     };
+
+    var reservoirsDIV = $('.reservoirs__list').outerHeight();
+    var divHeight = $('.city__information-sources').outerHeight();
+    var sourcesHeight = $('.city__information-sources').innerHeight();
+
+    if(reservoirsDIV >= sourcesHeight) {
+        $('#reservoirs').css('height', (divHeight - 70));
+        $('.reservoirs__controller').addClass('control--visible');
+    }
+    else {
+        $('.reservoirs__controller').removeClass('control--visible');
+    }
 }
