@@ -9,18 +9,18 @@
 
 /// Convert to EMs function
 /// @param {Number} target - The value to be converted
-/// @param {Number} context [$msuif-font-size] The base font size 
+/// @param {Number} context [$tnc-font-size] The base font size 
 /// @return {Em} value
-@function toem($target, $context: $msuif-font-size) {
+@function toem($target, $context: $tnc-font-size) {
    @if $target == 0 { @return 0 }
    @return $target / $context + 0em;
 }
 
 /// Convert to REMs function
 /// @param {Number} target - The value to be converted
-/// @param {Number} context [$msuif-font-size] - The base font size 
+/// @param {Number} context [$tnc-font-size] - The base font size 
 /// @return {Rem} value
-@function torem($target, $context: $msuif-font-size) {
+@function torem($target, $context: $tnc-font-size) {
    @if $target == 0 { @return 0 }
    @return $target / $context + 0rem;
 }

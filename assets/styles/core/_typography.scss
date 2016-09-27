@@ -9,19 +9,68 @@
 ///
 @import "../modules/icons";
 
+//Custom Font
+@font-face {
+  font-family: 'Whitney Condensed';
+  src: url('../fonts/WhitneyCondensed-Light.eot');
+  src: url('../fonts/WhitneyCondensed-Light.woff2') format('woff2'),
+       url('../fonts/WhitneyCondensed-Light.woff') format('woff'),
+       url('../fonts/WhitneyCondensed-Light.ttf') format('truetype'),
+       url('../fonts/WhitneyCondensed-Light.svg#WhitneyCondensed-Light') format('svg'),
+       url('../fonts/WhitneyCondensed-Light.eot?#iefix') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney Condensed';
+  src: url('../fonts/WhitneyCondensed-Semibold.eot');
+  src: url('../fonts/WhitneyCondensed-Semibold.woff2') format('woff2'),
+       url('../fonts/WhitneyCondensed-Semibold.woff') format('woff'),
+       url('../fonts/WhitneyCondensed-Semibold.ttf') format('truetype'),
+       url('../fonts/WhitneyCondensed-Semibold.svg#WhitneyCondensed-Semibold') format('svg'),
+       url('../fonts/WhitneyCondensed-Semibold.eot?#iefix') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney Pro';
+  src: url('../fonts/Whitney-Semibold.eot');
+  src: url('../fonts/Whitney-Semibold.woff2') format('woff2'),
+       url('../fonts/Whitney-Semibold.woff') format('woff'),
+       url('../fonts/Whitney-Semibold.ttf') format('truetype'),
+       url('../fonts/Whitney-Semibold.svg#Whitney-Semibold') format('svg'),
+       url('../fonts/Whitney-Semibold.eot?#iefix') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney Pro';
+  src: url('../fonts/Whitney-Light.eot');
+  src: url('../fonts/Whitney-Light.woff2') format('woff2'),
+       url('../fonts/Whitney-Light.woff') format('woff'),
+       url('../fonts/Whitney-Light.ttf') format('truetype'),
+       url('../fonts/Whitney-Light.svg#Whitney-Light') format('svg'),
+       url('../fonts/Whitney-Light.eot?#iefix') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 
 ///
-$msuif-headers-h1-font-size: 				toem(46px);
+$tnc-headers-h1-font-size: 				toem(32px);
 ///
-$msuif-headers-h2-font-size: 				toem(32px);
+$tnc-headers-h2-font-size: 				toem(32px);
 ///
-$msuif-headers-h3-font-size: 				toem(24px);
+$tnc-headers-h3-font-size: 				toem(22px);
 ///
-$msuif-headers-h4-font-size: 				toem(22px);
+$tnc-headers-h4-font-size: 				toem(22px);
 ///
-$msuif-headers-h5-font-size: 				toem(18px);
+$tnc-headers-h5-font-size: 				toem(18px);
 ///
-$msuif-headers-h6-font-size: 				toem(16px);
+$tnc-headers-h6-font-size: 				toem(16px);
 
 
 html,
@@ -35,41 +84,46 @@ h3,
 h4,
 h5,
 h6 {
-  font: $msuif-font;
+  font: $tnc-font;
   font-weight: 400;
-  color: $msuif-font-color;
+  color: $tnc-font-color;
 }
 
 h1 {
   margin: 0;
-  font-size: $msuif-headers-h1-font-size;
-  font-weight: $msuif-font-weight-bold;
+  font-size: $tnc-headers-h1-font-size;
+  font-weight: $tnc-font-weight-semibold;
+  //letter-spacing: -1px;
   line-height: 1.2;
   text-transform: uppercase;
 }
 
 h2 {
   margin: 0;
-  font-size: $msuif-headers-h2-font-size;
+  font-size: $tnc-headers-h2-font-size;
   line-height: 1.4;
 }
 
 h3 {
-  font-size: $msuif-headers-h3-font-size;
+  font-size: $tnc-headers-h3-font-size;
+  @include respond-to('iphone6-plus'){
+    font-size: torem(19px);
+  }
+  font-weight: $tnc-font-weight-light;
 }
 
 h4 {
-  font-size: $msuif-headers-h4-font-size;
+  font-size: $tnc-headers-h4-font-size;
 }
 
 h5 {
-  font-size: $msuif-headers-h5-font-size;
+  font-size: $tnc-headers-h5-font-size;
 }
 
 h6 {
-  font-size: $msuif-headers-h6-font-size;
+  font-size: $tnc-headers-h6-font-size;
 }
 
 strong {
-  font-weight: $msuif-font-weight-bold;
+  font-weight: $tnc-font-weight-bold;
 }

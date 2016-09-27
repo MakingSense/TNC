@@ -37,7 +37,7 @@ $accordion-item-padding:         10px !default;
         overflow: hidden;
         border-bottom: 1px solid tint($accordion-header-background, 20%);
         background-color: $accordion-item-background;
-        transition: max-height $msuif-transition-duration $msuif-transition-timing 0s;
+        transition: max-height $tnc-transition-duration $tnc-transition-timing 0s;
 
         // Show accordion item
         &:target {

@@ -1,0 +1,907 @@
+////
+/// Map
+/// @group Map
+/// @author MS
+////
+
+// -------------------------------------
+//   Variables
+// -------------------------------------
+
+
+// -------------------------------------
+//   Code
+// -------------------------------------
+.text__container {
+  @include respond-to('desktop') {
+    max-width: torem(150px);
+  }
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+  max-width: torem(200px);
+
+  transform: translate(-50%, -50%);
+  text-align: center;
+  h1,
+  h2,
+  p {
+    line-height: 1;
+
+    margin: 0;
+
+    text-transform: uppercase;
+
+    color: shade($tnc-font-color, 25%);
+  }
+  h1 {
+    @include respond-to('desktop') {
+      display: inline-block;
+
+      font-size: torem(45px);
+
+      padding-right: torem(5px);
+      padding-left: torem(5px);
+    }
+    @include respond-to('iphone6-plus') {
+      font-size: torem(36px);
+    }
+    @include respond-to('iphone5') {
+      font-size: torem(32px);
+    }
+
+    font-family: 'Whitney Condensed';
+    font-size: torem(52px);
+
+    padding-bottom: torem(5px);
+
+    border-bottom: 2px solid shade($tnc-font-color, 25%);
+  }
+  h2 {
+    @include respond-to('desktop') {
+      font-size: torem(20px);
+    }
+    @include respond-to('iphone5') {
+      font-size: torem(17px);
+    }
+
+    font-family: 'Whitney Pro';
+    font-size: torem(23px);
+  }
+  .icon-map {
+    @include respond-to('desktop') {
+      font-size: torem(90px);
+    }
+    @include respond-to('iphone5') {
+      font-size: torem(64px);
+    }
+
+    font-size: torem(100px);
+
+    transition: all .15s ease;
+    vertical-align: super;
+
+    color: shade($tnc-font-color, 25%);
+  }
+  p {
+    @include respond-to('iphone5') {
+      font-size: torem(18px);
+    }
+
+    font-family: 'Whitney Condensed';
+    font-size: torem(20px);
+  }
+  &--out {
+    -webkit-animation: text__container--out .5s ease forwards;
+            animation: text__container--out .5s ease forwards;
+    a {
+      p {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+
+@keyframes text__container--out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.map__container {
+  @include respond-to('ipad-portrait') {
+    width: 88vw;
+  }
+  @include respond-to('iphone6-plus') {
+    width: 75vw;
+  }
+
+  overflow: hidden;
+
+  position: relative;
+  z-index: -5;
+
+  width: 75vw;
+  height: 85vh;
+  margin: 0 auto;
+
+  transition: all .15s ease;
+
+  opacity: 0;
+  background: transparent;
+}
+.map {
+  @include respond-to('iphone6-plus') {
+    height: 70vh;
+  }
+  @include respond-to('iphone6') {
+    height: 69vh;
+  }
+  @include respond-to('iphone5') {
+    height: 68vh;
+  }
+
+  display: block;
+
+  position: relative;
+
+  width: 100%;
+  height: 75vh;
+  margin: 0 auto;
+
+  transition: all .15s ease;
+
+  border: 2px solid $tnc-color--primary;
+}
+
+.map__height-middle--in {
+  animation: map__height-middle--in .50s ease forwards;
+}
+
+.map__height-middle--out {
+  animation: map__height-middle--out .50s ease forwards;
+}
+
+
+@keyframes map__height-middle--in {
+  from {
+    height: 75vh;
+  }
+  to {
+    height: 47.5vh;
+  }
+}
+
+@include respond-to('ipad-portrait') {
+  @keyframes map__height-middle--in {
+    from {
+      height: 75vh;
+    }
+    to {
+      height: 52vh;
+    }
+  }
+}
+
+@keyframes map__height-middle--out {
+  from {
+    height: 47.5vh;
+  }
+  to {
+    height: 75vh;
+  }
+}
+
+.form {
+  @include respond-to('iphone6-plus') {
+    .button {
+      width: 100%;
+      margin-top: torem(5px);
+    }
+  }
+
+  display: block;
+
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 50%;
+
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  transform: translate(-50%, -100%);
+  text-align: center;
+  .search {
+    @include respond-to('iphone6') {
+      font-size: 16px;
+
+      width: 100%;
+      padding: 12px 15px;
+    }
+
+    display: inline-block;
+
+    font-size: 18px;
+
+    width: 400px;
+    margin: 0 auto;
+    padding: 15px 20px;
+
+    transition: all .25s ease;
+    vertical-align: middle;
+    text-transform: uppercase;
+
+    opacity: 1;
+    border: 1px solid rgba($tnc-color--primary, .2);
+    border-radius: 0;
+    outline: none;
+    background: rgba(255,255,255, .4);
+
+    -webkit-appearance: none;
+    &:focus {
+      border: 1px solid rgba($tnc-color--primary, 1);
+      background: rgba(255,255,255, .5);
+    }
+  }
+}
+
+.search__fade-out {
+  animation: search__fade-out .50s ease forwards;
+}
+
+.search__fade-out--reverse {
+  animation: search__fade-out--reverse .50s ease forwards;
+}
+
+@keyframes search__fade-out {
+  from {
+    z-index: 15;
+    top: 100%;
+
+    opacity: 1;
+  }
+  to {
+    z-index: -1;
+
+    opacity: 0;
+  }
+}
+
+@keyframes search__fade-out--reverse {
+  from {
+    z-index: -1;
+
+    opacity: 0;
+  }
+  to {
+    z-index: 15;
+
+    opacity: 1;
+  }
+}
+.city {
+  @include respond-to('desktop') {
+    padding: toem(13px);
+  }
+
+  display: block;
+
+  position: relative;
+
+  width: 100%;
+  height: 0;
+  margin: 0 auto;
+  padding: toem(16px);
+
+  transition: all .15s ease;
+
+  opacity: 0;
+  border-right: 2px dashed $tnc-color--primary;
+  border-bottom: 2px dashed $tnc-color--primary;
+  border-left: 2px dashed $tnc-color--primary;
+  .city__founded {
+    opacity: 0;
+  }
+  .city__wrong {
+    @include cf();
+
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    h2 {
+      @include respond-to('iphone6-plus') {
+        top: 10%;
+
+        transform: translate(-50%, -10%);
+      }
+
+      position: absolute;
+      top: 30%;
+      left: 50%;
+
+      transform: translate(-50%, -30%);
+    }
+    p {
+      @include respond-to('iphone6-plus') {
+        top: 35%;
+
+        font-size: torem(15px);
+
+        width: 100%;
+        max-width: none;
+
+        transform: translate(-50%, -35%);
+      }
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      font-size: 20px;
+
+      max-width: 50%;
+      margin: 0;
+
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    form {
+      @include respond-to('iphone6-plus') {
+        width: 100%;
+        max-width: none;
+      }
+
+      position: absolute;
+      top: 70%;
+      left: 50%;
+
+      max-width: 50%;
+
+      transform: translate(-50%, -50%);
+      input {
+        font-size: 14px;
+
+        margin: 0 auto;
+        padding: 11px;
+
+        transition: all .25s ease;
+        vertical-align: middle;
+        text-transform: uppercase;
+
+        border: none;
+        border: 1px solid rgba($tnc-color--primary, .2);
+        border-radius: 0;
+        outline: none;
+        background: rgba(255,255,255, .4);
+
+        -webkit-appearance: none;
+        &:focus {
+          border: 1px solid rgba($tnc-color--primary, 1);
+          background: rgba(255,255,255, .5);
+        }
+      }
+      button {
+        margin-top: 0;
+        padding-top: torem(10px);
+        padding-bottom: torem(10px);
+      }
+    }
+  }
+  h2 {
+    @include respond-to('desktop-mac') {
+      font-size: torem(28px);
+      line-height: 1;
+
+      margin-bottom: torem(14px);
+    }
+    @include respond-to('ipad') {
+      font-size: torem(24px);
+    }
+    @include respond-to('iphone6-plus') {
+      font-size: torem(18px);
+
+      margin-bottom: torem(5px);
+    }
+
+    font-weight: 600;
+
+    margin: 0 0 torem(16px) 0;
+    padding: 0;
+
+    text-transform: uppercase;
+  }
+  .route__line {
+    div {
+      @include respond-to('iphone6-plus') {
+        top: 40px;
+        right: 6%;
+
+        height: 4px;
+      }
+
+      position: absolute;
+      top: 37px;
+      right: 3%;
+
+      width: 0;
+      height: 6px;
+
+      transition: width 1.5s ease;
+
+      background: #00bfff;
+      span {
+        @include respond-to('ipad') {
+          left: -50%;
+        }
+        @include respond-to('ipad-portrait') {
+          wleft: -100% !important;
+        }
+        @include respond-to('iphone6-plus') {
+          left: -150% !important;
+
+          font-size: torem(15px);
+        }
+
+        position: absolute;
+        top: 50%;
+        left: -40%;
+
+        font-size: torem(20px);
+        font-weight: 700;
+
+        transition: opacity .25s ease;
+        transform: translate(0, -50%);
+        letter-spacing: .35px;
+        text-transform: uppercase;
+
+        opacity: 0;
+        color: $tnc-font-color-dark;
+      }
+      &:after,
+      &:before {
+        @include respond-to('iphone6-plus') {
+          width: 10px;
+          height: 10px;
+        }
+
+        position: absolute;
+        top: 50%;
+        left: 0;
+
+        width: 16px;
+        height: 16px;
+
+        content: '';
+        transform: translate(0, -50%);
+
+        border-radius: 9999px;
+        background: $tnc-font-color;
+      }
+      &:after {
+        right: 0;
+        left: 100%;
+      }
+      &.active {
+        @include respond-to('iphone6-plus') {
+          width: 15%;
+        }
+
+        width: 20%;
+        span {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  > h2 {
+    color: $tnc-font-color-dark;
+  }
+  &__button {
+    position: absolute;
+    top: torem(-22.5px);
+    left: 50%;
+
+    width: torem(45px);
+    height: torem(45px);
+
+    content: '';
+    transition: all .25s ease;
+    transform: translate(-50%, 0);
+
+    border: 1px solid rgba($tnc-font-color-dark, .2);
+    border-radius: 50%;
+    background: rgba(#fff, 1);
+    &:hover {
+      border: 1px solid rgba($tnc-font-color-dark, .4);
+    }
+    &:after {
+      position: absolute;
+      top: torem(12px);
+      left: 50%;
+
+      font-size: torem(35px);
+      font-weight: 600;
+      line-height: .5;
+
+      content: '>';
+      transform: translate(-50%, 0) rotate(90deg);
+
+      color: $tnc-font-color;
+    }
+  }
+  &__information {
+    @include cf();
+    > div {
+      @include column(1/3, $gutter: 2);
+      @include respond-to('ipad') {
+        @include column(1/3, $gutter: 1);
+      }
+      @include respond-to('desktop-mac') {
+        padding: toem(5px) toem(10px) toem(10px) toem(10px);
+      }
+      @include respond-to('iphone6-plus') {
+        &:nth-child(3) {
+          @include column(1/1, $gutter: 0);
+        }
+      }
+
+      position: relative;
+
+      padding: toem(16px);
+      h3 {
+        @include respond-to('desktop-mac') {
+          font-size: torem(20px);
+        }
+        @include respond-to('ipad-portrait') {
+          font-size: torem(17px);
+        }
+        @include respond-to('iphone6-plus') {
+          font-size: torem(15px);
+        }
+
+        font-family: 'Whitney Condensed';
+        font-weight: 600;
+
+        margin: 0;
+
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+    }
+    &-about {
+      @include respond-to('iphone6-plus') {
+        display: none;
+      }
+
+      text-align: center;
+      h2,
+      p {
+        margin: 0;
+      }
+      h2 {
+        @include respond-to('desktop-mac') {
+          font-size: torem(84px);
+        }
+        @include respond-to('ipad-portrait') {
+          font-size: torem(68px);
+        }
+
+        font-size: torem(100px);
+        font-weight: 600;
+        line-height: 1;
+        &:last-of-type {
+          @include respond-to('desktop-mac') {
+            font-size: torem(32px);
+          }
+          @include respond-to('ipad-portrait') {
+            font-size: torem(26px);
+          }
+
+          font-size: torem(36px);
+          font-style: italic;
+
+          margin: torem(8px) 0;
+        }
+      }
+      p {
+        @include respond-to('ipad-portrait') {
+          font-size: torem(13px);
+        }
+
+        font-size: torem(14px);
+        font-weight: 600;
+
+        text-transform: uppercase;
+
+        color: $tnc-font-color-dark;
+      }
+    }
+    &-sources {
+      @include respond-to('iphone6-plus') {
+        display: none;
+      }
+
+      overflow: hidden;
+
+      max-height: 230px;
+
+      text-align: center;
+      .reservoirs__controller {
+        @include respond-to('ipad') {
+          right: 3%;
+
+          transform: translate(-3%, -50%);
+        }
+
+        display: none;
+
+        position: absolute;
+        top: 50%;
+        right: 8%;
+
+        transform: translate(-8%, -50%);
+        a {
+          display: block;
+
+          font-size: 18px;
+
+          margin: 25px 0;
+
+          color: $tnc-font-color;
+          &:hover {
+            color: shade($tnc-font-color, 20%);
+          }
+        }
+        &.disable {
+          a {
+            pointer-events: none;
+
+            color: #ccc;
+          }
+        }
+        &.control--visible {
+          display: block;
+        }
+      }
+      .reservoirs__list {
+        @include respond-to('desktop-mac') {
+          margin-top: torem(13px);
+        }
+
+        overflow: hidden;
+
+        margin: 0;
+        margin-top: torem(16px);
+        padding: 0;
+
+        list-style-type: none;
+
+        text-align: center;
+        li {
+          @include respond-to('ipad-portrait') {
+            font-size: torem(13px);
+          }
+          @include respond-to('desktop-mac') {
+            margin-bottom: torem(8px);
+          }
+
+          font-size: torem(14px);
+          font-weight: 600;
+
+          padding-bottom: torem(10px);
+
+          text-transform: uppercase;
+          a {
+            color: $tnc-font-color-dark;
+            &:hover {
+              color: tint($tnc-font-color-dark, 35%);
+            }
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+          &.active {
+            display: inline-block;
+
+            position: relative;
+
+            color: $tnc-font-color;
+            &:before {
+              position: absolute;
+              top: 0;
+              left: -30%;
+
+              font-size: torem(35px);
+              font-weight: 600;
+              line-height: .5;
+
+              content: '>';
+            }
+          }
+        }
+      }
+    }
+    &-goto {
+      label,
+      input {
+        display: block;
+
+        box-sizing: border-box;
+        width: 100%;
+        margin-bottom: torem(5px);
+      }
+      label {
+        font-size: torem(12px);
+        font-weight: 600;
+
+        text-transform: uppercase;
+
+        color: $tnc-font-color-dark;
+      }
+      input {
+        font-size: 14px;
+
+        margin: 0 auto;
+        margin-bottom: torem(5px);
+        padding: 10px;
+
+        transition: all .25s ease;
+        vertical-align: middle;
+        text-transform: uppercase;
+
+        border: none;
+        border: 1px solid rgba($tnc-color--primary, .2);
+        border-radius: 0;
+        outline: none;
+        background: rgba(255,255,255, .4);
+
+        -webkit-appearance: none;
+        &:focus {
+          border: 1px solid rgba($tnc-color--primary, 1);
+          background: rgba(255,255,255, .5);
+        }
+        &:last-of-type {
+          margin-bottom: torem(10px);
+        }
+      }
+      form {
+        @include respond-to('iphone6-plus') {
+          margin-top: toem(10px);
+        }
+
+        margin-top: toem(16px);
+      }
+      .button {
+        width: 100%;
+        padding-top: torem(10px);
+        padding-bottom: torem(10px);
+      }
+    }
+  }
+}
+
+.item-list__fade-in {
+  animation: item-list__fade-in .50s ease forwards;
+}
+
+.item-list__fade-in--reverse {
+  animation: item-list__fade-in--reverse .50s ease forwards;
+}
+
+@keyframes item-list__fade-in {
+  from {
+    height: 0;
+
+    opacity: 0;
+  }
+  to {
+    height: 37.5vh;
+
+    opacity: 1;
+    background: rgba(255,255,255, .7);
+  }
+}
+
+.city__founded-anim-in {
+  animation: city__founded-anim-in .50s ease forwards;
+}
+.city__founded-anim-out {
+  animation: city__founded-anim-out .50s ease forwards;
+}
+
+@keyframes city__founded-anim-in {
+  from {
+    z-index: -9999;
+
+    height: 0;
+
+    opacity: 0;
+  }
+  to {
+    z-index: 10;
+    //height: 37.5vh;
+
+    opacity: 1;
+    background: transparent;
+  }
+}
+
+@keyframes city__founded-anim-out {
+  from {
+    //height: 37.5vh;
+    opacity: 1;
+    background: transparent;
+  }
+  to {
+    z-index: -9999;
+
+    height: 0;
+
+    opacity: 0;
+  }
+}
+
+@keyframes item-list__fade-in--reverse {
+  from {
+    height: 37.5vh;
+
+    opacity: 1;
+    background: rgba(255,255,255, .2);
+  }
+  to {
+    height: 0;
+
+    opacity: 0;
+  }
+}
+.item {
+  padding: 12px;
+
+  background: #d7f0ff;
+}
+
+.item:nth-child(odd) {
+  background: #e2f0f8;
+}
+
+.item a {
+  display: block;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  width: 100%;
+  margin-bottom: 8px;
+
+  text-decoration: none;
+
+  color: #444;
+}
+
+// .leaflet-clickable {
+//     stroke: brown;
+//     transition: all .25s linear;
+// }
+
+
+
+#directions {
+  display: none;
+
+  z-index: -9999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
