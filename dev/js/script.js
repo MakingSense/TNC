@@ -145,7 +145,6 @@ function initPlayer() {
 }
 
 function closeMap() {
-    event.preventDefault();
     $('.map__container').removeClass('anim__fade-in');
     $('.text__container').removeClass('text__container--out');
     $(this).removeAttr('href');
@@ -350,7 +349,7 @@ function peopleModalBinding() {
             if(container.hasClass('active') && container.hasClass('video__item')){
                 var l_player = player[0].player;
                 var aux = player.parent().siblings('.mejs-layers').find('.mejs-overlay-button');
-                if((Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
+                if(!(Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
                     setTimeout(aux.trigger('click'), 1000);
                 }
             }
