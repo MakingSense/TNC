@@ -16,9 +16,9 @@
 .wrapper {
   @include cf();
 
-  display: block;
-
   position: relative;
+
+  display: block;
 
   width: 100%;
   height: 100%;
@@ -110,6 +110,7 @@
   }
   &-8 {
     background-image: url('../img/section-02.jpg');
+    background-position: center center;
   }
   .section__footer {
     position: absolute;
@@ -299,14 +300,13 @@ div[id*='svg_'] {
   transform: translate(-50%, 0%);
   text-align: center;
   h3 {
+    font-weight: 600;
     line-height: 1.3;
 
     margin: 0;
 
+    letter-spacing: .25px;
     text-transform: uppercase;
-    &:last-child {
-      font-weight: 600;
-    }
   }
   p {
     margin: toem(15px) 0 0 0;
@@ -322,9 +322,9 @@ div[id*='svg_'] {
     color: $tnc-font-color;
   }
   .icon-location {
-    display: block;
-
     font-size: toem(64px);
+
+    display: block;
 
     margin: 0 auto;
     margin-bottom: torem(15px);
@@ -348,10 +348,10 @@ div[id*='svg_'] {
       display: none;
     }
 
-    display: block;
-
     position: absolute;
     top: 0;
+
+    display: block;
 
     width: 100%;
     padding: torem(10px) 5vh;
@@ -438,20 +438,23 @@ div[id*='svg_'] {
     }
   }
   h4 {
+    @include respond-to('iphone6-plus') {
+      font-size: torem(19px);
+
+      margin: torem(14px) 0;
+    }
+    @include respond-to('iphone5') {
+      font-size: torem(16px);
+
+      margin: torem(7px) 0;
+    }
+
     display: inline-block;
 
     margin: torem(16px) 0;
 
     vertical-align: middle;
     text-transform: uppercase;
-    @include respond-to('iphone6-plus') {
-      margin: torem(14px) 0;
-      font-size: torem(19px);
-    }
-    @include respond-to('iphone5') {
-      margin: torem(7px) 0;
-      font-size: torem(16px);
-    }
     span {
       font-weight: 700;
     }
@@ -524,9 +527,9 @@ div[id*='svg_'] {
 
       vertical-align: middle;
       li {
-        display: inline-block;
-
         font-size: torem(30px);
+
+        display: inline-block;
 
         margin-right: torem(5px);
 
@@ -557,11 +560,11 @@ div[id*='svg_'] {
           font-size: torem(40px);
         }
 
-        display: inline-block;
-
         font-family: 'Whitney Condensed';
         font-size: torem(48px);
         line-height: 1;
+
+        display: inline-block;
 
         margin: 0;
         padding: 0 torem(5px) torem(10px) torem(5px);
@@ -573,9 +576,9 @@ div[id*='svg_'] {
         border-bottom: 1px solid $tnc-font-color;
       }
       h4 {
-        display: block;
-
         line-height: 1;
+
+        display: block;
 
         margin: 0;
       }
@@ -710,6 +713,7 @@ div[id*='svg_'] {
         @include respond-to('iphone6-plus') {
           top: 60%;
           left: 5%;
+
           max-width: 360px;
         }
         @include respond-to('iphone6') {
@@ -860,8 +864,10 @@ div[id*='svg_'] {
       width: 100%;
     }
 
+    width: 60%;
+
     position: absolute;
-    top: 65%;
+    top: 75%;
     left: 50%;
 
     transform: translate(-50%, -65%);
@@ -874,7 +880,7 @@ div[id*='svg_'] {
     a {
       display: inline-block;
 
-      margin-bottom: toem(20px);
+      margin-bottom: 10%;
       span {
         font-size: toem(65px);
 
@@ -888,6 +894,7 @@ div[id*='svg_'] {
     }
     img {
       display: block;
+      margin: 0 auto;
     }
   }
 }

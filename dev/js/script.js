@@ -132,7 +132,7 @@ function initPlayer() {
             });
 
             $('#player_1_open').on('click touchstart', function() {
-                if((Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
+                if(!(Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
                     setTimeout(function(){
                         $('#c-video .mejs-overlay-button').trigger('click');
                     }, 1000);
