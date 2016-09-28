@@ -55,7 +55,7 @@ $rc-checkbox-border-radius: toem(3px) !default;
         height: $rc-height;
         background-color: $background-color;
         border: 1px dotted transparent;
-        transition: all $msuif-transition-duration $msuif-transition-timing;
+        transition: all $tnc-transition-duration $tnc-transition-timing;
 
         @if $type == 'checkbox' {
           border-radius: $rc-checkbox-border-radius
@@ -81,7 +81,7 @@ $rc-checkbox-border-radius: toem(3px) !default;
         font-size: $rc-font-size;
         text-align: center;
         color: $marker-color;
-        transition: transform #{$msuif-transition-duration / 2} $msuif-transition-timing;
+        transition: transform #{$tnc-transition-duration / 2} $tnc-transition-timing;
       }
     }
   }

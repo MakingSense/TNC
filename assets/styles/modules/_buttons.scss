@@ -2,3 +2,44 @@
 /// Buttons
 /// @group Component - Buttons
 ////
+
+.button {
+  @include respond-to('ipad-portrait') {
+    font-size: torem(14px);
+  }
+  @include respond-to('iphone6-plus') {
+    padding: toem(11px);
+  }
+
+  display: inline-block;
+
+  font-size: torem(16px);
+  font-weight: 700;
+  line-height: 1.2;
+
+  padding: toem(16px) toem(40px);
+
+  transition: all .25s ease;
+  text-align: center !important;
+  vertical-align: middle;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  color: #fff;
+  border: none;
+  background-color: $tnc-color--primary;
+
+  -webkit-appearance: none;
+  &:hover {
+    background-color: shade($tnc-color--primary, 15%);
+  }
+  &__hollow {
+    color: $tnc-color--primary;
+    border: 1px solid $tnc-color--primary;
+    background-color: transparent;
+    &:hover {
+      color: #fff;
+      background-color: $tnc-color--primary;
+    }
+  }
+}
