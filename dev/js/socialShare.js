@@ -11,11 +11,11 @@ jQuery.fn.socialShare = function(opts) {
             "Wild": "pic.twitter.com/7Y73t1DPgY"
         },
         facebook: {
-            "Ahh": "http://gph.is/2cM7Fx0",
-            "Cold": "http://gph.is/2ctjM1g",
-            "Dog Washing": "http://gph.is/2dj0mlN",
-            "Running": "http://gph.is/2cBVt4i",
-            "Wild": "http://gph.is/2dqbE3y" 
+            "Ahh": "http://45.55.238.210/img/shares/ahh.jpg",
+            "Cold": "http://45.55.238.210/img/shares/cold.jpg",
+            "Dog Washing": "http://45.55.238.210/img/shares/dog.jpg",
+            "Running": "http://45.55.238.210/img/shares/runner.jpg",
+            "Wild": "http://45.55.238.210/img/shares/wild.jpg" 
         }
     }
     var
@@ -62,12 +62,14 @@ jQuery.fn.socialShare = function(opts) {
                 case 'facebook':
                     var gif;
                     $.each(socialLinks.facebook, function(index, val) {
-                        if(name == index){
+                        if(name == encodeURIComponent(index)){
                             gif = val;
                         }                         
                     });
-                    window.open('https://www.facebook.com/dialog/feed?app_id=145634995501895' +
-                        // '&name=' + (title.concat(name)).concat(" water!") +
+                    //window.open('https://www.facebook.com/dialog/feed?app_id=145634995501895' +
+                    window.open('https://www.facebook.com/dialog/feed?app_id=575605059229712&link=' + url +
+                        '&name=' + (title.concat(name)).concat(" water!") +
+                        '&caption=' + url +
                         '&href=' + url +
                         '&description=' + content +
                         '&picture=' + gif +

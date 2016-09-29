@@ -14,7 +14,7 @@ $(document).ready(function() {
         navigation: true,
         navigationPosition: 'left',
         easingcss3: 'ease-in-out',
-        scrollingSpeed: 2000,
+        scrollingSpeed: 2300,
         fitToSectionDelay: 1000,
         touchSensitivity: 25,
 

@@ -99,7 +99,7 @@ function displayDataCity(cityName, placename) {
     km.html(calcutaKMAVG(cityName));
 }
 
-function calcutaKMAVG(cityName){
+function calcutaKMAVG(cityName) {
     var wsIDs = [];
     var ws = [];
     var totalKM = 0;
@@ -123,7 +123,7 @@ function calcutaKMAVG(cityName){
         totalKM = totalKM + distance;
     });
 
-    return distanceConvert(totalKM/ws.length);
+    return distanceConvert(totalKM / ws.length);
 }
 
 function hideCity() {
@@ -143,11 +143,33 @@ function hideCity() {
 
 function initMap() {
     map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr').setView(L.latLng(origin.lat, origin.lng), 8);
+    map.setZoom(16);
+
+    map.on('mousemove', function(e) {
+        var features = map.queryRenderedFeatures(e.point, {
+            layers: ['places']
+        });
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+        if (!features.length) {
+            popup.remove();
+            return;
+        }
+
+        var feature = features[0];
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(feature.geometry.coordinates)
+            .setHTML(feature.properties.description)
+            .addTo(map);
+    });
 
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
-    locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
-    //locations.loadURL('data/data-b.geojson'); // Develop DB
+    //locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
+    locations.loadURL('data/data-b.geojson'); // Develop DB
     map.attributionControl.setPosition('bottomleft');
 
     locations.on('ready', function() {
@@ -169,13 +191,13 @@ function initMap() {
             // Marker interaction
             locale.on('click touchstart', function(e) {
                 // 1. center the map on the selected marker.
-                map.panTo(locale.getLatLng());
+                map.setView(locale.getLatLng(), 12);
                 destination = locale.getLatLng();
                 traceRoute();
             });
             locale.on('hover', function(event) {
                 if (e.type == "mouseenter") {
-                   locale.openPopup();
+                    locale.openPopup();
                 }
             });
         });
@@ -196,7 +218,7 @@ function initMap() {
         } else {
             marker.setIcon(L.icon({
                 iconUrl: './img/icon-drop.svg',
-                iconSize: [32, 32],
+                iconSize: [20, 20],
                 // iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
             }));
@@ -235,7 +257,7 @@ $('#routeButton').on('click touchstart', function(event) {
     bindButtonRoute();
 });
 
-function bindButtonRoute(){
+function bindButtonRoute() {
     var link = "https://www.google.com/maps?";
     var loc_origin = "saddr=" + $('#origin').val();
     //var loc_origin = "saddr=" + origin[0] + ',' + origin[1];//Old Approach
@@ -266,15 +288,11 @@ function searchInMap(text) {
 }
 
 function showMap(err, data) {
-    if(data.results.features.length > 0) {
-        if(checkCityExist(data.results.features[0].text)) {
+    if (data.results.features.length > 0) {
+        if (checkCityExist(data.results.features[0].text)) {
             filterLocations(data.results.features[0].text);
             origin = data.latlng;
-            if (data.lbounds) {
-                map.fitBounds(data.lbounds);
-            } else if (data.latlng) {
-                map.setView([data.latlng[0], data.latlng[1]], 18);
-            }
+            map.setView([data.latlng[0], data.latlng[1]], 8);
             displayCity();
             displayDataCity(data.results.features[0].text, data.results.features[0].place_name);
             $('#origin').val(data.results.features[0].text);
@@ -282,12 +300,10 @@ function showMap(err, data) {
                 geolat: data.latlng[0],
                 geolon: data.latlng[1]
             });
-        }
-        else {
+        } else {
             displayCityWrong();
         }
-    }
-    else {
+    } else {
         displayCityWrong();
     }
 }
@@ -302,7 +318,7 @@ function checkCityExist(city) {
     locations.eachLayer(function(locale) {
         prop = locale.feature.properties;
         if (prop.type == "city") {
-            if(prop.city_name == city){
+            if (prop.city_name == city) {
                 aux = true;
             }
         }
@@ -362,7 +378,7 @@ function WaterSourcesPrinter(locale) {
 
         // When a menu item is clicked, animate the map to center
         // its associated locale and open its popup.
-        map.panTo(locale.getLatLng());
+        map.setView(locale.getLatLng(), 12);
         destination = locale.getLatLng();
         traceRoute();
         locale.openPopup();
@@ -373,11 +389,10 @@ function WaterSourcesPrinter(locale) {
     var divHeight = $('.city__information-sources').outerHeight();
     var sourcesHeight = $('.city__information-sources').innerHeight();
 
-    if(reservoirsDIV >= sourcesHeight) {
+    if (reservoirsDIV >= sourcesHeight) {
         $('.reservoirs__list').css('height', (divHeight - 70));
         $('.reservoirs__controller').addClass('control--visible');
-    }
-    else if(!$('.reservoirs__controller').hasClass('control--visible')) {
+    } else if (!$('.reservoirs__controller').hasClass('control--visible')) {
         $('.reservoirs__list').css('height', 'initial');
         $('.reservoirs__controller').removeClass('control--visible');
     }
