@@ -35,26 +35,27 @@ $(document).ready(function() {
     scrollLocation();
     scrollBinding();
     checkHash();
+    footerMobile();
 
-    var scrolled=0;
+    var scrolled = 0;
 
 
 
-    $("#downClick").on("click" ,function(){
-        scrolled=scrolled+20;
+    $("#downClick").on("click", function() {
+        scrolled = scrolled + 20;
 
         $("#reservoirs").animate({
-                scrollTop:  scrolled
-           });
+            scrollTop: scrolled
+        });
 
     });
 
-    $("#upClick").on("click" ,function(){
-        scrolled=scrolled-20;
+    $("#upClick").on("click", function() {
+        scrolled = scrolled - 20;
 
         $("#reservoirs").animate({
-                scrollTop:  scrolled
-           });
+            scrollTop: scrolled
+        });
 
     });
 
@@ -93,6 +94,17 @@ function removePreloader() {
     }, 4000);
 }
 
+function footerMobile() {
+    var logos = $('.main__footer .logos__container');
+    if(Detectizr.device.type == 'mobile'){
+        logos.insertAfter('.main__footer .content__container');
+        $('.logos__container').on('click', function(event) {
+            event.preventDefault();
+            $('.main__footer').toggleClass('active');
+        });
+    }
+}
+
 /*------------------------------------*\
   #Control Slides Functionalities
 \*------------------------------------*/
@@ -102,8 +114,7 @@ function hideSlidesDots() {
 
 function preloader() {
     var preloader = $('.preloader__container');
-        preloader.fadeOut('400', function() {
-    });
+    preloader.fadeOut('400', function() {});
 }
 
 /*------------------------------------*\
@@ -118,8 +129,7 @@ function initPlayer() {
         success: function(media, domNode) {
 
             // add HTML5 events to the YouTube API media object
-            media.addEventListener('play', function() {
-            }, false);
+            media.addEventListener('play', function() {}, false);
 
             media.addEventListener('ended', function() {
                 media.stop();
@@ -132,15 +142,15 @@ function initPlayer() {
             });
 
             $('#player_1_open').on('click touchstart', function() {
-                if(!(Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
-                    setTimeout(function(){
+                if (!(Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')) {
+                    setTimeout(function() {
                         $('#c-video .mejs-overlay-button').trigger('click');
                     }, 1000);
                 }
 
             });
         },
-        features: ['playpause','progress','current','duration','tracks']
+        features: ['playpause', 'progress', 'current', 'duration', 'tracks']
     });
 }
 
@@ -218,7 +228,7 @@ function bulletInformation() {
 \*------------------------------------*/
 var ts;
 
-function scrollBinding(){
+function scrollBinding() {
     var sections = $('.main__section, .section-7, .section-5, .section-3, .share__section');
 
     $.each(sections, function(index, val) {
@@ -234,7 +244,7 @@ function scrollBinding(){
                 $.fn.fullpage.moveTo(active - 2, 0);
                 amount++;
             }
-            if(ts > te && amount < 1 && active != 9 && $(this).hasClass('active')) {
+            if (ts > te && amount < 1 && active != 9 && $(this).hasClass('active')) {
                 $.fn.fullpage.moveTo(active + 2, 0);
                 amount++;
             }
@@ -243,11 +253,11 @@ function scrollBinding(){
             event.preventDefault();
             var active = parseInt($(this).attr('data-index'));
             var amount = 0;
-            if(event.deltaY == 1 && amount < 1 && active != 1 && $(this).hasClass('active')){
+            if (event.deltaY == 1 && amount < 1 && active != 1 && $(this).hasClass('active')) {
                 $.fn.fullpage.moveTo(active - 2, 0);
                 amount++;
             }
-            if(event.deltaY == -1 && amount < 1 && active != 9 && $(this).hasClass('active')){
+            if (event.deltaY == -1 && amount < 1 && active != 9 && $(this).hasClass('active')) {
                 $.fn.fullpage.moveTo(active + 2, 0);
                 amount++;
             }
@@ -263,10 +273,19 @@ function bingindGIF() {
     var gifMain = $('.gif__main img');
     var twitter = $('#twitter');
     var facebook = $('#facebook');
+    var height = $('.gif__main').outerHeight();
+    $('.gif__main').css('height', (height - 2));
     $.each(itemList, function(index, val) {
         $(this).on('click touchstart', function(event) {
             event.preventDefault();
+            $('.sk-circle').css('opacity', 1);            
+            gifMain.hide();
+            gifMain.on('load', function(event) {
+                $('.sk-circle').css('opacity', 0); 
+                $(this).fadeIn();               
+            });
             var src = $(this).attr('src');
+            gifMain.attr('src', '');
             gifMain.attr('src', (src.substr(0, src.length - 3) + 'gif'));
             gifMain.attr('data-name', $(this).attr('data-name'));
             twitter.attr('data-name', $(this).attr('data-name'));
@@ -305,14 +324,13 @@ function peopleModalBinding() {
     $.each(drops, function(index, val) {
         var container = $(this).parent();
         var player = $(this).siblings('.player');
-        if(container.hasClass('video__item')){
+        if (container.hasClass('video__item')) {
             player.mediaelementplayer({
                 success: function(media, domNode) {
                     var modalClose = $('.modal__close');
 
                     // add HTML5 events to the YouTube API media object
-                    media.addEventListener('play', function() {
-                    }, false);
+                    media.addEventListener('play', function() {}, false);
 
                     media.addEventListener('ended', function() {
                         media.stop();
@@ -326,7 +344,7 @@ function peopleModalBinding() {
                         });
                     });
                 },
-                features: ['playpause','progress','current','duration','tracks']
+                features: ['playpause', 'progress', 'current', 'duration', 'tracks']
             });
         }
         $(this).on('click touchstart', function(event) {
@@ -338,7 +356,7 @@ function peopleModalBinding() {
             $.each(aux, function(index, val) {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass('active');
-                    if($(this).hasClass('video__item')){
+                    if ($(this).hasClass('video__item')) {
                         var player = $(this).children('.player').find('.player');
                         var l_player = player[0].player;
                         l_player.pause();
@@ -346,14 +364,13 @@ function peopleModalBinding() {
                 }
             });
 
-            if(container.hasClass('active') && container.hasClass('video__item')){
+            if (container.hasClass('active') && container.hasClass('video__item')) {
                 var l_player = player[0].player;
                 var aux = player.parent().siblings('.mejs-layers').find('.mejs-overlay-button');
-                if(!(Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')){
+                if (!(Detectizr.device.type == 'tablet' || Detectizr.device.type == 'mobile') && (Detectizr.os.name != 'ios')) {
                     setTimeout(aux.trigger('click'), 1000);
                 }
-            }
-            else if(container.hasClass('video__item')) {
+            } else if (container.hasClass('video__item')) {
                 var l_player = player[0].player;
                 l_player.pause();
             }

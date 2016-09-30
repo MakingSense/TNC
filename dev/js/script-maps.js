@@ -168,8 +168,8 @@ function initMap() {
 
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
-    //locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
-    locations.loadURL('data/data-b.geojson'); // Develop DB
+    locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
+    //locations.loadURL('data/data-b.geojson'); // Develop DB
     map.attributionControl.setPosition('bottomleft');
 
     locations.on('ready', function() {

@@ -48,7 +48,7 @@ jQuery.fn.socialShare = function(opts) {
                 case 'twitter':
                     var gif;
                     $.each(socialLinks.twitter, function(index, val) {
-                        if(name == index){
+                        if(name == encodeURIComponent(index)){
                             gif = val;
                         }                         
                     });

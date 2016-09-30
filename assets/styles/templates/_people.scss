@@ -277,11 +277,14 @@
           }
           &:nth-child(2) {
             @include respond-to('iphone6-plus') {
-              height: 21%;
+              height: 25%;
+              max-width: 71%;
             }
             @include respond-to('iphone6') {
               top: 25%;
               right: 20%;
+              height: 23%;
+              max-width: 66%;
             }
 
             z-index: 20;
