@@ -50,6 +50,8 @@
   "dependencies": {
     "gulp-clean-css": "^2.0.12",
     "gulp-concat": "^2.6.0",
+    "gulp-print": "^2.0.1",
+    "gulp-rename": "^1.2.2",
     "gulp-svgo": "^1.0.3",
     "gulp-uglify": "^2.0.0",
     "gulp-zip": "^3.2.0",
@@ -63,6 +65,7 @@
     "del": "~2.2.0",
     "gulp": "~3.9.1",
     "gulp-autoprefixer": "~3.1.0",
+    "gulp-filenames": "^3.0.0",
     "gulp-iconfont": "~8.0.0",
     "gulp-iconfont-css": "~2.1.0",
     "gulp-kraken": "~0.2.0",

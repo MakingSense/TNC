@@ -111,26 +111,32 @@
   background-position: top center;
   background-size: cover;
   &-2 {
-    background-image: url('../img/section-08.jpg');
+    // background-image: url('../img/section-08.jpg');
+    background-image: url('/soy-img-section-08.jpg');//PRODUCTION
     background-position: center center;
   }
   &-3 {
-    background-image: url('../img/section-07.jpg');
+    // background-image: url('../img/section-07.jpg');
+    background-image: url('/soy-img-section-07.jpg');//PRODUCTION
     background-position: center center;
   }
   &-4 {
-    background-image: url('../img/section-06.jpg');
+    // background-image: url('../img/section-06.jpg');
+    background-image: url('/soy-img-section-06.jpg');//PRODUCTION
     background-position: bottom center;
   }
   &-6 {
-    background-image: url('../img/section-04.jpg');
+    // background-image: url('../img/section-04.jpg');
+    background-image: url('/soy-img-section-04.jpg');//PRODUCTION
   }
   &-7 {
-    background-image: url('../img/section-03.jpg');
+    // background-image: url('../img/section-03.jpg');
+    background-image: url('/soy-img-section-03.jpg');//PRODUCTION
     background-position: center center;
   }
   &-8 {
-    background-image: url('../img/section-02.jpg');
+    // background-image: url('../img/section-02.jpg');
+    background-image: url('/soy-img-section-02.jpg');//PRODUCTION
     background-position: center center;
   }
   .section__footer {
@@ -357,7 +363,8 @@ div[id*='svg_'] {
 .share__section {
   z-index: 9999;
 
-  background-image: url('../img/section-09.jpg');
+  // background-image: url('../img/section-09.jpg');
+  background-image: url('/soy-img-section-09.jpg');//PRODUCTION
   background-position: center center;
   .fp-tableCell {
     z-index: 9999;
@@ -590,7 +597,8 @@ div[id*='svg_'] {
       width: 426px;
       margin: 0 auto;
 
-      background-image: url('../img/gifs/bg.jpg');
+      // background-image: url('../img/gifs/bg.jpg');
+      background-image: url('/soy-img-gifs-bg.jpg');//PRODUCTION
       background-repeat: no-repeat;
       img {
         border: 1px solid $tnc-font-color;
@@ -949,7 +957,8 @@ div[id*='svg_'] {
 
   position: relative;
 
-  background-image: url('../img/section-01.jpg');
+  // background-image: url('../img/section-01.jpg');
+  background-image: url('/soy-img-section-01.jpg');//PRODUCTION
   background-position: center center;
   .c-modal__content {
     width: 80vw;
