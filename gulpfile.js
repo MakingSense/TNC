@@ -159,7 +159,7 @@ gulp.task('minify-css', ['autoprefixer', 'minify-css-plugin-1', 'minify-css-plug
 });
 
 gulp.task('minify-css-plugin-1', function() {
-    return gulp.src('dev/css/jquery.mb.YTPlayer.min.css')
+    return gulp.src('dev/css/jquerymbYTPlayermin.css')
         .pipe(cleanCSS({
             debug: true
         }, function(details) {
@@ -215,11 +215,13 @@ gulp.task('scriptsJS', ['concatscriptJS'], function(cb) {
 
 // Generate webfonts
 gulp.task('webfont:generate', function() {
-    var fontName = 'icon-font';
+    //var fontName = 'icon-font';
+    var fontName = 'soy-fonts-icon-font';//PRODUCTION
     return gulp.src([config.folderAssets.base + '/icons/*.svg'])
         .pipe(iconfontCss({
             fontName: fontName,
-            fontPath: '../fonts/',
+            //fontPath: '../fonts/',
+            fontPath: '/', //PRODUCTION
             path: 'gulp-icontemplate.css',
             targetPath: '_icon-font.scss'
         }))

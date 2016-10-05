@@ -286,8 +286,7 @@ function bingindGIF() {
             });
             var src = $(this).attr('src');
             gifMain.attr('src', '');
-            // gifMain.attr('src', (src.substr(0, src.length - 3) + 'gif')); //Development
-            gifMain.attr('src', (src.substr(0, src.length - 4) + '-1.gif')); //Production
+            gifMain.attr('src', (src.substr(0, src.length - 6) + '.gif')); //Development
             gifMain.attr('data-name', $(this).attr('data-name'));
             twitter.attr('data-name', $(this).attr('data-name'));
             facebook.attr('data-name', $(this).attr('data-name'));

@@ -168,7 +168,8 @@ function initMap() {
 
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
-    locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
+    //locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
+    locations.loadURL('/soy-data-data.geojson'); // PRODUCTION
     //locations.loadURL('data/data-b.geojson'); // Develop DB
     map.attributionControl.setPosition('bottomleft');
 
@@ -217,7 +218,8 @@ function initMap() {
             }));
         } else {
             marker.setIcon(L.icon({
-                iconUrl: './img/icon-drop.svg',
+                //iconUrl: './img/icon-drop.svg',
+                iconUrl: '/soy-img-icon-drop.svg', //PRODUCTION
                 iconSize: [20, 20],
                 // iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
