@@ -60,57 +60,6 @@
 
 
 
-//Custom Font PRODUCTION
-
-@font-face {
-  font-family: 'Whitney Condensed';
-  src: url('/soy-fonts-whitneycondensed-light.eot');
-  src: url('/soy-fonts-whitneycondensed-light.woff2') format('woff2'),
-       url('/soy-fonts-whitneycondensed-light.woff') format('woff'),
-       url('/soy-fonts-whitneycondensed-light.ttf') format('truetype'),
-       url('/soy-fonts-whitneycondensed-light.svg#whitneycondensed-light') format('svg'),
-       url('/soy-fonts-whitneycondensed-light.eot?#iefix') format('embedded-opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Whitney Condensed';
-  src: url('/soy-fonts-whitneycondensed-semibold.eot');
-  src: url('/soy-fonts-whitneycondensed-semibold.woff2') format('woff2'),
-       url('/soy-fonts-whitneycondensed-semibold.woff') format('woff'),
-       url('/soy-fonts-whitneycondensed-semibold.ttf') format('truetype'),
-       url('/soy-fonts-whitneycondensed-semibold.svg#whitneycondensed-semibold') format('svg'),
-       url('/soy-fonts-whitneycondensed-semibold.eot?#iefix') format('embedded-opentype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Whitney Pro';
-  src: url('/soy-fonts-whitney-semibold.eot');
-  src: url('/soy-fonts-whitney-semibold.woff2') format('woff2'),
-       url('/soy-fonts-whitney-semibold.woff') format('woff'),
-       url('/soy-fonts-whitney-semibold.ttf') format('truetype'),
-       url('/soy-fonts-whitney-semibold.svg#whitney-semibold') format('svg'),
-       url('/soy-fonts-whitney-semibold.eot?#iefix') format('embedded-opentype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Whitney Pro';
-  src: url('/soy-fonts-whitney-light.eot');
-  src: url('/soy-fonts-whitney-light.woff2') format('woff2'),
-       url('/soy-fonts-whitney-light.woff') format('woff'),
-       url('/soy-fonts-whitney-light.ttf') format('truetype'),
-       url('/soy-fonts-whitney-light.svg#whitney-light') format('svg'),
-       url('/soy-fonts-whitney-light.eot?#iefix') format('embedded-opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-
 ///
 $tnc-headers-h1-font-size: 				toem(32px);
 ///
