@@ -144,12 +144,37 @@
     bottom: 3%;
     left: 2%;
     a {
+      @include respond-to('iphone6-plus') {
+        font-size: torem(12px);
+      }
+
       font-weight: 600;
 
       letter-spacing: .25px;
       text-transform: uppercase;
 
       color: $tnc-font-color;
+    }
+  }
+  .section__credits {
+    position: absolute;
+    right: 2%;
+    bottom: 3%;
+    a {
+      @include respond-to('iphone6-plus') {
+        font-size: torem(12px);
+      }
+
+      font-weight: 600;
+
+      letter-spacing: .25px;
+      text-transform: uppercase;
+
+      color: $tnc-font-color;
+    }
+    &--left {
+      right: initial;
+      left: 2%;
     }
   }
 }
@@ -358,12 +383,17 @@ div[id*='svg_'] {
 
     animation: bounce 1.2s infinite;
   }
+  &--inners {
+    @include respond-to('iphone6-plus') {
+      display: none;
+    }
+  }
 }
 
 .share__section {
   z-index: 9999;
-
   // background-image: url('../img/section-09.jpg');
+
   background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-09.jpg');//PRODUCTION
   background-position: center center;
   .fp-tableCell {
@@ -596,8 +626,8 @@ div[id*='svg_'] {
 
       width: 426px;
       margin: 0 auto;
-
       // background-image: url('../img/gifs/bg.jpg');
+
       background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-gifs-bg.jpg');//PRODUCTION
       background-repeat: no-repeat;
       img {
@@ -957,8 +987,8 @@ div[id*='svg_'] {
   @include c-modal;
 
   position: relative;
-
   // background-image: url('../img/section-01.jpg');
+
   background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-01.jpg');//PRODUCTION
   background-position: center center;
   .c-modal__content {
