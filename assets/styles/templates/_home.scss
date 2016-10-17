@@ -38,6 +38,13 @@
   pointer-events: none;
 
   background: #262626;
+  img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
 }
 
 @media only screen and (min-width : 320px) and (max-width : 736px) and (orientation : landscape) {
@@ -111,32 +118,32 @@
   background-position: top center;
   background-size: cover;
   &-2 {
-    // background-image: url('../img/section-08.jpg');
-    background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-08.jpg');//PRODUCTION
+    background-image: url('../img/section-08.jpg');
+    //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-08.jpg');//PRODUCTION
     background-position: center center;
   }
   &-3 {
-    // background-image: url('../img/section-07.jpg');
-    background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-07.jpg');//PRODUCTION
+    background-image: url('../img/section-07.jpg');
+    //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-07.jpg');//PRODUCTION
     background-position: center center;
   }
   &-4 {
-    // background-image: url('../img/section-06.jpg');
-    background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-06.jpg');//PRODUCTION
+    background-image: url('../img/section-06.jpg');
+    //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-06.jpg');//PRODUCTION
     background-position: bottom center;
   }
   &-6 {
-    // background-image: url('../img/section-04.jpg');
-    background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-04.jpg');//PRODUCTION
+    background-image: url('../img/section-04.jpg');
+    //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-04.jpg');//PRODUCTION
   }
   &-7 {
-    // background-image: url('../img/section-03.jpg');
-    background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-03.jpg');//PRODUCTION
+    background-image: url('../img/section-03.jpg');
+    //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-03.jpg');//PRODUCTION
     background-position: center center;
   }
   &-8 {
-    // background-image: url('../img/section-02.jpg');
-    background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-02.jpg');//PRODUCTION
+    background-image: url('../img/section-02.jpg');
+    //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-02.jpg');//PRODUCTION
     background-position: center center;
   }
   .section__footer {
@@ -392,9 +399,9 @@ div[id*='svg_'] {
 
 .share__section {
   z-index: 9999;
-  // background-image: url('../img/section-09.jpg');
 
-  background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-09.jpg');//PRODUCTION
+  background-image: url('../img/section-09.jpg');
+  //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-09.jpg');//PRODUCTION
   background-position: center center;
   .fp-tableCell {
     z-index: 9999;
@@ -411,14 +418,14 @@ div[id*='svg_'] {
 
       padding: torem(6px);
 
-      transform: translate(0, -65%);
+      transform: translate(0, -70%);
 
       background-color: rgba($tnc-background--footer, .98);
     }
     @include respond-to('iphone5') {
       padding: torem(3px);
 
-      transform: translate(0, -75%);
+      transform: translate(0, -76%);
     }
 
     display: block;
@@ -592,12 +599,12 @@ div[id*='svg_'] {
     @include respond-to('iphone6-plus') {
       font-size: torem(19px);
 
-      margin: torem(14px) 0;
+      margin: torem(7px) 0;
     }
     @include respond-to('iphone5') {
-      font-size: torem(16px);
+      font-size: torem(15px);
 
-      margin: torem(7px) 0;
+      margin: torem(2px) 0;
     }
 
     display: inline-block;
@@ -626,9 +633,9 @@ div[id*='svg_'] {
 
       width: 426px;
       margin: 0 auto;
-      // background-image: url('../img/gifs/bg.jpg');
 
-      background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-gifs-bg.jpg');//PRODUCTION
+      background-image: url('../img/gifs/bg.jpg');
+      //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-gifs-bg.jpg');//PRODUCTION
       background-repeat: no-repeat;
       img {
         border: 1px solid $tnc-font-color;
@@ -931,53 +938,7 @@ div[id*='svg_'] {
         border-left: none;
       }
       &.bg-water {
-        @include respond-to('desktop-mac') {
-          top: 29.5%;
-          left: 35.2%;
-
-          width: 17.2%;
-        }
-        @include respond-to('desktop') {
-          top: 29%;
-          left: 37.5%;
-
-          width: 15%;
-        }
-        @include respond-to('macbook') {
-          top: 29.8%;
-          left: 36%;
-
-          width: 16.5%;
-        }
-        @include respond-to('ipad') {
-          top: 29.2%;
-          left: 31.5%;
-
-          width: 22.5%;
-        }
-        @include respond-to('ipad-portrait') {
-          top: 29.2%;
-          left: 21%;
-
-          width: 39.5%;
-        }
-        @include respond-to('iphone6-plus') {
-          display: none;
-        }
-
-        z-index: 0;
-        top: 29.5%;
-        left: 37.2%;
-
-        width: 15.2%;
-        height: 20%;
-
-        transform: rotate(30deg);
-
-        border: none;
-        border-radius: 50px;
-        background: rgba($tnc-font-color, .75);
-        box-shadow: 0 0 45px 10px rgba($tnc-font-color,.75);
+        display: none;
       }
     }
   }
@@ -987,9 +948,9 @@ div[id*='svg_'] {
   @include c-modal;
 
   position: relative;
-  // background-image: url('../img/section-01.jpg');
 
-  background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-01.jpg');//PRODUCTION
+  background-image: url('../img/section-01.jpg');
+  //background-image: url('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/media/soy-img-section-01.jpg');//PRODUCTION
   background-position: center center;
   .c-modal__content {
     width: 80vw;

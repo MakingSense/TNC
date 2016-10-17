@@ -215,13 +215,13 @@ gulp.task('scriptsJS', ['concatscriptJS'], function(cb) {
 
 // Generate webfonts
 gulp.task('webfont:generate', function() {
-    //var fontName = 'icon-font';
-    var fontName = 'soy-fonts-icon-font';//PRODUCTION
+    var fontName = 'icon-font';
+    //var fontName = 'soy-fonts-icon-font';//PRODUCTION
     return gulp.src([config.folderAssets.base + '/icons/*.svg'])
         .pipe(iconfontCss({
             fontName: fontName,
-            //fontPath: '../fonts/',
-            fontPath: '/', //PRODUCTION
+            fontPath: '../fonts/',
+            //fontPath: '/', //PRODUCTION
             path: 'gulp-icontemplate.css',
             targetPath: '_icon-font.scss'
         }))

@@ -30,6 +30,10 @@ $(window).on('load', function() {
     //Binding input
     $('#search-input-btn, #search-inner-button, #search-inner-button-a').on('click touchstart', function(event) {
         event.preventDefault();
+        if (!$('.map__container').hasClass('anim__fade-in')) {
+            $('.map__container').addClass('anim__fade-in');
+            $('.search__container').removeClass('anim__fade-in');
+        }
         $('.reservoirs__controller').removeClass('control--visible')
         var wsList = $('.reservoirs__list');
         wsList.empty();
@@ -40,7 +44,7 @@ $(window).on('load', function() {
     });
 
     $('#iconMap').on('click touchstart', function(event) {
-        $('.map__container').addClass('anim__fade-in');
+        $('.search__container').addClass('anim__fade-in');
         $('.text__container').addClass('text__container--out');
     });
 
@@ -86,7 +90,12 @@ function displayDataCity(cityName, placename) {
     var sources = $('#citySources');
     var km = $('#cityKmAverage');
 
-    title.html(placename);
+    if (!Detectizr.device.type == 'mobile') {
+        title.html(placename);
+    } else {
+        title.html(cityName);
+    }
+
     name.html('About ' + cityName);
 
     locations.eachLayer(function(locale) {
@@ -168,8 +177,8 @@ function initMap() {
 
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
-    //locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
-    locations.loadURL('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/document/prd_290015.geojson'); // PRODUCTION
+    locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
+    //locations.loadURL('http://www.nature.org/cs/groups/webcontent/@web/@lakesrivers/documents/document/prd_290015.geojson'); // PRODUCTION
     //locations.loadURL('data/data-b.geojson'); // Develop DB
     map.attributionControl.setPosition('bottomleft');
 

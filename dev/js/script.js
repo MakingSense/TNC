@@ -156,7 +156,9 @@ function initPlayer() {
 
 function closeMap() {
     $('.map__container').removeClass('anim__fade-in');
+    $('.form').removeClass('search__fade-out');
     $('.text__container').removeClass('text__container--out');
+    $('.search__container').removeClass('anim__fade-in');
     $(this).removeAttr('href');
 };
 
@@ -286,7 +288,8 @@ function bingindGIF() {
             });
             var src = $(this).attr('src');
             gifMain.attr('src', '');
-            gifMain.attr('src', (src.substr(0, src.length - 6) + '.gif')); //Development
+            //gifMain.attr('src', (src.substr(0, src.length - 6) + '.gif')); //PRODUCTION
+            gifMain.attr('src', (src.substr(0, src.length - 4) + '.gif')); //Development
             gifMain.attr('data-name', $(this).attr('data-name'));
             twitter.attr('data-name', $(this).attr('data-name'));
             facebook.attr('data-name', $(this).attr('data-name'));

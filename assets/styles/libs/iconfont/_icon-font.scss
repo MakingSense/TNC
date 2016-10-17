@@ -1,15 +1,15 @@
 @font-face {
-  font-family: "soy-fonts-icon-font";
-  src: url('/soy-fonts-icon-font.eot');
-  src: url('/soy-fonts-icon-font.eot?#iefix') format('eot'),
-    url('/soy-fonts-icon-font.woff2') format('woff2'),
-    url('/soy-fonts-icon-font.woff') format('woff'),
-    url('/soy-fonts-icon-font.ttf') format('truetype'),
-    url('/soy-fonts-icon-font.svg#soy-fonts-icon-font') format('svg');
+  font-family: "icon-font";
+  src: url('../fonts/icon-font.eot');
+  src: url('../fonts/icon-font.eot?#iefix') format('eot'),
+    url('../fonts/icon-font.woff2') format('woff2'),
+    url('../fonts/icon-font.woff') format('woff'),
+    url('../fonts/icon-font.ttf') format('truetype'),
+    url('../fonts/icon-font.svg#icon-font') format('svg');
 }
 
 .ms-icon {
-  font-family:"soy-fonts-icon-font";
+  font-family:"icon-font";
   display:inline-block;
   vertical-align:middle;
   line-height:1;
