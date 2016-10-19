@@ -14,7 +14,7 @@ $(document).ready(function() {
         navigation: true,
         navigationPosition: 'left',
         easingcss3: 'ease-in-out',
-        scrollingSpeed: 2600,
+        scrollingSpeed: 1800,
         fitToSectionDelay: 1000,
         touchSensitivity: 25,
 
@@ -467,7 +467,7 @@ svg_first = function() {
 
         tnc_line_1.setViewBox(-220, -409.45, width, 950, false);
     };
-    tween = TweenMax.to(triangle, 2, {
+    tween = TweenMax.to(triangle, 1.6, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
@@ -539,7 +539,7 @@ svg_third = function() {
 
         tnc_line_3.setViewBox(-70, 0, width, 950, false);
     };
-    tween = TweenMax.to(triangle, 1.8, {
+    tween = TweenMax.to(triangle, 1.6, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,
@@ -575,7 +575,7 @@ svg_four = function() {
 
         tnc_line_4.setViewBox(0, 0, width, 950, false);
     };
-    tween = TweenMax.to(triangle, 1.8, {
+    tween = TweenMax.to(triangle, 1.6, {
         length: obj.pathLength,
         onUpdate: drawLine,
         ease: Circ.easeIn,

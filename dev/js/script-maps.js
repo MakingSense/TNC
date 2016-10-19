@@ -7,7 +7,7 @@
 /*------------------------------------*\
   #Global Vars
 \*------------------------------------*/
-var map, geocoder, locations, directions;
+var map, geocoder, locations, directions, activeCity;
 var listings = document.getElementById('reservoirs');
 var origin = {
     lat: 22.3077423,
@@ -90,11 +90,13 @@ function displayDataCity(cityName, placename) {
     var sources = $('#citySources');
     var km = $('#cityKmAverage');
 
-    if (!Detectizr.device.type == 'mobile') {
+    if (Detectizr.device.type != 'mobile') {
         title.html(placename);
     } else {
         title.html(cityName);
     }
+
+    activeCity = cityName;
 
     name.html('About ' + cityName);
 
@@ -154,27 +156,6 @@ function initMap() {
     map = L.mapbox.map('map-one', 'tnc-globalwater.026wsirr').setView(L.latLng(origin.lat, origin.lng), 8);
     map.setZoom(16);
 
-    map.on('mousemove', function(e) {
-        var features = map.queryRenderedFeatures(e.point, {
-            layers: ['places']
-        });
-        // Change the cursor style as a UI indicator.
-        map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-
-        if (!features.length) {
-            popup.remove();
-            return;
-        }
-
-        var feature = features[0];
-
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(feature.geometry.coordinates)
-            .setHTML(feature.properties.description)
-            .addTo(map);
-    });
-
     geocoder = L.mapbox.geocoder('mapbox.places');
     locations = L.mapbox.featureLayer().addTo(map);
     locations.loadURL('data/data.geojson'); // load in your own GeoJSON file here
@@ -201,7 +182,8 @@ function initMap() {
             // Marker interaction
             locale.on('click touchstart', function(e) {
                 // 1. center the map on the selected marker.
-                map.setView(locale.getLatLng(), 12);
+                //map.setView(locale.getLatLng(), 12);
+                checkActiveCity(locale);
                 destination = locale.getLatLng();
                 traceRoute();
             });
@@ -300,13 +282,14 @@ function searchInMap(text) {
 
 function showMap(err, data) {
     if (data.results.features.length > 0) {
-        if (checkCityExist(data.results.features[0].text)) {
-            filterLocations(data.results.features[0].text);
+        var aux = checkCityExist(data.results.features[0].text);
+        if (aux != '') {
+            filterLocations(aux);
             origin = data.latlng;
             map.setView([data.latlng[0], data.latlng[1]], 8);
             displayCity();
-            displayDataCity(data.results.features[0].text, data.results.features[0].place_name);
-            $('#origin').val(data.results.features[0].text);
+            displayDataCity(aux, data.results.features[0].place_name);
+            $('#origin').val(aux);
             $('#origin').attr({
                 geolat: data.latlng[0],
                 geolon: data.latlng[1]
@@ -325,12 +308,12 @@ function filterLocations(cityName) {
 }
 
 function checkCityExist(city) {
-    var aux = false;
+    var aux = '';
     locations.eachLayer(function(locale) {
         prop = locale.feature.properties;
         if (prop.type == "city") {
-            if (prop.city_name == city) {
-                aux = true;
+            if (city.indexOf(prop.city_name) > -1) {
+                aux = prop.city_name;
             }
         }
     });
@@ -359,6 +342,29 @@ function filterWaterSources() {
     return waterSources;
 }
 
+function filterCities() {
+    var cities = [];
+    locations.eachLayer(function(locale) {
+        prop = locale.feature.properties;
+        if (prop.type == "city") {
+            cities.push(locale);
+        }
+    });
+    return cities;
+}
+
+function filterCitiesbyID(cityID) {
+    var cities = filterCities();
+    var filteredCity;
+    $.each(cities, function(index, val) {
+        prop = val.feature.properties;
+        if (prop.id == cityID) {
+            filteredCity = val;
+        }
+    });
+    return filteredCity;
+}
+
 function filterWaterSourcesbyID(cityID) {
     var waterSources = filterWaterSources();
     var filteredSources = [];
@@ -370,8 +376,22 @@ function filterWaterSourcesbyID(cityID) {
             filteredSources.push(val);
         }
     });
-    filteredSources
     return filteredSources;
+}
+
+function checkActiveCity(locale) {
+    var cities = locale.feature.properties.cities;
+    var result = false;
+
+    var aux = filterCitiesbyID(cities[0]);
+    var _city = aux.feature.properties.city_name;
+    if (activeCity == _city) {
+        result = true;
+    } else {
+        $('#search-inner').val(_city);
+        $('#search-inner-button').trigger('click');
+    }
+    return result;
 }
 
 function WaterSourcesPrinter(locale) {
@@ -389,7 +409,7 @@ function WaterSourcesPrinter(locale) {
 
         // When a menu item is clicked, animate the map to center
         // its associated locale and open its popup.
-        map.setView(locale.getLatLng(), 12);
+        //map.setView(locale.getLatLng(), 12);
         destination = locale.getLatLng();
         traceRoute();
         locale.openPopup();
