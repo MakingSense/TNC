@@ -284,12 +284,13 @@ function showMap(err, data) {
     if (data.results.features.length > 0) {
         var aux = checkCityExist(data.results.features[0].text);
         if (aux != '') {
-            filterLocations(aux);
+            filterLocations(aux.feature.properties.city_name);
+            var loc = aux.getLatLng();
             origin = data.latlng;
-            map.setView([data.latlng[0], data.latlng[1]], 8);
+            map.setView([loc.lat , loc.lng], 8);
             displayCity();
-            displayDataCity(aux, data.results.features[0].place_name);
-            $('#origin').val(aux);
+            displayDataCity(aux.feature.properties.city_name, data.results.features[0].place_name);
+            $('#origin').val(aux.feature.properties.city_name);
             $('#origin').attr({
                 geolat: data.latlng[0],
                 geolon: data.latlng[1]
@@ -313,7 +314,7 @@ function checkCityExist(city) {
         prop = locale.feature.properties;
         if (prop.type == "city") {
             if (city.indexOf(prop.city_name) > -1) {
-                aux = prop.city_name;
+                aux = locale;
             }
         }
     });
